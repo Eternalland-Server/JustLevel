@@ -1,0 +1,12 @@
+name: JustLevel
+main: com.taylorswiftcn.megumi.justlevel.Main
+version: ${project.version}
+author: 'Megumi'
+api-version: '1.13'
+depend:
+  - MegumiLib
+  - ClientManager
+
+commands:
+  jlevel:
+    description: show all command

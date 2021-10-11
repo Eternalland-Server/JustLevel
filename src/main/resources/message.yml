@@ -1,0 +1,6 @@
+Help:
+- '/jlevel - 这是一个模板'
+AdminHelp:
+- '/jlevel admin - 这是一个模板'
+Message:
+  NoPermission: '&3你没有权限: %s%'
