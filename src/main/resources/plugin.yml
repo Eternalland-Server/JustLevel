@@ -1,7 +1,7 @@
 name: JustLevel
-main: com.taylorswiftcn.megumi.justlevel.Main
+main: net.sakuragame.megumi.justlevel.Main
 version: ${project.version}
-author: 'Megumi'
+author: 'Justwei'
 api-version: '1.13'
 depend:
   - MegumiLib

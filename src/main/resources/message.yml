@@ -1,6 +1,22 @@
-Help:
-- '/jlevel - 这是一个模板'
-AdminHelp:
-- '/jlevel admin - 这是一个模板'
-Message:
-  NoPermission: '&3你没有权限: %s%'
+help:
+ - '/jlevel - 这是一个模板'
+admin-help:
+ - ''
+ - '&7/jlevel addExp <player> <exp> - 增加经验'
+ - '&7/jlevel setLevel <player> <level> - 设置等级'
+ - '&7/jlevel setStage <player> <stage> - 设置阶段'
+ - '&7/jlevel setRealm <player> <realm> - 设置境界'
+ - '&7/jlevel item give <player> <id> <amount> - 给予玩家突破石'
+ - '&7/jlevel item get <id> <amount> - 获取突破石'
+ - ''
+player-info:
+ - ''
+ - '&f等级: &7%level%'
+ - '&f经验: &7%current_exp%/%total_exp%'
+ - '&f阶段: &7%stage%'
+ - '&f境界: %7%realm%'
+ - '&f阶段点数: &7%stage_points%'
+ - '&f境界点数: &7%realm_points%'
+ - ''
+message:
+  no-permission: '&3你没有权限: %s%'
