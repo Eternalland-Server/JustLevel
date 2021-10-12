@@ -39,7 +39,7 @@ public class PlayerLevelData {
         this.player = player;
         this.stage = 1;
         this.realm = 1;
-        this.level = 0;
+        this.level = 1;
         this.exp = 0d;
         this.stagePoint = 0;
         this.realmPoint = 0;
@@ -57,6 +57,27 @@ public class PlayerLevelData {
         this.updateExpBar();
     }
 
+    public void addRealm() {
+        setRealm(realm + 1);
+    }
+
+    public void addStage() {
+        setStage(stage + 1);
+    }
+
+    public void addLevel(int upgrade) {
+        JustPlayerUpgradeEvent upgradeEvent = new JustPlayerUpgradeEvent(this, upgrade);
+        upgradeEvent.call();
+        if (upgradeEvent.isCancelled()) return;
+        upgrade = upgradeEvent.getUpgrade();
+
+        int oldLevel = level;
+        setLevel(level + upgrade);
+
+        IEvent upgradedEvent = new JustPlayerUpgradedEvent(this, upgrade, oldLevel, level);
+        upgradedEvent.call();
+    }
+
     public void setRealm(int realm) {
         this.realm = Math.min(ConfigFile.realm_layer, realm);
     }
@@ -69,8 +90,15 @@ public class PlayerLevelData {
         this.level = Math.min(ConfigFile.stage_level, level);
     }
 
-    private void setExp(double exp) {
-        this.exp = exp;
+    public void setExp(double exp) {
+        double upgradeRequire = LevelUtil.getUpgradeRequireExp(level);
+        double value = Math.min(upgradeRequire, exp);
+        if (value == upgradeRequire) {
+            level++;
+            this.exp = 0;
+            return;
+        }
+        this.exp = value;
     }
 
     public void updateExpBar() {
@@ -94,7 +122,7 @@ public class PlayerLevelData {
         JustPlayerExpChangeEvent changeEvent = new JustPlayerExpChangeEvent(this, value);
         changeEvent.call();
         if (changeEvent.isCancelled()) return;
-        value = changeEvent.getChangeExp();
+        value = changeEvent.getExpChange();
 
         double experience = value + exp;
         int upgrade = 0;
@@ -117,16 +145,7 @@ public class PlayerLevelData {
         }
 
         if (upgrade != 0) {
-            JustPlayerUpgradeEvent upgradeEvent = new JustPlayerUpgradeEvent(this, upgrade);
-            upgradeEvent.call();
-            if (upgradeEvent.isCancelled()) return;
-            upgrade = upgradeEvent.getUpgrade();
-
-            int oldLevel = level;
-            setLevel(level + upgrade);
-
-            IEvent upgradedEvent = new JustPlayerUpgradedEvent(this, upgrade, oldLevel, level);
-            upgradedEvent.call();
+            addLevel(upgrade);
         }
         IEvent expChangedEvent = new JustPlayerExpChangedEvent(this, value);
         expChangedEvent.call();

@@ -6,7 +6,7 @@ public enum AccountTable {
             new String[] {
                     "`uuid` varchar(36) NOT NULL PRIMARY KEY",
                     "`player` varchar(48) NOT NULL",
-                    "`level` int default 0",
+                    "`level` int default 1",
                     "`exp` double default 0",
                     "`stage_point` int default 0",
                     "`realm_point` int default 0"

@@ -9,11 +9,11 @@ import org.bukkit.event.HandlerList;
 public class JustPlayerExpChangedEvent extends IEvent {
 
     private final PlayerLevelData playerData;
-    private final double changeExp;
+    private final double expChange;
 
-    public JustPlayerExpChangedEvent(PlayerLevelData playerData, double changeExp) {
+    public JustPlayerExpChangedEvent(PlayerLevelData playerData, double expChange) {
         this.playerData = playerData;
-        this.changeExp = changeExp;
+        this.expChange = expChange;
     }
 
     private static final HandlerList handlerList = new HandlerList();

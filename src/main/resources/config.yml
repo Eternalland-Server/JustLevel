@@ -1,6 +1,7 @@
 Prefix: ' &7&l[境界] '
-#等级经验
-level-formula: '(2.0*level^2)/2.0+120.0*(level/5.0)+35.0'
+#等级经验共识
+level-formula: 'Math.pow(level, 2)+24*level+35'
+#阶段突破所需点数
 stage-upgrade:
   1: 4
   2: 8
@@ -12,6 +13,7 @@ stage-upgrade:
   8: 38
   9: 44
   10: 50
+#境界突破所需点数
 realm-upgrade:
   1: 2
   2: 4
@@ -34,7 +36,9 @@ realm-upgrade:
   19: 60
   20: 66
   21: 88
+#突破石
 stone:
+  #阶段突破石
   stage:
     id: STONE
     data: 0
@@ -44,6 +48,7 @@ stone:
       - ''
       - ' &3使用一个 &7- 右键'
       - ' &3全部使用 &7- Shift+右键'
+  #境界突破石
   realm:
     id: STONE
     data: 0

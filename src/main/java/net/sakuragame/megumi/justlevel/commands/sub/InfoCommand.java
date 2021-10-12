@@ -45,7 +45,7 @@ public class InfoCommand extends SubCommand {
                 .replace("%stage%", String.valueOf(data.getStage()))
                 .replace("%realm%", String.valueOf(data.getRealm()))
                 .replace("%stage_points%", String.valueOf(data.getStagePoint()))
-                .replace("%realm_stage%", String.valueOf(data.getRealmPoint()))
+                .replace("%realm_points%", String.valueOf(data.getRealmPoint()))
         ));
     }
 

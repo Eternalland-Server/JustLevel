@@ -18,11 +18,11 @@ public class MessageFile {
     public static void init() {
         message = JustLevel.getInstance().getFileManager().getMessage();
 
-        help = getStringList("Help");
-        adminHelp = getStringList("AdminHelp");
-        playerInfo = getStringList("PlayerInfo");
+        help = getStringList("help");
+        adminHelp = getStringList("admin-help");
+        playerInfo = getStringList("player-info");
 
-        noPermission = getString("Message.NoPermission");
+        noPermission = getString("message.no-permission");
     }
 
     private static String getString(String path) {
@@ -32,6 +32,5 @@ public class MessageFile {
     private static List<String> getStringList(String path) {
         return MegumiUtil.onReplace(message.getStringList(path));
     }
-
 
 }

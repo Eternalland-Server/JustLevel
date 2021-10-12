@@ -33,6 +33,7 @@ public class ConfigFile {
         level_formula = config.getString("level-formula");
         loadStageUpgrade();
         loadRealmUpgrade();
+        stone = new HashMap<>();
         stone.put("stage", new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, "stage").build());
         stone.put("realm", new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, "realm").build());
     }

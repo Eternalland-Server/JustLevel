@@ -13,13 +13,13 @@ import net.sakuragame.megumi.justlevel.commands.sub.player.SetStageCommand;
 public class MainCommand extends ICommand {
 
     public MainCommand() {
-        help = new HelpCommand();
-        commands.put("info", new InfoCommand());
-        commands.put("item", new ItemCommand());
-        commands.put("addExp", new AddExpCommand());
-        commands.put("setLevel", new SetLevelCommand());
-        commands.put("setStage", new SetStageCommand());
-        commands.put("setRealm", new SetRealmCommand());
-        commands.put("reload", new ReloadCommand());
+        this.help = new HelpCommand();
+        this.commands.put("info", new InfoCommand());
+        this.commands.put("item", new ItemCommand());
+        this.commands.put("addexp", new AddExpCommand());
+        this.commands.put("setlevel", new SetLevelCommand());
+        this.commands.put("setstage", new SetStageCommand());
+        this.commands.put("setrealm", new SetRealmCommand());
+        this.commands.put("reload", new ReloadCommand());
     }
 }

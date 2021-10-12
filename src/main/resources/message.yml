@@ -1,5 +1,5 @@
 help:
- - '/jlevel - 这是一个模板'
+ - '&7/jlevel info - 查看境界属性'
 admin-help:
  - ''
  - '&7/jlevel addExp <player> <exp> - 增加经验'
@@ -14,7 +14,7 @@ player-info:
  - '&f等级: &7%level%'
  - '&f经验: &7%current_exp%/%total_exp%'
  - '&f阶段: &7%stage%'
- - '&f境界: %7%realm%'
+ - '&f境界: &7%realm%'
  - '&f阶段点数: &7%stage_points%'
  - '&f境界点数: &7%realm_points%'
  - ''

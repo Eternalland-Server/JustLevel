@@ -16,15 +16,19 @@ public class LevelUtil {
     private static Map<Integer, Double> exp = new HashMap<>();
 
     public static void conversionExp() {
-        for (int i = 0; i < ConfigFile.stage_level; i++) {
+        for (int i = 1; i <= ConfigFile.stage_level; i++) {
             try {
-                double require = (Double) script.eval(ConfigFile.level_formula.replace("level", String.valueOf(i)));
+                double require = Double.parseDouble(script.eval(ConfigFile.level_formula.replace("level", String.valueOf(i))).toString());
                 exp.put(i, require);
             }
             catch (ScriptException e) {
                 e.printStackTrace();
             }
         }
+
+        double last = exp.get(ConfigFile.stage_level);
+        last = Math.ceil(last / 1000) * 1000;
+        exp.put(ConfigFile.stage_level, last);
     }
 
     public static double getUpgradeRequireExp(int level) {

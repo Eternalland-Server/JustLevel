@@ -27,7 +27,7 @@ public class ItemCommand extends SubCommand implements TabCompleter {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
-        SubCommand cmd = MainCommand.getHelp();
+        SubCommand cmd = new HelpCommand();
         if (strings.length >= 2 && this.commands.containsKey(strings[1])) {
            cmd = commands.get(strings[1]);
         }

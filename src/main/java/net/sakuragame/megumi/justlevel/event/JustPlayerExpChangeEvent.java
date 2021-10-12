@@ -12,12 +12,12 @@ import org.bukkit.event.HandlerList;
 public class JustPlayerExpChangeEvent extends IEvent implements Cancellable {
 
     private final PlayerLevelData playerData;
-    private double changeExp;
+    private double expChange;
     private boolean cancel;
 
-    public JustPlayerExpChangeEvent(PlayerLevelData playerData, double changeExp) {
+    public JustPlayerExpChangeEvent(PlayerLevelData playerData, double expChange) {
         this.playerData = playerData;
-        this.changeExp = changeExp;
+        this.expChange = expChange;
         this.cancel = false;
     }
 
