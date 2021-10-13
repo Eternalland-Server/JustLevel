@@ -1,9 +1,8 @@
 package net.sakuragame.megumi.justlevel.event;
 
-import com.taylorswiftcn.justwei.event.IEvent;
-import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
@@ -11,12 +10,16 @@ import org.bukkit.event.HandlerList;
 @Setter
 public class JustPlayerExpChangeEvent extends IEvent implements Cancellable {
 
-    private final PlayerLevelData playerData;
+    private final Player player;
+    private final int level;
+    private final double exp;
     private double expChange;
     private boolean cancel;
 
-    public JustPlayerExpChangeEvent(PlayerLevelData playerData, double expChange) {
-        this.playerData = playerData;
+    public JustPlayerExpChangeEvent(Player player, int level, double exp, double expChange) {
+        this.player = player;
+        this.level = level;
+        this.exp = exp;
         this.expChange = expChange;
         this.cancel = false;
     }

@@ -29,7 +29,10 @@ public class SetExpCommand extends SubCommand {
             commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
             return;
         }
-        if (!MegumiUtil.isInteger(s2)) return;
+        if (!MegumiUtil.isInteger(s2)) {
+            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s2);
+            return;
+        }
 
         int value = Integer.parseInt(s2);
         PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());

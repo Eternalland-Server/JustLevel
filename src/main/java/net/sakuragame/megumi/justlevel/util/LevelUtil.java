@@ -16,6 +16,7 @@ public class LevelUtil {
     private static Map<Integer, Double> exp = new HashMap<>();
 
     public static void conversionExp() {
+        exp.clear();
         for (int i = 1; i <= ConfigFile.stage_level; i++) {
             try {
                 double require = Double.parseDouble(script.eval(ConfigFile.level_formula.replace("level", String.valueOf(i))).toString());

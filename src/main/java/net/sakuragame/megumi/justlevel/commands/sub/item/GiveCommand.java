@@ -22,7 +22,10 @@ public class GiveCommand extends SubCommand {
             commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
             return;
         }
-        if (!MegumiUtil.isNumber(s)) return;
+        if (!MegumiUtil.isNumber(s)) {
+            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s);
+            return;
+        }
 
         int amount = Integer.parseInt(s);
 

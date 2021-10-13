@@ -5,16 +5,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerUpgradedEvent extends IEvent {
+public class JustPlayerStageChangeEvent extends IEvent {
 
     private final Player player;
-    private final int oldLevel;
-    private final int newLevel;
+    private final int oldStage;
+    private final int newStage;
+    private final int realm;
 
-    public JustPlayerUpgradedEvent(Player player, int oldLevel, int newLevel) {
+    public JustPlayerStageChangeEvent(Player player, int oldStage, int newStage, int realm) {
         this.player = player;
-        this.oldLevel = oldLevel;
-        this.newLevel = newLevel;
+        this.oldStage = oldStage;
+        this.newStage = newStage;
+        this.realm = realm;
     }
 
     private static final HandlerList handlerList = new HandlerList();

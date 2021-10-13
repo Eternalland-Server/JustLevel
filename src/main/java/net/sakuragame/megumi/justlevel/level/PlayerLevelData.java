@@ -1,11 +1,7 @@
 package net.sakuragame.megumi.justlevel.level;
 
-import com.taylorswiftcn.justwei.event.IEvent;
 import net.sakuragame.megumi.justlevel.JustLevel;
-import net.sakuragame.megumi.justlevel.event.JustPlayerExpChangeEvent;
-import net.sakuragame.megumi.justlevel.event.JustPlayerExpChangedEvent;
-import net.sakuragame.megumi.justlevel.event.JustPlayerUpgradeEvent;
-import net.sakuragame.megumi.justlevel.event.JustPlayerUpgradedEvent;
+import net.sakuragame.megumi.justlevel.event.*;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import net.sakuragame.megumi.justlevel.util.LevelUtil;
 import lombok.Getter;
@@ -32,8 +28,8 @@ public class PlayerLevelData {
      */
     private double exp;
 
-    private int stagePoint;
-    private int realmPoint;
+    private int stagePoints;
+    private int realmPoints;
 
     public PlayerLevelData(Player player) {
         this.player = player;
@@ -41,19 +37,19 @@ public class PlayerLevelData {
         this.realm = 1;
         this.level = 1;
         this.exp = 0d;
-        this.stagePoint = 0;
-        this.realmPoint = 0;
+        this.stagePoints = 0;
+        this.realmPoints = 0;
         this.updateExpBar();
     }
 
     public PlayerLevelData(Player player, int totalLevel, double currentExp, int stagePoint, int realmPoint) {
         this.player = player;
-        this.stage = (totalLevel / ConfigFile.stage_level) % 10;
-        this.realm = totalLevel / ConfigFile.stage_level / 10;
-        this.level = totalLevel - stage * ConfigFile.stage_level + realm * 10 * ConfigFile.stage_level;
+        this.stage = (totalLevel / ConfigFile.stage_level) % ConfigFile.stage_layer + 1;
+        this.realm = totalLevel / ConfigFile.stage_level / ConfigFile.stage_layer + 1;
+        this.level = totalLevel - (stage - 1) * ConfigFile.stage_level - (realm - 1) * ConfigFile.stage_layer * ConfigFile.stage_level + 1;
         this.exp = currentExp;
-        this.stagePoint = stagePoint;
-        this.realmPoint = realmPoint;
+        this.stagePoints = stagePoint;
+        this.realmPoints = realmPoint;
         this.updateExpBar();
     }
 
@@ -61,12 +57,20 @@ public class PlayerLevelData {
         setRealm(realm + 1);
     }
 
+    public void addRealm(int i) {
+        setRealm(realm + i);
+    }
+
     public void addStage() {
         setStage(stage + 1);
     }
 
+    public void addStage(int i) {
+        setStage(stage + i);
+    }
+
     public void addLevel(int upgrade) {
-        JustPlayerUpgradeEvent upgradeEvent = new JustPlayerUpgradeEvent(this, upgrade);
+        JustPlayerUpgradeEvent upgradeEvent = new JustPlayerUpgradeEvent(player, level, upgrade);
         upgradeEvent.call();
         if (upgradeEvent.isCancelled()) return;
         upgrade = upgradeEvent.getUpgrade();
@@ -74,24 +78,33 @@ public class PlayerLevelData {
         int oldLevel = level;
         setLevel(level + upgrade);
 
-        IEvent upgradedEvent = new JustPlayerUpgradedEvent(this, upgrade, oldLevel, level);
+        IEvent upgradedEvent = new JustPlayerUpgradedEvent(player, oldLevel, level);
         upgradedEvent.call();
     }
 
     public void setRealm(int realm) {
-        this.realm = Math.min(ConfigFile.realm_layer, realm);
+        int oldRealm = this.realm;
+        this.realm = Math.min(ConfigFile.realm_layer, Math.max(0, realm));
+
+        IEvent event = new JustPlayerRealmChangeEvent(player, oldRealm, this.realm);
+        event.call();
     }
 
     public void setStage(int stage) {
-        this.stage = Math.min(10, stage);
+        int oldStage = this.stage;
+        this.stage = Math.min(ConfigFile.stage_layer, Math.max(0, stage));
+
+        IEvent event = new JustPlayerStageChangeEvent(player, oldStage, this.stage, realm);
+        event.call();
     }
 
     public void setLevel(int level) {
         this.level = Math.min(ConfigFile.stage_level, level);
+        updateLevelTip();
     }
 
     public void setExp(double exp) {
-        double upgradeRequire = LevelUtil.getUpgradeRequireExp(level);
+        double upgradeRequire = getUpgradeExp();
         double value = Math.min(upgradeRequire, exp);
         if (value == upgradeRequire) {
             level++;
@@ -101,25 +114,20 @@ public class PlayerLevelData {
         this.exp = value;
     }
 
-    public void updateExpBar() {
-        this.player.setLevel(level);
-        this.player.setExp((float) (exp / LevelUtil.getUpgradeRequireExp(level)));
-    }
-
     public void save() {
         int totalLevel = getTotalLevel();
-        JustLevel.getInstance().getStorageManager().updatePlayerData(player, totalLevel, exp, stagePoint, realmPoint);
+        JustLevel.getInstance().getStorageManager().updatePlayerData(player, totalLevel, exp, stagePoints, realmPoints);
     }
 
     public int getTotalLevel() {
-        return level + stage * ConfigFile.stage_level + realm * 10 * ConfigFile.stage_level;
+        return level + (stage - 1) * ConfigFile.stage_level + (realm - 1) * ConfigFile.stage_layer * ConfigFile.stage_level - 1;
     }
 
     public void addExp(double value) {
         if (realm == ConfigFile.realm_layer) return;
         if (level == ConfigFile.stage_level) return;
 
-        JustPlayerExpChangeEvent changeEvent = new JustPlayerExpChangeEvent(this, value);
+        JustPlayerExpChangeEvent changeEvent = new JustPlayerExpChangeEvent(player, level, exp, value);
         changeEvent.call();
         if (changeEvent.isCancelled()) return;
         value = changeEvent.getExpChange();
@@ -147,17 +155,61 @@ public class PlayerLevelData {
         if (upgrade != 0) {
             addLevel(upgrade);
         }
-        IEvent expChangedEvent = new JustPlayerExpChangedEvent(this, value);
+        IEvent expChangedEvent = new JustPlayerExpChangedEvent(player, level, exp, value);
         expChangedEvent.call();
 
         updateExpBar();
     }
 
-    public void addStagePoint(int i) {
-        this.stagePoint += i;
+    public void addStagePoints(int points) {
+        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, TierType.Stage, points);
+        pointsEvent.call();
+        if (pointsEvent.isCancelled()) return;
+        points = pointsEvent.getPoints();
+
+        setStagePoints(getStagePoints() + points);
+
+        IEvent event = new JustPlayerIncreasedPointsEvent(player, TierType.Stage, points);
+        event.call();
     }
 
-    public void addRealmPoint(int i) {
-        this.realmPoint += i;
+    public void addRealmPoints(int points) {
+        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, TierType.Realm, points);
+        pointsEvent.call();
+        if (pointsEvent.isCancelled()) return;
+        points = pointsEvent.getPoints();
+
+        setRealmPoints(getRealmPoints() + points);
+
+        IEvent event = new JustPlayerIncreasedPointsEvent(player, TierType.Realm, points);
+        event.call();
+    }
+
+    public void takeStagePoints(int points) {
+        setStagePoints(Math.max(0, getStagePoints() - points));
+    }
+
+    public void takeRealmPoints(int points) {
+        setRealmPoints(Math.max(0, getRealmPoints() - points));
+    }
+
+    public void setStagePoints(int points) {
+        this.stagePoints = Math.max(0, points);
+    }
+
+    public void setRealmPoints(int points) {
+        this.realmPoints = Math.max(0, points);
+    }
+
+    public void updateExpBar() {
+        this.player.setExp((float) (this.exp / getUpgradeExp()));
+    }
+
+    public void updateLevelTip() {
+        this.player.setLevel(this.level);
+    }
+
+    public double getUpgradeExp() {
+        return LevelUtil.getUpgradeRequireExp(this.level);
     }
 }

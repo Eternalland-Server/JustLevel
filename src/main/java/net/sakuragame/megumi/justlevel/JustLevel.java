@@ -2,6 +2,7 @@ package net.sakuragame.megumi.justlevel;
 
 import net.sakuragame.megumi.justlevel.commands.MainCommand;
 import net.sakuragame.megumi.justlevel.file.FileManager;
+import net.sakuragame.megumi.justlevel.hook.LevelPlaceholder;
 import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
 import net.sakuragame.megumi.justlevel.listener.PlayerListener;
 import net.sakuragame.megumi.justlevel.listener.StoneListener;
@@ -38,8 +39,8 @@ public class JustLevel extends JavaPlugin {
         storageManager.init();
 
         LevelUtil.conversionExp();
-
         loadOnlinePlayer();
+        new LevelPlaceholder().register();
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
@@ -62,8 +63,11 @@ public class JustLevel extends JavaPlugin {
     }
 
     private void loadOnlinePlayer() {
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            // do something
-        });
+        Bukkit.getOnlinePlayers().forEach(player -> playerData.put(player.getUniqueId(), storageManager.getPlayerData(player)));
+    }
+
+    public void reload() {
+        fileManager.init();
+        LevelUtil.conversionExp();
     }
 }

@@ -39,13 +39,14 @@ public class InfoCommand extends SubCommand {
     private void sendInfo(Player player) {
         PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
         MessageFile.playerInfo.forEach(s -> player.sendMessage(s
+                .replace("%player%", player.getName())
                 .replace("%level%", String.valueOf(data.getLevel()))
                 .replace("%current_exp%", String.valueOf(data.getExp()))
                 .replace("%total_exp%", String.valueOf(LevelUtil.getUpgradeRequireExp(data.getLevel())))
                 .replace("%stage%", String.valueOf(data.getStage()))
                 .replace("%realm%", String.valueOf(data.getRealm()))
-                .replace("%stage_points%", String.valueOf(data.getStagePoint()))
-                .replace("%realm_points%", String.valueOf(data.getRealmPoint()))
+                .replace("%stage_points%", String.valueOf(data.getStagePoints()))
+                .replace("%realm_points%", String.valueOf(data.getRealmPoints()))
         ));
     }
 

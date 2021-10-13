@@ -3,6 +3,7 @@ package net.sakuragame.megumi.justlevel.file.sub;
 import com.taylorswiftcn.justwei.util.ItemBuilder;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.JustLevel;
+import net.sakuragame.megumi.justlevel.level.TierType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +19,7 @@ public class ConfigFile {
 
     public static String Prefix;
     public static Integer realm_layer;
+    public static Integer stage_layer;
     public static Integer stage_level;
     public static String level_formula;
     public static Map<Integer, Integer> stageUpgrade;
@@ -29,13 +31,14 @@ public class ConfigFile {
 
         Prefix = getString("Prefix");
         realm_layer = 21;
+        stage_layer = 10;
         stage_level = 200;
         level_formula = config.getString("level-formula");
         loadStageUpgrade();
         loadRealmUpgrade();
         stone = new HashMap<>();
-        stone.put("stage", new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, "stage").build());
-        stone.put("realm", new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, "realm").build());
+        stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, TierType.Stage.getId()).build());
+        stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, TierType.Stage.getId()).build());
     }
 
     private static String getString(String path) {

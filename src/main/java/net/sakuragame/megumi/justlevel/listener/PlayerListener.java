@@ -22,8 +22,6 @@ public class PlayerListener implements Listener {
         Player player = e.getPlayer();
         UUID uuid = player.getUniqueId();
 
-        plugin.getPlayerData().put(uuid, new PlayerLevelData(player));
-
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             PlayerLevelData data = plugin.getStorageManager().getPlayerData(player);
             plugin.getPlayerData().put(uuid, data);
@@ -34,8 +32,6 @@ public class PlayerListener implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         UUID uuid = player.getUniqueId();
-
-        plugin.getPlayerData().remove(uuid);
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
            plugin.getPlayerData().get(uuid).save();

@@ -15,7 +15,10 @@ public class GetCommand extends SubCommand {
         String id = strings[2];
         String s = strings[3];
 
-        if (!MegumiUtil.isNumber(s)) return;
+        if (!MegumiUtil.isNumber(s)) {
+            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s);
+            return;
+        }
 
         int amount = Integer.parseInt(s);
 

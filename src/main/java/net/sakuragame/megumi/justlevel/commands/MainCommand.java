@@ -1,10 +1,7 @@
 package net.sakuragame.megumi.justlevel.commands;
 
 import com.taylorswiftcn.justwei.commands.ICommand;
-import net.sakuragame.megumi.justlevel.commands.sub.HelpCommand;
-import net.sakuragame.megumi.justlevel.commands.sub.InfoCommand;
-import net.sakuragame.megumi.justlevel.commands.sub.ItemCommand;
-import net.sakuragame.megumi.justlevel.commands.sub.ReloadCommand;
+import net.sakuragame.megumi.justlevel.commands.sub.*;
 import net.sakuragame.megumi.justlevel.commands.sub.player.AddExpCommand;
 import net.sakuragame.megumi.justlevel.commands.sub.player.SetLevelCommand;
 import net.sakuragame.megumi.justlevel.commands.sub.player.SetRealmCommand;
@@ -20,6 +17,7 @@ public class MainCommand extends ICommand {
         this.commands.put("setlevel", new SetLevelCommand());
         this.commands.put("setstage", new SetStageCommand());
         this.commands.put("setrealm", new SetRealmCommand());
+        this.commands.put("points", new PointsCommand());
         this.commands.put("reload", new ReloadCommand());
     }
 }

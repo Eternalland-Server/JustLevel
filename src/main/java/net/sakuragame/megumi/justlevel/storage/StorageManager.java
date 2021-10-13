@@ -7,6 +7,7 @@ import net.sakuragame.serversystems.manage.api.database.DatabaseQuery;
 import net.sakuragame.serversystems.manage.client.api.ClientManagerAPI;
 import org.bukkit.entity.Player;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class StorageManager {
     }
 
     public void insertPlayerData(Player player) {
-        dataManager.insert(
+        dataManager.executeInsert(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
                 new String[]{"uuid", "player"},
                 new String[]{player.getUniqueId().toString(), player.getName()}
@@ -34,13 +35,12 @@ public class StorageManager {
     }
 
     public PlayerLevelData getPlayerData(Player player) {
-        DatabaseQuery query = dataManager.sqlQuery(
+
+        try (DatabaseQuery query = dataManager.sqlQuery(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
                 "uuid",
                 player.getUniqueId().toString()
-        );
-
-        try {
+        )) {
             query.execute();
             ResultSet result = query.getResultSet();
             if (result.next()) {
@@ -53,8 +53,6 @@ public class StorageManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            query.close();
         }
 
         insertPlayerData(player);
@@ -63,7 +61,7 @@ public class StorageManager {
     }
 
     public void updatePlayerData(Player player, int level, double exp, int stagePoint, int realmPoint) {
-        dataManager.update(
+        dataManager.executeUpdate(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
                 new String[]{"level", "exp", "stage_point", "realm_point"},
                 new String[]{String.valueOf(level), String.valueOf(exp), String.valueOf(stagePoint), String.valueOf(realmPoint)},
@@ -75,13 +73,9 @@ public class StorageManager {
     public void updateAllPlayerData() {
         List<Object[]> datum = new ArrayList<>();
         for (PlayerLevelData data : plugin.getPlayerData().values()) {
-            datum.add(new Object[] {data.getPlayer().getUniqueId().toString(), data.getTotalLevel(), data.getExp(), data.getStagePoint(), data.getRealmPoint()});
+            datum.add(new Object[] {data.getTotalLevel(), data.getExp(), data.getStagePoints(), data.getRealmPoints(), data.getPlayer().getUniqueId().toString()});
         }
 
-        dataManager.replace(
-                AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
-                new String[] {"uuid", "level", "exp", "stage_point", "realm_point"},
-                datum
-        );
+        dataManager.executeSQLBatch("update " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName() + " SET level = ?, exp = ?, stage_point = ?, realm_point = ? WHERE uuid = ?", datum);
     }
 }

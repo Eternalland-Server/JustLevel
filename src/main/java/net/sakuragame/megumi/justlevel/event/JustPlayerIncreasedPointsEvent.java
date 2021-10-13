@@ -1,20 +1,19 @@
 package net.sakuragame.megumi.justlevel.event;
 
-import lombok.Getter;
+import net.sakuragame.megumi.justlevel.level.TierType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-@Getter
-public class JustPlayerUpgradedEvent extends IEvent {
+public class JustPlayerIncreasedPointsEvent extends IEvent {
 
     private final Player player;
-    private final int oldLevel;
-    private final int newLevel;
+    private final TierType type;
+    private final int points;
 
-    public JustPlayerUpgradedEvent(Player player, int oldLevel, int newLevel) {
+    public JustPlayerIncreasedPointsEvent(Player player, TierType type, int points) {
         this.player = player;
-        this.oldLevel = oldLevel;
-        this.newLevel = newLevel;
+        this.type = type;
+        this.points = points;
     }
 
     private static final HandlerList handlerList = new HandlerList();

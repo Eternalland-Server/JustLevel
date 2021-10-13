@@ -29,7 +29,10 @@ public class AddExpCommand extends SubCommand {
             commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
             return;
         }
-        if (!MegumiUtil.isFloat(s2)) return;
+        if (!MegumiUtil.isFloat(s2)) {
+            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s2);
+            return;
+        }
 
         double value = Double.parseDouble(s2);
         PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());

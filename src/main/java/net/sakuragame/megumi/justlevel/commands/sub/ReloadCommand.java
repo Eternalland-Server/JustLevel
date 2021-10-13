@@ -1,12 +1,22 @@
 package net.sakuragame.megumi.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.SubCommand;
+import net.sakuragame.megumi.justlevel.JustLevel;
+import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import org.bukkit.command.CommandSender;
 
 public class ReloadCommand extends SubCommand {
+
+    private JustLevel plugin;
+
+    public ReloadCommand() {
+        this.plugin = JustLevel.getInstance();
+    }
+
     @Override
     public void perform(CommandSender CommandSender, String[] Strings) {
-
+        plugin.reload();
+        CommandSender.sendMessage(ConfigFile.Prefix + "§a配置文件已重载");
     }
 
     @Override

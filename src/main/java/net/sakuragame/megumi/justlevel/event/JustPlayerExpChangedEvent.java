@@ -1,18 +1,21 @@
 package net.sakuragame.megumi.justlevel.event;
 
-import com.taylorswiftcn.justwei.event.IEvent;
-import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
 import lombok.Getter;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
 public class JustPlayerExpChangedEvent extends IEvent {
 
-    private final PlayerLevelData playerData;
+    private final Player player;
+    private final int level;
+    private final double exp;
     private final double expChange;
 
-    public JustPlayerExpChangedEvent(PlayerLevelData playerData, double expChange) {
-        this.playerData = playerData;
+    public JustPlayerExpChangedEvent(Player player, int level, double exp, double expChange) {
+        this.player = player;
+        this.level = level;
+        this.exp = exp;
         this.expChange = expChange;
     }
 
