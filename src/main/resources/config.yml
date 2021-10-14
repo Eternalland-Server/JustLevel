@@ -1,6 +1,13 @@
 Prefix: ' &7&l[境界] '
 #等级经验共识
 level-formula: 'Math.pow(level, 2)+24*level+35'
+#会员玩家多倍经验
+exp-addition:
+  #权限节点: <倍数>
+  #权限: <插件名>.<节点>
+  mvp: 2.0
+  svp: 1.7
+  vip: 1.4
 #突破石
 stone:
   #阶段突破石

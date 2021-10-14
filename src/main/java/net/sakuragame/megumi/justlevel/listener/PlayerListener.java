@@ -1,8 +1,6 @@
 package net.sakuragame.megumi.justlevel.listener;
 
 import net.sakuragame.megumi.justlevel.JustLevel;
-import net.sakuragame.megumi.justlevel.event.JustPlayerExpChangedEvent;
-import net.sakuragame.megumi.justlevel.event.JustPlayerUpgradedEvent;
 import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

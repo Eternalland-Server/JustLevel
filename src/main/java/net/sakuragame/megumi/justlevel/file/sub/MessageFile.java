@@ -14,6 +14,7 @@ public class MessageFile {
     public static List<String> playerInfo;
 
     public static String noPermission;
+    public static String expChange;
 
     public static void init() {
         message = JustLevel.getInstance().getFileManager().getMessage();
@@ -23,6 +24,7 @@ public class MessageFile {
         playerInfo = getStringList("player-info");
 
         noPermission = getString("message.no-permission");
+        expChange = getString("message.exp-change");
     }
 
     private static String getString(String path) {

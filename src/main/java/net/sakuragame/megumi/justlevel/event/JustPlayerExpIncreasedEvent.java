@@ -5,18 +5,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerExpChangedEvent extends IEvent {
+public class JustPlayerExpIncreasedEvent extends IEvent {
 
     private final Player player;
     private final int level;
     private final double exp;
-    private final double expChange;
+    private final double increase;
 
-    public JustPlayerExpChangedEvent(Player player, int level, double exp, double expChange) {
+    public JustPlayerExpIncreasedEvent(Player player, int level, double exp, double increase) {
         this.player = player;
         this.level = level;
         this.exp = exp;
-        this.expChange = expChange;
+        this.increase = increase;
     }
 
     private static final HandlerList handlerList = new HandlerList();

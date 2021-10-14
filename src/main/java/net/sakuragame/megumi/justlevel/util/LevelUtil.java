@@ -2,6 +2,7 @@ package net.sakuragame.megumi.justlevel.util;
 
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
+import org.bukkit.entity.Player;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -30,6 +31,17 @@ public class LevelUtil {
         double last = exp.get(ConfigFile.stage_level);
         last = Math.ceil(last / 1000) * 1000;
         exp.put(ConfigFile.stage_level, last);
+    }
+
+    public static double getPlayerExpAddition(Player player, double exp) {
+        for (String s : ConfigFile.expAddition.keySet()) {
+            String permission = plugin.getName().toLowerCase() + "." + s;
+            if (!player.hasPermission(permission)) continue;
+            double rate = ConfigFile.expAddition.get(s);
+            exp = exp * (rate - 1);
+        }
+
+        return exp;
     }
 
     public static double getUpgradeRequireExp(int level) {

@@ -116,12 +116,12 @@ public class PlayerLevelData {
 
     public void addExp(double value) {
         if (realm == ConfigFile.realm_layer) return;
-        if (level == ConfigFile.stage_level) return;
+        if (level == ConfigFile.stage_level && exp == getUpgradeExp()) return;
 
-        JustPlayerExpChangeEvent changeEvent = new JustPlayerExpChangeEvent(player, level, exp, value);
-        changeEvent.call();
-        if (changeEvent.isCancelled()) return;
-        value = changeEvent.getExpChange();
+        JustPlayerExpIncreaseEvent increaseEvent = new JustPlayerExpIncreaseEvent(player, level, exp, value);
+        increaseEvent.call();
+        if (increaseEvent.isCancelled()) return;
+        value = increaseEvent.getIncrease();
 
         double experience = value + exp;
         int upgrade = 0;
@@ -146,8 +146,8 @@ public class PlayerLevelData {
         if (upgrade != 0) {
             addLevel(upgrade);
         }
-        IEvent expChangedEvent = new JustPlayerExpChangedEvent(player, level, exp, value);
-        expChangedEvent.call();
+        IEvent increasedEvent = new JustPlayerExpIncreasedEvent(player, level, exp, value);
+        increasedEvent.call();
 
         updateExpBar();
     }

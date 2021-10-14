@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class ConfigFile {
     public static Integer stage_layer;
     public static Integer stage_level;
     public static String level_formula;
+    public static Map<String, Double> expAddition;
     public static Map<Integer, RealmSetting> realmSetting;
     public static Map<String, ItemStack> stone;
 
@@ -34,6 +36,7 @@ public class ConfigFile {
         stage_layer = 10;
         stage_level = 200;
         level_formula = config.getString("level-formula");
+        loadExpAddition();
         loadRealmSetting();
         stone = new HashMap<>();
         stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, TierType.Stage.getId()).build());
@@ -46,6 +49,18 @@ public class ConfigFile {
 
     private static List<String> getStringList(String path) {
         return MegumiUtil.onReplace(config.getStringList(path));
+    }
+
+    private static void loadExpAddition() {
+        expAddition = new LinkedHashMap<>();
+
+        ConfigurationSection section = config.getConfigurationSection("exp-addition");
+        if (section == null) return;
+
+        for (String s : section.getKeys(false)) {
+            double rate = section.getDouble(s);
+            expAddition.put(s, rate);
+        }
     }
 
     private static void loadRealmSetting() {

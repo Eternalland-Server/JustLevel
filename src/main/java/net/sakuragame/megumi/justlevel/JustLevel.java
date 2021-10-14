@@ -4,6 +4,8 @@ import net.sakuragame.megumi.justlevel.commands.MainCommand;
 import net.sakuragame.megumi.justlevel.file.FileManager;
 import net.sakuragame.megumi.justlevel.hook.LevelPlaceholder;
 import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
+import net.sakuragame.megumi.justlevel.listener.ExpListener;
+import net.sakuragame.megumi.justlevel.listener.MythicMobListener;
 import net.sakuragame.megumi.justlevel.listener.PlayerListener;
 import net.sakuragame.megumi.justlevel.listener.StoneListener;
 import net.sakuragame.megumi.justlevel.storage.StorageManager;
@@ -44,6 +46,8 @@ public class JustLevel extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ExpListener(), this);
+        Bukkit.getPluginManager().registerEvents(new MythicMobListener(), this);
         getCommand("jlevel").setExecutor(new MainCommand());
 
         long end = System.currentTimeMillis();
