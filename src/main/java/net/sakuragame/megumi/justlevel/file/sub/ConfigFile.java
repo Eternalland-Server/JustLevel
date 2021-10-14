@@ -3,6 +3,7 @@ package net.sakuragame.megumi.justlevel.file.sub;
 import com.taylorswiftcn.justwei.util.ItemBuilder;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.JustLevel;
+import net.sakuragame.megumi.justlevel.level.RealmSetting;
 import net.sakuragame.megumi.justlevel.level.TierType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,8 +23,7 @@ public class ConfigFile {
     public static Integer stage_layer;
     public static Integer stage_level;
     public static String level_formula;
-    public static Map<Integer, Integer> stageUpgrade;
-    public static Map<Integer, Integer> realmUpgrade;
+    public static Map<Integer, RealmSetting> realmSetting;
     public static Map<String, ItemStack> stone;
 
     public static void init() {
@@ -34,8 +34,7 @@ public class ConfigFile {
         stage_layer = 10;
         stage_level = 200;
         level_formula = config.getString("level-formula");
-        loadStageUpgrade();
-        loadRealmUpgrade();
+        loadRealmSetting();
         stone = new HashMap<>();
         stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, TierType.Stage.getId()).build());
         stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, TierType.Stage.getId()).build());
@@ -49,27 +48,18 @@ public class ConfigFile {
         return MegumiUtil.onReplace(config.getStringList(path));
     }
 
-    private static void loadStageUpgrade() {
-        stageUpgrade = new HashMap<>();
+    private static void loadRealmSetting() {
+        realmSetting = new HashMap<>();
 
-        ConfigurationSection section = config.getConfigurationSection("stage-upgrade");
+        ConfigurationSection section = config.getConfigurationSection("setting");
         if (section == null) return;
 
         for (String s : section.getKeys(false)) {
-            int count = section.getInt(s);
-            stageUpgrade.put(Integer.parseInt(s), count);
-        }
-    }
-
-    private static void loadRealmUpgrade() {
-        realmUpgrade = new HashMap<>();
-
-        ConfigurationSection section = config.getConfigurationSection("real-upgrade");
-        if (section == null) return;
-
-        for (String s : section.getKeys(false)) {
-            int count = section.getInt(s);
-            realmUpgrade.put(Integer.parseInt(s), count);
+            int layer = Integer.parseInt(s);
+            String name = section.getString(s + ".name");
+            int stageConsume = section.getInt(s + ".stage");
+            int realmConsume = section.getInt(s + ".realm");
+            realmSetting.put(layer, new RealmSetting(layer, name, stageConsume, realmConsume));
         }
     }
 }

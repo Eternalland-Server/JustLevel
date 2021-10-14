@@ -114,15 +114,6 @@ public class PlayerLevelData {
         this.exp = value;
     }
 
-    public void save() {
-        int totalLevel = getTotalLevel();
-        JustLevel.getInstance().getStorageManager().updatePlayerData(player, totalLevel, exp, stagePoints, realmPoints);
-    }
-
-    public int getTotalLevel() {
-        return level + (stage - 1) * ConfigFile.stage_level + (realm - 1) * ConfigFile.stage_layer * ConfigFile.stage_level - 1;
-    }
-
     public void addExp(double value) {
         if (realm == ConfigFile.realm_layer) return;
         if (level == ConfigFile.stage_level) return;
@@ -211,5 +202,18 @@ public class PlayerLevelData {
 
     public double getUpgradeExp() {
         return LevelUtil.getUpgradeRequireExp(this.level);
+    }
+
+    public String getRealmName() {
+        return ConfigFile.realmSetting.get(realm).getName();
+    }
+
+    public void save() {
+        int totalLevel = getTotalLevel();
+        JustLevel.getInstance().getStorageManager().updatePlayerData(player, totalLevel, exp, stagePoints, realmPoints);
+    }
+
+    public int getTotalLevel() {
+        return level + (stage - 1) * ConfigFile.stage_level + (realm - 1) * ConfigFile.stage_layer * ConfigFile.stage_level - 1;
     }
 }

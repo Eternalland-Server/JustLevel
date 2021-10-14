@@ -1,41 +1,6 @@
 Prefix: ' &7&l[境界] '
 #等级经验共识
 level-formula: 'Math.pow(level, 2)+24*level+35'
-#阶段突破所需点数
-stage-upgrade:
-  1: 4
-  2: 8
-  3: 12
-  4: 16
-  5: 20
-  6: 26
-  7: 32
-  8: 38
-  9: 44
-  10: 50
-#境界突破所需点数
-realm-upgrade:
-  1: 2
-  2: 4
-  3: 6
-  4: 8
-  5: 10
-  6: 14
-  7: 18
-  8: 22
-  9: 26
-  10: 30
-  11: 32
-  12: 34
-  13: 36
-  14: 38
-  15: 40
-  16: 45
-  17: 50
-  18: 55
-  19: 60
-  20: 66
-  21: 88
 #突破石
 stone:
   #阶段突破石
@@ -58,3 +23,92 @@ stone:
       - ''
       - ' &3使用一个 &7- 右键'
       - ' &3全部使用 &7- Shift+右键'
+setting:
+  #境界层级
+  1:
+    #境界名称
+    name: '炼体'
+    #阶段突破消耗点数
+    stage: 1
+    #境界突破消耗点数
+    realm: 2
+  2:
+    name: '筑基'
+    stage: 1
+    realm: 4
+  3:
+    name: '开光'
+    stage: 2
+    realm: 6
+  4:
+    name: '融合'
+    stage: 2
+    realm: 8
+  5:
+    name: '出凡'
+    stage: 3
+    realm: 10
+  6:
+    name: '金丹'
+    stage: 3
+    realm: 14
+  7:
+    name: '元婴'
+    stage: 4
+    realm: 18
+  8:
+    name: '出窍'
+    stage: 4
+    realm: 22
+  9:
+    name: '分神'
+    stage: 5
+    realm: 26
+  10:
+    name: '合体'
+    stage: 5
+    realm: 30
+  11:
+    name: '洞虚'
+    stage: 6
+    realm: 32
+  12:
+    name: '大乘'
+    stage: 6
+    realm: 34
+  13:
+    name: '渡劫'
+    stage: 7
+    realm: 36
+  14:
+    name: '飞升'
+    stage: 7
+    realm: 38
+  15:
+    name: '地仙'
+    stage: 8
+    realm: 40
+  16:
+    name: '天仙'
+    stage: 8
+    realm: 45
+  17:
+    name: '灵仙'
+    stage: 9
+    realm: 50
+  18:
+    name: '仙王'
+    stage: 9
+    realm: 55
+  19:
+    name: '仙尊'
+    stage: 10
+    realm: 60
+  20:
+    name: '仙帝'
+    stage: 10
+    realm: 66
+  21:
+    name: '神王'
+    stage: 66
+    realm: 88

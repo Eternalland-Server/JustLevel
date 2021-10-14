@@ -65,6 +65,10 @@ public class LevelPlaceholder extends PlaceholderExpansion {
             return String.valueOf(data.getRealm());
         }
 
+        if (params.equalsIgnoreCase("realm_name")) {
+            return String.valueOf(data.getRealmName());
+        }
+
         if (params.equalsIgnoreCase("stage_points")) {
             return String.valueOf(data.getStagePoints());
         }

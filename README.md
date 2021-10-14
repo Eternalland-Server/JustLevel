@@ -16,6 +16,8 @@
 
 %justlevel_realm% - 当前境界
 
+%justlevel_realm_name% - 当前境界名称
+
 %justlevel_stage_points% - 当前阶段突破点数
 
 %justlevel_realm_points% - 当前境界突破点数
