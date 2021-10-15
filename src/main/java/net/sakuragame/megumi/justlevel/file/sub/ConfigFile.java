@@ -40,7 +40,7 @@ public class ConfigFile {
         loadRealmSetting();
         stone = new HashMap<>();
         stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, TierType.Stage.getId()).build());
-        stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, TierType.Stage.getId()).build());
+        stone.put(TierType.Realm.getId(), new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, TierType.Realm.getId()).build());
     }
 
     private static String getString(String path) {

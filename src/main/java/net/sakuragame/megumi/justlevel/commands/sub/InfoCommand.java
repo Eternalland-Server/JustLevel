@@ -10,12 +10,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
+
 public class InfoCommand extends SubCommand {
 
     private JustLevel plugin;
+    private final DecimalFormat format;
 
     public InfoCommand() {
         this.plugin = JustLevel.getInstance();
+        this.format = new DecimalFormat("#.#");
     }
 
     @Override
@@ -41,7 +45,7 @@ public class InfoCommand extends SubCommand {
         MessageFile.playerInfo.forEach(s -> player.sendMessage(s
                 .replace("%player%", player.getName())
                 .replace("%level%", String.valueOf(data.getLevel()))
-                .replace("%current_exp%", String.valueOf(data.getExp()))
+                .replace("%current_exp%", format.format(data.getExp()))
                 .replace("%total_exp%", String.valueOf(LevelUtil.getUpgradeRequireExp(data.getLevel())))
                 .replace("%stage%", String.valueOf(data.getStage()))
                 .replace("%realm%", String.valueOf(data.getRealm()))

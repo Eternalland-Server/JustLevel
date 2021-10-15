@@ -1,10 +1,13 @@
 package net.sakuragame.megumi.justlevel.listener;
 
+import com.taylorswiftcn.justwei.nbt.NBTItem;
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
+import net.sakuragame.megumi.justlevel.file.sub.MessageFile;
 import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
-import de.tr7zw.changeme.nbtapi.NBTItem;
 import net.sakuragame.megumi.justlevel.level.TierType;
+import net.sakuragame.megumi.justmessage.api.MessageAPI;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +23,7 @@ public class StoneListener implements Listener {
     @EventHandler
     public void onRight(PlayerInteractEvent e) {
         Player player = e.getPlayer();
-        if (e.getAction() != Action.RIGHT_CLICK_AIR || e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item == null || item.getItemMeta() == null) return;
@@ -30,6 +33,8 @@ public class StoneListener implements Listener {
         TierType type = TierType.getType(id);
         if (type == null) return;
 
+        e.setCancelled(true);
+
         PlayerLevelData playerData = plugin.getPlayerData().get(player.getUniqueId());
 
         switch (type) {
@@ -38,12 +43,12 @@ public class StoneListener implements Listener {
                     int i = item.getAmount();
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                     playerData.addStagePoints(i);
-                    player.sendMessage("成功消耗全部stage");
+                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.stagePointsChange, "%points%", String.valueOf(i)));
                 }
                 else {
                     item.setAmount(item.getAmount() - 1);
                     playerData.addStagePoints(1);
-                    player.sendMessage("成功消耗一个stage");
+                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.stagePointsChange, "%points%", "1"));
                 }
                 break;
             case Realm:
@@ -51,12 +56,12 @@ public class StoneListener implements Listener {
                     int i = item.getAmount();
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                     playerData.addRealmPoints(i);
-                    player.sendMessage("成功消耗全部realm");
+                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.realmPointsChange, "%points%", String.valueOf(i)));
                 }
                 else {
                     item.setAmount(item.getAmount() - 1);
                     playerData.addRealmPoints(1);
-                    player.sendMessage("成功消耗一个realm");
+                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.realmPointsChange, "%points%", "1"));
                 }
                 break;
         }

@@ -15,6 +15,8 @@ public class MessageFile {
 
     public static String noPermission;
     public static String expChange;
+    public static String stagePointsChange;
+    public static String realmPointsChange;
 
     public static void init() {
         message = JustLevel.getInstance().getFileManager().getMessage();
@@ -25,6 +27,8 @@ public class MessageFile {
 
         noPermission = getString("message.no-permission");
         expChange = getString("message.exp-change");
+        stagePointsChange = getString("message.stage-points-change");
+        realmPointsChange = getString("message.realm-points-change");
     }
 
     private static String getString(String path) {
