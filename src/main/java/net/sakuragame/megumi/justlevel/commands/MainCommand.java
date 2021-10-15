@@ -7,7 +7,7 @@ import net.sakuragame.megumi.justlevel.commands.sub.player.*;
 public class MainCommand extends ICommand {
 
     public MainCommand() {
-        this.help = new HelpCommand();
+        this.setHelpCommand(new HelpCommand());
         this.register(new InfoCommand());
         this.register(new ItemCommand());
         this.register(new AddExpCommand());
