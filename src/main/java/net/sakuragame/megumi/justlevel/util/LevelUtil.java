@@ -39,6 +39,7 @@ public class LevelUtil {
             if (!player.hasPermission(permission)) continue;
             double rate = ConfigFile.expAddition.get(s);
             exp = exp * (rate - 1);
+            return exp;
         }
 
         return exp;

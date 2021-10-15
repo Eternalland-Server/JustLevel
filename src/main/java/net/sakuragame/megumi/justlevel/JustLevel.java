@@ -72,6 +72,6 @@ public class JustLevel extends JavaPlugin {
 
     public void reload() {
         fileManager.init();
-        LevelUtil.conversionExp();
+        /*LevelUtil.conversionExp();*/
     }
 }

@@ -14,8 +14,6 @@ public class MythicMobListener implements Listener {
     @EventHandler
     public void onDropLoad(MythicDropLoadEvent e) {
         String dropName = e.getDropName();
-        plugin.getLogger().info(dropName);
-
         if (!dropName.equalsIgnoreCase("jexp")) return;
 
         Drop drop = new JustExperienceDrop(e.getConfig());
