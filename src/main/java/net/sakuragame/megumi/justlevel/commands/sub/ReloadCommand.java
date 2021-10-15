@@ -14,6 +14,11 @@ public class ReloadCommand extends SubCommand {
     }
 
     @Override
+    public String getIdentifier() {
+        return "reload";
+    }
+
+    @Override
     public void perform(CommandSender CommandSender, String[] Strings) {
         plugin.reload();
         CommandSender.sendMessage(ConfigFile.Prefix + "§a配置文件已重载");

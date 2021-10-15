@@ -8,6 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class GetCommand extends SubCommand {
+
+    @Override
+    public String getIdentifier() {
+        return "get";
+    }
+
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
         if (strings.length < 4) return;

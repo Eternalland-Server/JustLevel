@@ -18,6 +18,10 @@ public class TakeCommand extends SubCommand {
         this.plugin = JustLevel.getInstance();
     }
 
+    @Override
+    public String getIdentifier() {
+        return "take";
+    }
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {

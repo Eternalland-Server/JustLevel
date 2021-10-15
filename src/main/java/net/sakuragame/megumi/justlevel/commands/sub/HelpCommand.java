@@ -7,6 +7,11 @@ import org.bukkit.command.CommandSender;
 public class HelpCommand extends SubCommand {
 
     @Override
+    public String getIdentifier() {
+        return "help";
+    }
+
+    @Override
     public void perform(CommandSender CommandSender, String[] Strings) {
         MessageFile.help.forEach(CommandSender::sendMessage);
         if (CommandSender.hasPermission("justrpg.admin"))

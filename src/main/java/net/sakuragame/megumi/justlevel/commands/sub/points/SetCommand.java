@@ -18,6 +18,10 @@ public class SetCommand extends SubCommand {
         this.plugin = JustLevel.getInstance();
     }
 
+    @Override
+    public String getIdentifier() {
+        return "set";
+    }
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {

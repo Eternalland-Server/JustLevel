@@ -10,4 +10,9 @@ public class ItemCommand extends MegumiCommand {
         this.commands.put("give", new GiveCommand());
         this.commands.put("get", new GetCommand());
     }
+
+    @Override
+    public String getIdentifier() {
+        return "item";
+    }
 }

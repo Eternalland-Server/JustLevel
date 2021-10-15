@@ -9,6 +9,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class GiveCommand extends SubCommand {
+
+    @Override
+    public String getIdentifier() {
+        return "give";
+    }
+
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
         if (strings.length < 5) return;

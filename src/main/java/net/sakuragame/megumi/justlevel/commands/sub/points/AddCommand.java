@@ -19,6 +19,11 @@ public class AddCommand extends SubCommand {
     }
 
     @Override
+    public String getIdentifier() {
+        return "add";
+    }
+
+    @Override
     public void perform(CommandSender commandSender, String[] strings) {
         if (strings.length < 5) return;
 

@@ -18,6 +18,11 @@ public class SetLevelCommand extends SubCommand {
     }
 
     @Override
+    public String getIdentifier() {
+        return "setLevel";
+    }
+
+    @Override
     public void perform(CommandSender commandSender, String[] strings) {
         if (strings.length < 3) return;
 

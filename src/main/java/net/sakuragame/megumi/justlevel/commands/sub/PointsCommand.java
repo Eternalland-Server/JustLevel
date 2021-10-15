@@ -12,4 +12,9 @@ public class PointsCommand extends MegumiCommand {
         this.commands.put("set", new SetCommand());
         this.commands.put("take", new TakeCommand());
     }
+
+    @Override
+    public String getIdentifier() {
+        return "points";
+    }
 }

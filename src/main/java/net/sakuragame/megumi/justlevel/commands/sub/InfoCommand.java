@@ -23,6 +23,11 @@ public class InfoCommand extends SubCommand {
     }
 
     @Override
+    public String getIdentifier() {
+        return "info";
+    }
+
+    @Override
     public void perform(CommandSender commandSender, String[] strings) {
         if (strings.length >= 2) {
             String s = strings[1];
