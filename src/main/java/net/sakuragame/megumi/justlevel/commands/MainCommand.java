@@ -14,7 +14,7 @@ public class MainCommand extends ICommand {
         this.register(new SetExpCommand());
         this.register(new SetLevelCommand());
         this.register(new SetStageCommand());
-        this.register( new SetRealmCommand());
+        this.register(new SetRealmCommand());
         this.register(new PointsCommand());
         this.register(new ReloadCommand());
     }

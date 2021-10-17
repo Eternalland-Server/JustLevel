@@ -17,7 +17,7 @@ import java.util.Map;
 public class ConfigFile {
     private static YamlConfiguration config;
 
-    public static final String ID_TAG = "JUST_ID";
+    public static final String ID_TAG = "JUST_LEVEL_ID";
 
     public static String Prefix;
     public static Integer realm_layer;

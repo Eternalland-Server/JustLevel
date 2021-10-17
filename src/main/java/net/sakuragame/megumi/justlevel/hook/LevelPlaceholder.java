@@ -19,7 +19,7 @@ public class LevelPlaceholder extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getIdentifier() {
-        return "sakura";
+        return "justlevel";
     }
 
     @Override

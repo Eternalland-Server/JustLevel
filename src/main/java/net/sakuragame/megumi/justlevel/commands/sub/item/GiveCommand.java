@@ -44,7 +44,7 @@ public class GiveCommand extends SubCommand {
         item.setAmount(amount);
 
         player.getInventory().addItem(item);
-        player.sendMessage(ConfigFile.Prefix + "§a获取物品成功");
+        player.sendMessage(ConfigFile.Prefix + "§a物品已发放到玩家背包");
     }
 
     @Override

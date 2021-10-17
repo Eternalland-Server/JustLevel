@@ -52,7 +52,7 @@ setting:
     stage: 2
     realm: 8
   5:
-    name: '出凡'
+    name: '心动'
     stage: 3
     realm: 10
   6:
@@ -116,6 +116,6 @@ setting:
     stage: 10
     realm: 66
   21:
-    name: '神王'
+    name: '圣者'
     stage: 66
     realm: 88

@@ -100,9 +100,17 @@
         </dependency>
 
         <dependency>
+            <groupId>eos.moe</groupId>
+            <artifactId>DragonCore</artifactId>
+            <version>2.4.7</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/DragonCore-2.4.7.jar</systemPath>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.20</version>
+            <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

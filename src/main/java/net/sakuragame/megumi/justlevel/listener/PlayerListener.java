@@ -23,6 +23,8 @@ public class PlayerListener implements Listener {
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             PlayerLevelData data = plugin.getStorageManager().getPlayerData(player);
             plugin.getPlayerData().put(uuid, data);
+
+            Bukkit.getScheduler().runTaskLater(plugin, data::syncPlaceHolder, 40);
         }, 10);
     }
 

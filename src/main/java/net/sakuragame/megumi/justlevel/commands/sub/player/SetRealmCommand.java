@@ -19,7 +19,7 @@ public class SetRealmCommand extends SubCommand {
 
     @Override
     public String getIdentifier() {
-        return "setReal";
+        return "setRealm";
     }
 
     @Override

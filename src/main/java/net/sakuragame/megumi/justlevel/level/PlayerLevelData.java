@@ -3,6 +3,7 @@ package net.sakuragame.megumi.justlevel.level;
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.event.*;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
+import net.sakuragame.megumi.justlevel.hook.DragonCoreSync;
 import net.sakuragame.megumi.justlevel.util.LevelUtil;
 import lombok.Getter;
 import org.bukkit.entity.Player;
@@ -51,6 +52,35 @@ public class PlayerLevelData {
         this.stagePoints = stagePoint;
         this.realmPoints = realmPoint;
         this.updateExpBar();
+        this.updateLevelTip();
+    }
+
+    public void syncPlaceHolder() {
+        DragonCoreSync.send(player, exp, getUpgradeExp(), stage, getRealmName(), stagePoints, realmPoints);
+    }
+
+    public void syncExp() {
+        DragonCoreSync.send(player, exp, getUpgradeExp());
+    }
+
+    public void syncCurrentExp() {
+        DragonCoreSync.send(player, DragonCoreSync.PlaceHolder.CURRENT_EXP, exp);
+    }
+
+    public void syncStage() {
+        DragonCoreSync.send(player, DragonCoreSync.PlaceHolder.CURRENT_STAGE, stage);
+    }
+
+    public void syncRealm() {
+        DragonCoreSync.send(player, DragonCoreSync.PlaceHolder.CURRENT_REALM, getRealmName());
+    }
+
+    public void syncStagePoints() {
+        DragonCoreSync.send(player, DragonCoreSync.PlaceHolder.STAGE_POINTS, stagePoints);
+    }
+
+    public void syncRealmPoints() {
+        DragonCoreSync.send(player, DragonCoreSync.PlaceHolder.REALM_POINTS, realmPoints);
     }
 
     public void addRealm() {
@@ -69,6 +99,26 @@ public class PlayerLevelData {
         setStage(stage + i);
     }
 
+    public void setRealm(int realm) {
+        int oldRealm = this.realm;
+        this.realm = Math.min(ConfigFile.realm_layer, Math.max(0, realm));
+
+        IEvent event = new JustPlayerRealmChangeEvent(player, oldRealm, this.realm);
+        event.call();
+
+        syncRealm();
+    }
+
+    public void setStage(int stage) {
+        int oldStage = this.stage;
+        this.stage = Math.min(ConfigFile.stage_layer, Math.max(0, stage));
+
+        IEvent event = new JustPlayerStageChangeEvent(player, oldStage, this.stage, realm);
+        event.call();
+
+        syncStage();
+    }
+
     public void addLevel(int upgrade) {
         JustPlayerUpgradeEvent upgradeEvent = new JustPlayerUpgradeEvent(player, level, upgrade);
         upgradeEvent.call();
@@ -80,22 +130,6 @@ public class PlayerLevelData {
 
         IEvent upgradedEvent = new JustPlayerUpgradedEvent(player, oldLevel, level);
         upgradedEvent.call();
-    }
-
-    public void setRealm(int realm) {
-        int oldRealm = this.realm;
-        this.realm = Math.min(ConfigFile.realm_layer, Math.max(0, realm));
-
-        IEvent event = new JustPlayerRealmChangeEvent(player, oldRealm, this.realm);
-        event.call();
-    }
-
-    public void setStage(int stage) {
-        int oldStage = this.stage;
-        this.stage = Math.min(ConfigFile.stage_layer, Math.max(0, stage));
-
-        IEvent event = new JustPlayerStageChangeEvent(player, oldStage, this.stage, realm);
-        event.call();
     }
 
     public void setLevel(int level) {
@@ -112,6 +146,8 @@ public class PlayerLevelData {
             return;
         }
         this.exp = value;
+
+        syncCurrentExp();
     }
 
     public void addExp(double value) {
@@ -150,6 +186,7 @@ public class PlayerLevelData {
         increasedEvent.call();
 
         updateExpBar();
+        syncExp();
     }
 
     public void addStagePoints(int points) {
@@ -186,10 +223,14 @@ public class PlayerLevelData {
 
     public void setStagePoints(int points) {
         this.stagePoints = Math.max(0, points);
+
+        syncStagePoints();
     }
 
     public void setRealmPoints(int points) {
         this.realmPoints = Math.max(0, points);
+
+        syncRealmPoints();
     }
 
     public void updateExpBar() {
