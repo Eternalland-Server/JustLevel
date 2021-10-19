@@ -11,5 +11,7 @@ public class RealmSetting {
     private String name;
     private int stageConsume;
     private int realmConsume;
+    private int stageBreakPrice;
+    private int realmBreakPrice;
 
 }

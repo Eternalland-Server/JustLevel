@@ -20,8 +20,8 @@ player-info:
  - '&f经验: &7%current_exp%/%total_exp%'
  - '&f阶段: &7%stage%'
  - '&f境界: &7%realm%'
- - '&f阶段突破点: &7%stage_points%'
- - '&f境界突破点: &7%realm_points%'
+ - '&f突破点: &7%stage_points%'
+ - '&f境界点: &7%realm_points%'
  - ''
 message:
   no-permission: '&3你没有权限: %s%'

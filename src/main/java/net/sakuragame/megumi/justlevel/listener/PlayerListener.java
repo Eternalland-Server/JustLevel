@@ -6,7 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
@@ -37,5 +39,10 @@ public class PlayerListener implements Listener {
            plugin.getPlayerData().get(uuid).save();
            plugin.getPlayerData().remove(uuid);
         });
+    }
+
+    @EventHandler
+    public void onVanillaExpChange(PlayerExpChangeEvent e) {
+        e.setAmount(0);
     }
 }

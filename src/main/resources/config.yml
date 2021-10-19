@@ -36,86 +36,128 @@ setting:
     #境界名称
     name: '炼体'
     #阶段突破消耗点数
-    stage: 1
+    stage-consume: 1
     #境界突破消耗点数
-    realm: 2
+    realm-consume: 2
+    stage-break-price: 1000
+    realm-break-price: 9999
   2:
     name: '筑基'
-    stage: 1
-    realm: 4
+    stage-consume: 1
+    realm-consume: 4
+    stage-break-price: 2000
+    realm-break-price: 19999
   3:
     name: '开光'
-    stage: 2
-    realm: 6
+    stage-consume: 2
+    realm-consume: 6
+    stage-break-price: 3000
+    realm-break-price: 29999
   4:
     name: '融合'
-    stage: 2
-    realm: 8
+    stage-consume: 2
+    realm-consume: 8
+    stage-break-price: 4000
+    realm-break-price: 39999
   5:
     name: '心动'
-    stage: 3
-    realm: 10
+    stage-consume: 3
+    realm-consume: 10
+    stage-break-price: 5000
+    realm-break-price: 49999
   6:
     name: '金丹'
-    stage: 3
-    realm: 14
+    stage-consume: 3
+    realm-consume: 14
+    stage-break-price: 6000
+    realm-break-price: 59999
   7:
     name: '元婴'
-    stage: 4
-    realm: 18
+    stage-consume: 4
+    realm-consume: 18
+    stage-break-price: 7000
+    realm-break-price: 69999
   8:
     name: '出窍'
-    stage: 4
-    realm: 22
+    stage-consume: 4
+    realm-consume: 22
+    stage-break-price: 8000
+    realm-break-price: 79999
   9:
     name: '分神'
-    stage: 5
-    realm: 26
+    stage-consume: 5
+    realm-consume: 26
+    stage-break-price: 9000
+    realm-break-price: 89999
   10:
     name: '合体'
-    stage: 5
-    realm: 30
+    stage-consume: 5
+    realm-consume: 30
+    stage-break-price: 10000
+    realm-break-price: 99999
   11:
     name: '洞虚'
-    stage: 6
-    realm: 32
+    stage-consume: 6
+    realm-consume: 32
+    stage-break-price: 11000
+    realm-break-price: 109999
   12:
     name: '大乘'
-    stage: 6
-    realm: 34
+    stage-consume: 6
+    realm-consume: 34
+    stage-break-price: 12000
+    realm-break-price: 119999
   13:
     name: '渡劫'
-    stage: 7
-    realm: 36
+    stage-consume: 7
+    realm-consume: 36
+    stage-break-price: 13000
+    realm-break-price: 129999
   14:
     name: '飞升'
-    stage: 7
-    realm: 38
+    stage-consume: 7
+    realm-consume: 38
+    stage-break-price: 14000
+    realm-break-price: 139999
   15:
     name: '地仙'
-    stage: 8
-    realm: 40
+    stage-consume: 8
+    realm-consume: 40
+    stage-break-price: 15000
+    realm-break-price: 149999
   16:
     name: '天仙'
-    stage: 8
-    realm: 45
+    stage-consume: 8
+    realm-consume: 45
+    stage-break-price: 16000
+    realm-break-price: 159999
   17:
     name: '灵仙'
-    stage: 9
-    realm: 50
+    stage-consume: 9
+    realm-consume: 50
+    stage-break-price: 17000
+    realm-break-price: 169999
   18:
     name: '仙王'
-    stage: 9
-    realm: 55
+    stage-consume: 9
+    realm-consume: 55
+    stage-break-price: 18000
+    realm-break-price: 179999
   19:
     name: '仙尊'
-    stage: 10
-    realm: 60
+    stage-consume: 10
+    realm-consume: 60
+    stage-break-price: 19000
+    realm-break-price: 189999
   20:
     name: '仙帝'
-    stage: 10
-    realm: 66
+    stage-consume: 10
+    realm-consume: 66
+    stage-break-price: 20000
+    realm-break-price: 199999
   21:
     name: '圣者'
-    stage: 66
-    realm: 88
+    stage-consume: 66
+    realm-consume: 88
+    stage-break-price: 21000
+    realm-break-price: 209999

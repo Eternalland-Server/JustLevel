@@ -151,7 +151,7 @@ public class PlayerLevelData {
     }
 
     public void addExp(double value) {
-        if (realm == ConfigFile.realm_layer) return;
+        if (realm == ConfigFile.realm_layer && stage == ConfigFile.stage_layer && level == ConfigFile.stage_level) return;
         if (level == ConfigFile.stage_level && exp == getUpgradeExp()) return;
 
         JustPlayerExpIncreaseEvent increaseEvent = new JustPlayerExpIncreaseEvent(player, level, exp, value);

@@ -72,9 +72,11 @@ public class ConfigFile {
         for (String s : section.getKeys(false)) {
             int layer = Integer.parseInt(s);
             String name = section.getString(s + ".name");
-            int stageConsume = section.getInt(s + ".stage");
-            int realmConsume = section.getInt(s + ".realm");
-            realmSetting.put(layer, new RealmSetting(layer, name, stageConsume, realmConsume));
+            int stageConsume = section.getInt(s + ".stage-consume");
+            int realmConsume = section.getInt(s + ".realm-consume");
+            int stageBreakPrice = section.getInt(s + ".stage-break-price");
+            int realmBreakPrice = section.getInt(s + ".realm-break-price");
+            realmSetting.put(layer, new RealmSetting(layer, name, stageConsume, realmConsume, stageBreakPrice, realmBreakPrice));
         }
     }
 }
