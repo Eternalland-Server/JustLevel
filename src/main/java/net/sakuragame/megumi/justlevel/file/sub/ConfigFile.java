@@ -4,7 +4,7 @@ import com.taylorswiftcn.justwei.util.ItemBuilder;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.level.RealmSetting;
-import net.sakuragame.megumi.justlevel.level.TierType;
+import net.sakuragame.megumi.justlevel.level.LevelType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -39,8 +39,8 @@ public class ConfigFile {
         loadExpAddition();
         loadRealmSetting();
         stone = new HashMap<>();
-        stone.put(TierType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, TierType.Stage.getId()).build());
-        stone.put(TierType.Realm.getId(), new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, TierType.Realm.getId()).build());
+        stone.put(LevelType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, LevelType.Stage.getId()).build());
+        stone.put(LevelType.Realm.getId(), new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, LevelType.Realm.getId()).build());
     }
 
     private static String getString(String path) {

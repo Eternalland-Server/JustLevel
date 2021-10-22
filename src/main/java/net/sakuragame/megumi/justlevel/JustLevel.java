@@ -1,5 +1,6 @@
 package net.sakuragame.megumi.justlevel;
 
+import net.milkbowl.vault.economy.Economy;
 import net.sakuragame.megumi.justlevel.commands.MainCommand;
 import net.sakuragame.megumi.justlevel.file.FileManager;
 import net.sakuragame.megumi.justlevel.hook.LevelPlaceholder;
@@ -12,6 +13,7 @@ import net.sakuragame.megumi.justlevel.storage.StorageManager;
 import net.sakuragame.megumi.justlevel.util.LevelUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
@@ -23,6 +25,8 @@ public class JustLevel extends JavaPlugin {
 
     @Getter private FileManager fileManager;
     @Getter private StorageManager storageManager;
+
+    @Getter private Economy economy;
 
     @Getter
     private Map<UUID, PlayerLevelData> playerData;
@@ -39,10 +43,11 @@ public class JustLevel extends JavaPlugin {
         storageManager = new StorageManager(this);
         fileManager.init();
         storageManager.init();
-
         LevelUtil.conversionExp();
         loadOnlinePlayer();
+
         new LevelPlaceholder().register();
+        setupEconomy();
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
@@ -64,6 +69,13 @@ public class JustLevel extends JavaPlugin {
     public String getVersion() {
         String packet = Bukkit.getServer().getClass().getPackage().getName();
         return packet.substring(packet.lastIndexOf('.') + 1);
+    }
+
+    private void setupEconomy() {
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (rsp != null) {
+            economy = rsp.getProvider();
+        }
     }
 
     private void loadOnlinePlayer() {

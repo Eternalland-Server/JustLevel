@@ -7,13 +7,12 @@ import org.bukkit.event.HandlerList;
 @Getter
 public class JustPlayerStageChangeEvent extends IEvent {
 
-    private final Player player;
     private final int oldStage;
     private final int newStage;
     private final int realm;
 
     public JustPlayerStageChangeEvent(Player player, int oldStage, int newStage, int realm) {
-        this.player = player;
+        super(player);
         this.oldStage = oldStage;
         this.newStage = newStage;
         this.realm = realm;

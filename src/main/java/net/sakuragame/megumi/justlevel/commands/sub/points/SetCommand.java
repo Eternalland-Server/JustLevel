@@ -5,7 +5,7 @@ import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
-import net.sakuragame.megumi.justlevel.level.TierType;
+import net.sakuragame.megumi.justlevel.level.LevelType;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -32,7 +32,7 @@ public class SetCommand extends SubCommand {
         String s3 = strings[4];
 
         Player player = Bukkit.getPlayerExact(s1);
-        TierType type = TierType.getType(s2);
+        LevelType type = LevelType.getType(s2);
 
         if (player == null) {
             commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");

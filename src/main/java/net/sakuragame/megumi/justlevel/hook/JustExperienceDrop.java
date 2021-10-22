@@ -6,7 +6,7 @@ import io.lumine.xikage.mythicmobs.drops.Drop;
 import io.lumine.xikage.mythicmobs.drops.DropMetadata;
 import io.lumine.xikage.mythicmobs.drops.IIntangibleDrop;
 import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
-import net.sakuragame.megumi.justlevel.level.LevelManager;
+import net.sakuragame.megumi.justlevel.api.JustLevelAPI;
 import org.bukkit.entity.Player;
 
 public class JustExperienceDrop extends Drop implements IIntangibleDrop {
@@ -18,6 +18,6 @@ public class JustExperienceDrop extends Drop implements IIntangibleDrop {
     @Override
     public void giveDrop(AbstractPlayer abstractPlayer, DropMetadata dropMetadata) {
         Player player = BukkitAdapter.adapt(abstractPlayer);
-        LevelManager.addExp(player, getAmount());
+        JustLevelAPI.addExp(player, getAmount());
     }
 }

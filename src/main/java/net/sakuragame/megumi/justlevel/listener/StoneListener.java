@@ -5,7 +5,7 @@ import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import net.sakuragame.megumi.justlevel.file.sub.MessageFile;
 import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
-import net.sakuragame.megumi.justlevel.level.TierType;
+import net.sakuragame.megumi.justlevel.level.LevelType;
 import net.sakuragame.megumi.justmessage.api.MessageAPI;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -30,7 +30,7 @@ public class StoneListener implements Listener {
 
         NBTItem nbtItem = new NBTItem(item);
         String id = nbtItem.getString(ConfigFile.ID_TAG);
-        TierType type = TierType.getType(id);
+        LevelType type = LevelType.getType(id);
         if (type == null) return;
 
         e.setCancelled(true);

@@ -1,7 +1,7 @@
 name: JustLevel
 main: net.sakuragame.megumi.justlevel.JustLevel
 version: ${project.version}
-author: 'Justwei'
+author: 'justwei'
 api-version: '1.13'
 depend:
   - MegumiLib

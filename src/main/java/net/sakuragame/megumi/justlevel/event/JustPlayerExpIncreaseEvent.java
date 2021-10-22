@@ -10,14 +10,13 @@ import org.bukkit.event.HandlerList;
 @Setter
 public class JustPlayerExpIncreaseEvent extends IEvent implements Cancellable {
 
-    private final Player player;
     private final int level;
     private final double exp;
     private double increase;
     private boolean cancel;
 
     public JustPlayerExpIncreaseEvent(Player player, int level, double exp, double increase) {
-        this.player = player;
+        super(player);
         this.level = level;
         this.exp = exp;
         this.increase = increase;

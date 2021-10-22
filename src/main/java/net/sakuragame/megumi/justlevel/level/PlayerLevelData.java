@@ -60,7 +60,7 @@ public class PlayerLevelData {
     }
 
     public void syncExp() {
-        DragonCoreSync.send(player, exp, getUpgradeExp());
+        DragonCoreSync.sendExp(player, exp, getUpgradeExp());
     }
 
     public void syncCurrentExp() {
@@ -81,6 +81,57 @@ public class PlayerLevelData {
 
     public void syncRealmPoints() {
         DragonCoreSync.send(player, DragonCoreSync.PlaceHolder.REALM_POINTS, realmPoints);
+    }
+
+    public void syncBreakRequire() {
+        RealmSetting setting = ConfigFile.realmSetting.get(realm);
+        int stageRequire = canStageBreak() ? 1 : 0;
+        int realmRequire = canRealmBreak() ? 1 : 0;
+        boolean stageA = (level >= ConfigFile.stage_level);
+        boolean stageB = (stagePoints >= setting.getStageConsume());
+        boolean stageC = (JustLevel.getInstance().getEconomy().getBalance(player) >= setting.getStageBreakPrice());
+        boolean realmA = (stage >= ConfigFile.stage_layer);
+        boolean realmB = (realmPoints >= setting.getRealmConsume());
+        boolean realmC = (JustLevel.getInstance().getEconomy().getBalance(player) >= setting.getRealmBreakPrice());
+        DragonCoreSync.sendRequire(
+                player,
+                stageRequire,
+                realmRequire,
+                String.format("%s &f等级: %s", stageA ? "┦" : "┧", stageA ? "&a" + ConfigFile.stage_level : "&c" + ConfigFile.stage_level),
+                String.format("%s &f突破石: %s", stageB ? "┦" : "┧", stageB ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
+                String.format("%s &f金币: %s", stageC ? "┦" : "┧", stageC ? "&a" + setting.getStageBreakPrice() : "&c" + setting.getStageBreakPrice()),
+                String.format("%s &f阶段: %s", realmA ? "┦" : "┧", realmA ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
+                String.format("%s &f境界石: %s", realmB ? "┦" : "┧", realmB ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
+                String.format("%s &f金币: %s", realmC ? "┦" : "┧", realmC ? "&a" + setting.getRealmBreakPrice() : "&c" + setting.getRealmBreakPrice())
+        );
+    }
+
+    public boolean canStageBreak() {
+        if (stage == ConfigFile.stage_layer) return false;
+        RealmSetting setting = ConfigFile.realmSetting.get(realm);
+        return level == ConfigFile.stage_level && stagePoints >= setting.getStageConsume() && JustLevel.getInstance().getEconomy().getBalance(player) >= setting.getStageBreakPrice();
+    }
+
+    public boolean canRealmBreak() {
+        if (realm == ConfigFile.realm_layer) return false;
+        RealmSetting setting = ConfigFile.realmSetting.get(realm);
+        return level == ConfigFile.stage_level && stage == ConfigFile.stage_layer && realmPoints >= setting.getRealmConsume() && JustLevel.getInstance().getEconomy().getBalance(player) >= setting.getRealmBreakPrice();
+    }
+
+    public int getStageBreakPoints() {
+        return ConfigFile.realmSetting.get(realm).getStageConsume();
+    }
+
+    public int getRealmBreakPoints() {
+        return ConfigFile.realmSetting.get(realm).getRealmConsume();
+    }
+
+    public int getStageBreakPrice() {
+        return ConfigFile.realmSetting.get(realm).getStageBreakPrice();
+    }
+
+    public int getRealmBreakPrice() {
+        return ConfigFile.realmSetting.get(realm).getRealmBreakPrice();
     }
 
     public void addRealm() {
@@ -190,26 +241,26 @@ public class PlayerLevelData {
     }
 
     public void addStagePoints(int points) {
-        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, TierType.Stage, points);
+        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelType.Stage, points);
         pointsEvent.call();
         if (pointsEvent.isCancelled()) return;
         points = pointsEvent.getPoints();
 
         setStagePoints(getStagePoints() + points);
 
-        IEvent event = new JustPlayerIncreasedPointsEvent(player, TierType.Stage, points);
+        IEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Stage, points);
         event.call();
     }
 
     public void addRealmPoints(int points) {
-        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, TierType.Realm, points);
+        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelType.Realm, points);
         pointsEvent.call();
         if (pointsEvent.isCancelled()) return;
         points = pointsEvent.getPoints();
 
         setRealmPoints(getRealmPoints() + points);
 
-        IEvent event = new JustPlayerIncreasedPointsEvent(player, TierType.Realm, points);
+        IEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Realm, points);
         event.call();
     }
 

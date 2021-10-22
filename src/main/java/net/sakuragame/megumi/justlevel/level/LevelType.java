@@ -1,13 +1,13 @@
 package net.sakuragame.megumi.justlevel.level;
 
-public enum TierType {
+public enum LevelType {
 
     Stage("stage"),
     Realm("realm");
 
     private String id;
 
-    TierType(String id) {
+    LevelType(String id) {
         this.id = id;
     }
 
@@ -15,8 +15,8 @@ public enum TierType {
         return id;
     }
 
-    public static TierType getType(String id) {
-        for (TierType type : values()) {
+    public static LevelType getType(String id) {
+        for (LevelType type : values()) {
             if (type.getId().equals(id)) return type;
         }
 

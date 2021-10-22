@@ -2,7 +2,7 @@ package net.sakuragame.megumi.justlevel.event;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.sakuragame.megumi.justlevel.level.TierType;
+import net.sakuragame.megumi.justlevel.level.LevelType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
@@ -11,13 +11,12 @@ import org.bukkit.event.HandlerList;
 @Setter
 public class JustPlayerIncreasePointsEvent extends IEvent implements Cancellable {
 
-    private final Player player;
-    private final TierType type;
+    private final LevelType type;
     private int points;
     private boolean cancel;
 
-    public JustPlayerIncreasePointsEvent(Player player, TierType type, int points) {
-        this.player = player;
+    public JustPlayerIncreasePointsEvent(Player player, LevelType type, int points) {
+        super(player);
         this.type = type;
         this.points = points;
         this.cancel = false;

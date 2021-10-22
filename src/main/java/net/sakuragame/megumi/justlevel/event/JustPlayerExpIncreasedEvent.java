@@ -7,13 +7,12 @@ import org.bukkit.event.HandlerList;
 @Getter
 public class JustPlayerExpIncreasedEvent extends IEvent {
 
-    private final Player player;
     private final int level;
     private final double exp;
     private final double increase;
 
     public JustPlayerExpIncreasedEvent(Player player, int level, double exp, double increase) {
-        this.player = player;
+        super(player);
         this.level = level;
         this.exp = exp;
         this.increase = increase;
