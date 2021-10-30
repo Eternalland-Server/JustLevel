@@ -1,6 +1,6 @@
 package net.sakuragame.megumi.justlevel.commands.sub;
 
-import com.taylorswiftcn.justwei.commands.SubCommand;
+import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import net.sakuragame.megumi.justlevel.file.sub.MessageFile;
@@ -29,17 +29,18 @@ public class InfoCommand extends SubCommand {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length >= 2) {
-            String s = strings[1];
+        if (strings.length >= 1) {
+            String s = strings[0];
             Player player = Bukkit.getPlayerExact(s);
             if (player == null) {
                 commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
                 return;
             }
             sendInfo(player);
+            return;
         }
 
-        if (strings.length == 1 && commandSender instanceof Player) {
+        if (commandSender instanceof Player) {
             Player player = getPlayer();
             sendInfo(player);
         }

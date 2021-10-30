@@ -1,6 +1,6 @@
 package net.sakuragame.megumi.justlevel.file;
 
-import com.taylorswiftcn.justwei.file.IConfiguration;
+import com.taylorswiftcn.justwei.file.JustConfiguration;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import net.sakuragame.megumi.justlevel.file.sub.MessageFile;
 import net.sakuragame.megumi.justlevel.JustLevel;
@@ -8,7 +8,7 @@ import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 
-public class FileManager extends IConfiguration {
+public class FileManager extends JustConfiguration {
 
     @Getter private YamlConfiguration config;
     @Getter private YamlConfiguration message;

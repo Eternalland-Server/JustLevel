@@ -1,6 +1,6 @@
 package net.sakuragame.megumi.justlevel.commands.sub.item;
 
-import com.taylorswiftcn.justwei.commands.SubCommand;
+import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import org.bukkit.command.CommandSender;
@@ -16,10 +16,10 @@ public class GetCommand extends SubCommand {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length < 4) return;
+        if (strings.length < 2) return;
 
-        String id = strings[2];
-        String s = strings[3];
+        String id = strings[0];
+        String s = strings[1];
 
         if (!MegumiUtil.isNumber(s)) {
             commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s);

@@ -1,6 +1,6 @@
 package net.sakuragame.megumi.justlevel.commands.sub.player;
 
-import com.taylorswiftcn.justwei.commands.SubCommand;
+import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
@@ -24,10 +24,10 @@ public class AddExpCommand extends SubCommand {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length < 3) return;
+        if (strings.length < 2) return;
 
-        String s1 = strings[1];
-        String s2 = strings[2];
+        String s1 = strings[0];
+        String s2 = strings[1];
 
         Player player = Bukkit.getPlayerExact(s1);
         if (player == null) {

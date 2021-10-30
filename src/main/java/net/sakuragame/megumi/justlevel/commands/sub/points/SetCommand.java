@@ -1,6 +1,6 @@
 package net.sakuragame.megumi.justlevel.commands.sub.points;
 
-import com.taylorswiftcn.justwei.commands.SubCommand;
+import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.JustLevel;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
@@ -25,11 +25,11 @@ public class SetCommand extends SubCommand {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length < 5) return;
+        if (strings.length < 3) return;
 
-        String s1 = strings[2];
-        String s2 = strings[3];
-        String s3 = strings[4];
+        String s1 = strings[0];
+        String s2 = strings[1];
+        String s3 = strings[2];
 
         Player player = Bukkit.getPlayerExact(s1);
         LevelType type = LevelType.getType(s2);

@@ -1,13 +1,13 @@
 package net.sakuragame.megumi.justlevel.commands;
 
-import com.taylorswiftcn.justwei.commands.ICommand;
+import com.taylorswiftcn.justwei.commands.JustCommand;
 import net.sakuragame.megumi.justlevel.commands.sub.*;
 import net.sakuragame.megumi.justlevel.commands.sub.player.*;
 
-public class MainCommand extends ICommand {
+public class MainCommand extends JustCommand {
 
     public MainCommand() {
-        this.setHelpCommand(new HelpCommand());
+        super(new HelpCommand());
         this.register(new InfoCommand());
         this.register(new ItemCommand());
         this.register(new AddExpCommand());
