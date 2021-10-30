@@ -2,6 +2,7 @@ package net.sakuragame.megumi.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import net.sakuragame.megumi.justlevel.JustLevel;
+import net.sakuragame.megumi.justlevel.commands.CommandPerms;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import org.bukkit.command.CommandSender;
 
@@ -31,6 +32,6 @@ public class ReloadCommand extends SubCommand {
 
     @Override
     public String getPermission() {
-        return null;
+        return CommandPerms.ADMIN.getNode();
     }
 }

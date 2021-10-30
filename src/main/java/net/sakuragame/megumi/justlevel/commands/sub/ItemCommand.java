@@ -2,6 +2,7 @@ package net.sakuragame.megumi.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.sub.SubTabCompleter;
 import eos.moe.dragoncore.commands.sub.HelpCommand;
+import net.sakuragame.megumi.justlevel.commands.CommandPerms;
 import net.sakuragame.megumi.justlevel.commands.sub.item.GetCommand;
 import net.sakuragame.megumi.justlevel.commands.sub.item.GiveCommand;
 
@@ -25,6 +26,6 @@ public class ItemCommand extends SubTabCompleter {
 
     @Override
     public String getPermission() {
-        return null;
+        return CommandPerms.ADMIN.getNode();
     }
 }

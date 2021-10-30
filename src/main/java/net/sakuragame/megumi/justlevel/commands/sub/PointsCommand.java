@@ -2,6 +2,7 @@ package net.sakuragame.megumi.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.sub.SubTabCompleter;
 import eos.moe.dragoncore.commands.sub.HelpCommand;
+import net.sakuragame.megumi.justlevel.commands.CommandPerms;
 import net.sakuragame.megumi.justlevel.commands.sub.points.AddCommand;
 import net.sakuragame.megumi.justlevel.commands.sub.points.SetCommand;
 import net.sakuragame.megumi.justlevel.commands.sub.points.TakeCommand;
@@ -27,6 +28,6 @@ public class PointsCommand extends SubTabCompleter {
 
     @Override
     public String getPermission() {
-        return null;
+        return CommandPerms.ADMIN.getNode();
     }
 }

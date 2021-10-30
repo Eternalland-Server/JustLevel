@@ -3,6 +3,7 @@ package net.sakuragame.megumi.justlevel.commands.sub.player;
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.megumi.justlevel.JustLevel;
+import net.sakuragame.megumi.justlevel.commands.CommandPerms;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
 import net.sakuragame.megumi.justlevel.level.PlayerLevelData;
 import org.bukkit.Bukkit;
@@ -53,6 +54,6 @@ public class SetStageCommand extends SubCommand {
 
     @Override
     public String getPermission() {
-        return "justlevel.admin";
+        return CommandPerms.ADMIN.getNode();
     }
 }
