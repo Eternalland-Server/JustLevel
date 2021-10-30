@@ -29,19 +29,19 @@ public class InfoCommand extends SubCommand {
     }
 
     @Override
-    public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length >= 1) {
-            String s = strings[0];
+    public void perform(CommandSender sender, String[] args) {
+        if (args.length >= 1) {
+            String s = args[0];
             Player player = Bukkit.getPlayerExact(s);
             if (player == null) {
-                commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
+                sender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
                 return;
             }
             sendInfo(player);
             return;
         }
 
-        if (commandSender instanceof Player) {
+        if (sender instanceof Player) {
             Player player = getPlayer();
             sendInfo(player);
         }

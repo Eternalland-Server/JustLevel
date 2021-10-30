@@ -24,19 +24,19 @@ public class SetRealmCommand extends SubCommand {
     }
 
     @Override
-    public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length < 2) return;
+    public void perform(CommandSender sender, String[] args) {
+        if (args.length < 2) return;
 
-        String s1 = strings[0];
-        String s2 = strings[1];
+        String s1 = args[0];
+        String s2 = args[1];
 
         Player player = Bukkit.getPlayerExact(s1);
         if (player == null) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
+            sender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
             return;
         }
         if (!MegumiUtil.isInteger(s2)) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s2);
+            sender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s2);
             return;
         }
 
@@ -44,7 +44,7 @@ public class SetRealmCommand extends SubCommand {
         PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
         data.setRealm(value);
 
-        commandSender.sendMessage(ConfigFile.Prefix + "§a设置玩家境界成功!");
+        sender.sendMessage(ConfigFile.Prefix + "§a设置玩家境界成功!");
     }
 
     @Override

@@ -24,29 +24,29 @@ public class SetCommand extends SubCommand {
     }
 
     @Override
-    public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length < 3) return;
+    public void perform(CommandSender sender, String[] args) {
+        if (args.length < 3) return;
 
-        String s1 = strings[0];
-        String s2 = strings[1];
-        String s3 = strings[2];
+        String s1 = args[0];
+        String s2 = args[1];
+        String s3 = args[2];
 
         Player player = Bukkit.getPlayerExact(s1);
         LevelType type = LevelType.getType(s2);
 
         if (player == null) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
+            sender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
             return;
         }
 
         if (type == null) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c无效参数: " + s2);
-            commandSender.sendMessage(ConfigFile.Prefix + "§c请使用: stage/realm");
+            sender.sendMessage(ConfigFile.Prefix + "§c无效参数: " + s2);
+            sender.sendMessage(ConfigFile.Prefix + "§c请使用: stage/realm");
             return;
         }
 
         if (!MegumiUtil.isNumber(s3)) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s3);
+            sender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s3);
             return;
         }
 
@@ -57,11 +57,11 @@ public class SetCommand extends SubCommand {
         switch (type) {
             case Realm:
                 data.setRealmPoints(points);
-                commandSender.sendMessage(ConfigFile.Prefix + "§a已设置该玩家境界突破点为 " + s3);
+                sender.sendMessage(ConfigFile.Prefix + "§a已设置该玩家境界突破点为 " + s3);
                 break;
             case Stage:
                 data.setStagePoints(points);
-                commandSender.sendMessage(ConfigFile.Prefix + "§a已设置该玩家阶段突破点为 " + s3);
+                sender.sendMessage(ConfigFile.Prefix + "§a已设置该玩家阶段突破点为 " + s3);
                 break;
         }
     }

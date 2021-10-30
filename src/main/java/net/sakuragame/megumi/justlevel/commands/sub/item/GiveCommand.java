@@ -16,27 +16,27 @@ public class GiveCommand extends SubCommand {
     }
 
     @Override
-    public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length < 3) return;
+    public void perform(CommandSender sender, String[] args) {
+        if (args.length < 3) return;
 
-        String playerID = strings[0];
-        String id = strings[1];
-        String s = strings[2];
+        String playerID = args[0];
+        String id = args[1];
+        String s = args[2];
 
         Player player = Bukkit.getPlayerExact(playerID);
         if (player == null) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
+            sender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
             return;
         }
         if (!MegumiUtil.isNumber(s)) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s);
+            sender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s);
             return;
         }
 
         int amount = Integer.parseInt(s);
 
         if (!ConfigFile.stone.containsKey(id)) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c没有该物品");
+            sender.sendMessage(ConfigFile.Prefix + "§c没有该物品");
             return;
         }
 

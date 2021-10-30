@@ -15,21 +15,21 @@ public class GetCommand extends SubCommand {
     }
 
     @Override
-    public void perform(CommandSender commandSender, String[] strings) {
-        if (strings.length < 2) return;
+    public void perform(CommandSender sender, String[] args) {
+        if (args.length < 2) return;
 
-        String id = strings[0];
-        String s = strings[1];
+        String id = args[0];
+        String s = args[1];
 
         if (!MegumiUtil.isNumber(s)) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s);
+            sender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s);
             return;
         }
 
         int amount = Integer.parseInt(s);
 
         if (!ConfigFile.stone.containsKey(id)) {
-            commandSender.sendMessage(ConfigFile.Prefix + "§c没有该物品");
+            sender.sendMessage(ConfigFile.Prefix + "§c没有该物品");
             return;
         }
 
