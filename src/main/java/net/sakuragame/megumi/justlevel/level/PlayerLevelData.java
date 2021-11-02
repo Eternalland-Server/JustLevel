@@ -154,7 +154,7 @@ public class PlayerLevelData {
         int oldRealm = this.realm;
         this.realm = Math.min(ConfigFile.realm_layer, Math.max(0, realm));
 
-        IEvent event = new JustPlayerRealmChangeEvent(player, oldRealm, this.realm);
+        JustLevelEvent event = new JustPlayerRealmChangeEvent(player, oldRealm, this.realm);
         event.call();
 
         syncRealm();
@@ -164,7 +164,7 @@ public class PlayerLevelData {
         int oldStage = this.stage;
         this.stage = Math.min(ConfigFile.stage_layer, Math.max(0, stage));
 
-        IEvent event = new JustPlayerStageChangeEvent(player, oldStage, this.stage, realm);
+        JustLevelEvent event = new JustPlayerStageChangeEvent(player, oldStage, this.stage, realm);
         event.call();
 
         syncStage();
@@ -179,7 +179,7 @@ public class PlayerLevelData {
         int oldLevel = level;
         setLevel(level + upgrade);
 
-        IEvent upgradedEvent = new JustPlayerUpgradedEvent(player, oldLevel, level);
+        JustLevelEvent upgradedEvent = new JustPlayerUpgradedEvent(player, oldLevel, level);
         upgradedEvent.call();
     }
 
@@ -233,7 +233,7 @@ public class PlayerLevelData {
         if (upgrade != 0) {
             addLevel(upgrade);
         }
-        IEvent increasedEvent = new JustPlayerExpIncreasedEvent(player, level, exp, value);
+        JustLevelEvent increasedEvent = new JustPlayerExpIncreasedEvent(player, level, exp, value);
         increasedEvent.call();
 
         updateExpBar();
@@ -248,7 +248,7 @@ public class PlayerLevelData {
 
         setStagePoints(getStagePoints() + points);
 
-        IEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Stage, points);
+        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Stage, points);
         event.call();
     }
 
@@ -260,7 +260,7 @@ public class PlayerLevelData {
 
         setRealmPoints(getRealmPoints() + points);
 
-        IEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Realm, points);
+        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Realm, points);
         event.call();
     }
 

@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerExpIncreasedEvent extends IEvent {
+public class JustPlayerExpIncreasedEvent extends JustLevelEvent {
 
     private final int level;
     private final double exp;

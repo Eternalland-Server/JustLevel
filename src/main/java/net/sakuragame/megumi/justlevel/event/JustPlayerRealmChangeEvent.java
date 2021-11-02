@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerRealmChangeEvent extends IEvent {
+public class JustPlayerRealmChangeEvent extends JustLevelEvent {
 
     private final int oldRealm;
     private final int newRealm;

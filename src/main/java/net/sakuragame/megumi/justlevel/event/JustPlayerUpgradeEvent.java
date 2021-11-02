@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
 
 @Getter
 @Setter
-public class JustPlayerUpgradeEvent extends IEvent implements Cancellable {
+public class JustPlayerUpgradeEvent extends JustLevelEvent implements Cancellable {
 
     private final int level;
     private int upgrade;

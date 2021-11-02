@@ -14,8 +14,8 @@ import java.util.List;
 
 public class StorageManager {
 
-    private JustLevel plugin;
-    private DataManager dataManager;
+    private final JustLevel plugin;
+    private final DataManager dataManager;
 
     public StorageManager(JustLevel plugin) {
         this.plugin = plugin;

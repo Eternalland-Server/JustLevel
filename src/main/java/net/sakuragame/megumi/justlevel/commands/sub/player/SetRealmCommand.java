@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 public class SetRealmCommand extends SubCommand {
 
-    private JustLevel plugin;
+    private final JustLevel plugin;
 
     public SetRealmCommand() {
         this.plugin = JustLevel.getInstance();

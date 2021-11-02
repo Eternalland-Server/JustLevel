@@ -4,7 +4,7 @@ import net.sakuragame.megumi.justlevel.level.LevelType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-public class JustPlayerIncreasedPointsEvent extends IEvent {
+public class JustPlayerIncreasedPointsEvent extends JustLevelEvent {
 
     private final LevelType type;
     private final int points;

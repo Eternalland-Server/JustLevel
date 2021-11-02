@@ -1,7 +1,7 @@
 package net.sakuragame.megumi.justlevel.api;
 
 import net.sakuragame.megumi.justlevel.JustLevel;
-import net.sakuragame.megumi.justlevel.event.IEvent;
+import net.sakuragame.megumi.justlevel.event.JustLevelEvent;
 import net.sakuragame.megumi.justlevel.event.JustPlayerRealBrokenEvent;
 import net.sakuragame.megumi.justlevel.event.JustPlayerStageBrokenEvent;
 import net.sakuragame.megumi.justlevel.file.sub.ConfigFile;
@@ -37,7 +37,7 @@ public class JustLevelAPI {
         data.syncBreakRequire();
         plugin.getEconomy().withdrawPlayer(player, setting.getStageBreakPrice());
 
-        IEvent event = new JustPlayerStageBrokenEvent(player, data.getStage(), setting.getStageConsume(), setting.getStageBreakPrice());
+        JustLevelEvent event = new JustPlayerStageBrokenEvent(player, data.getStage(), setting.getStageConsume(), setting.getStageBreakPrice());
         event.call();
     }
 
@@ -58,7 +58,7 @@ public class JustLevelAPI {
         data.syncBreakRequire();
         plugin.getEconomy().withdrawPlayer(player, setting.getRealmBreakPrice());
 
-        IEvent event = new JustPlayerRealBrokenEvent(player, data.getRealm(), setting.getRealmConsume(), setting.getRealmBreakPrice());
+        JustLevelEvent event = new JustPlayerRealBrokenEvent(player, data.getRealm(), setting.getRealmConsume(), setting.getRealmBreakPrice());
         event.call();
     }
 

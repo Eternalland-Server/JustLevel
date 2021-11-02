@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerEvent;
 
-public abstract class IEvent extends PlayerEvent {
+public abstract class JustLevelEvent extends PlayerEvent {
 
-    public IEvent(Player who) {
+    public JustLevelEvent(Player who) {
         super(who);
     }
 

@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 
 public class ReloadCommand extends SubCommand {
 
-    private JustLevel plugin;
+    private final JustLevel plugin;
 
     public ReloadCommand() {
         this.plugin = JustLevel.getInstance();

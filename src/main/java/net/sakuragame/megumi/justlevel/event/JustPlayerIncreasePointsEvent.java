@@ -9,7 +9,7 @@ import org.bukkit.event.HandlerList;
 
 @Getter
 @Setter
-public class JustPlayerIncreasePointsEvent extends IEvent implements Cancellable {
+public class JustPlayerIncreasePointsEvent extends JustLevelEvent implements Cancellable {
 
     private final LevelType type;
     private int points;

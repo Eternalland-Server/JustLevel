@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 public class SetExpCommand extends SubCommand {
 
-    private JustLevel plugin;
+    private final JustLevel plugin;
 
     public SetExpCommand() {
         this.plugin = JustLevel.getInstance();

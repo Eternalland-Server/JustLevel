@@ -15,7 +15,7 @@ import java.text.DecimalFormat;
 
 public class InfoCommand extends SubCommand {
 
-    private JustLevel plugin;
+    private final JustLevel plugin;
     private final DecimalFormat format;
 
     public InfoCommand() {

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class LevelPlaceholder extends PlaceholderExpansion {
 
-    private JustLevel plugin;
+    private final JustLevel plugin;
 
     public LevelPlaceholder() {
         this.plugin = JustLevel.getInstance();

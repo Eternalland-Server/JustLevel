@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerStageChangeEvent extends IEvent {
+public class JustPlayerStageChangeEvent extends JustLevelEvent {
 
     private final int oldStage;
     private final int newStage;

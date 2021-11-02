@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerStageBrokenEvent extends IEvent {
+public class JustPlayerStageBrokenEvent extends JustLevelEvent {
 
     private final int stage;
     private final int points;

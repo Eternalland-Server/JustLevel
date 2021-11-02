@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class StoneListener implements Listener {
 
-    private JustLevel plugin = JustLevel.getInstance();
+    private final JustLevel plugin = JustLevel.getInstance();
 
     @EventHandler
     public void onRight(PlayerInteractEvent e) {

@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 public class SetStageCommand extends SubCommand {
 
-    private JustLevel plugin;
+    private final JustLevel plugin;
 
     public SetStageCommand() {
         this.plugin = JustLevel.getInstance();

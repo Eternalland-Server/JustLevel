@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 
 public class MythicMobListener implements Listener {
 
-    private JustLevel plugin = JustLevel.getInstance();
+    private final JustLevel plugin = JustLevel.getInstance();
 
     @EventHandler
     public void onDropLoad(MythicDropLoadEvent e) {
