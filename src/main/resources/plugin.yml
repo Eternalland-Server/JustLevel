@@ -1,5 +1,5 @@
 name: JustLevel
-main: net.sakuragame.megumi.justlevel.JustLevel
+main: net.sakuragame.eternal.justlevel.JustLevel
 version: ${project.version}
 author: 'justwei'
 api-version: '1.13'
