@@ -1,7 +1,6 @@
 package net.sakuragame.eternal.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.sub.SubTabCompleter;
-import eos.moe.dragoncore.commands.sub.HelpCommand;
 import net.sakuragame.eternal.justlevel.commands.CommandPerms;
 import net.sakuragame.eternal.justlevel.commands.sub.points.AddCommand;
 import net.sakuragame.eternal.justlevel.commands.sub.points.SetCommand;

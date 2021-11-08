@@ -6,7 +6,7 @@ import net.sakuragame.eternal.justlevel.level.LevelType;
 import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
-import net.sakuragame.megumi.justmessage.api.MessageAPI;
+import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

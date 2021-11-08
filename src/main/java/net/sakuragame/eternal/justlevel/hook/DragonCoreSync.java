@@ -1,6 +1,6 @@
 package net.sakuragame.eternal.justlevel.hook;
 
-import eos.moe.dragoncore.network.PacketSender;
+import net.sakuragame.eternal.dragoncore.network.PacketSender;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
