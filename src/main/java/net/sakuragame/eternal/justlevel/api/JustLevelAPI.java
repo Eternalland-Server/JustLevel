@@ -21,6 +21,18 @@ public class JustLevelAPI {
         return plugin.getPlayerData().get(player.getUniqueId());
     }
 
+    public static int getRealm(Player player) {
+        return getData(player).getRealm();
+    }
+
+    public static int getStage(Player player) {
+        return getData(player).getStage();
+    }
+
+    public static int getLevel(Player player) {
+        return getData(player).getLevel();
+    }
+
     public static void tryBreakStage(Player player) {
         PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
 
