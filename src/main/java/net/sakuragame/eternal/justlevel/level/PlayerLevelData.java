@@ -306,6 +306,10 @@ public class PlayerLevelData {
     }
 
     public int getTotalLevel() {
-        return level + (stage - 1) * ConfigFile.stage_level + (realm - 1) * ConfigFile.stage_layer * ConfigFile.stage_level - 1;
+        return level + ((stage - 1) + (realm - 1) * ConfigFile.stage_layer) * ConfigFile.stage_level - 1;
+    }
+
+    public int getTotalStage() {
+        return stage + (realm - 1) * ConfigFile.stage_layer;
     }
 }

@@ -13,10 +13,6 @@ public class JustLevelAPI {
 
     private static JustLevel plugin = JustLevel.getInstance();
 
-    public static void addExp(Player player, double exp) {
-        plugin.getPlayerData().get(player.getUniqueId()).addExp(exp);
-    }
-
     public static PlayerLevelData getData(Player player) {
         return plugin.getPlayerData().get(player.getUniqueId());
     }
@@ -31,6 +27,14 @@ public class JustLevelAPI {
 
     public static int getLevel(Player player) {
         return getData(player).getLevel();
+    }
+
+    public static int getTotalStage(Player player) {
+        return getData(player).getTotalStage();
+    }
+
+    public static void addExp(Player player, double exp) {
+        plugin.getPlayerData().get(player.getUniqueId()).addExp(exp);
     }
 
     public static void tryBreakStage(Player player) {
