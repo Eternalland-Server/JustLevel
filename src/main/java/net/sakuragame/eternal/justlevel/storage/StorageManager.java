@@ -26,19 +26,22 @@ public class StorageManager {
     }
 
     public void insertPlayerData(Player player) {
+        int uid = ClientManagerAPI.getUserID(player.getUniqueId());
+
         dataManager.executeInsert(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
-                new String[]{"uuid", "player"},
-                new String[]{player.getUniqueId().toString(), player.getName()}
+                new String[]{"uid"},
+                new Object[]{uid}
         );
     }
 
     public PlayerLevelData getPlayerData(Player player) {
+        int uid = ClientManagerAPI.getUserID(player.getUniqueId());
 
         try (DatabaseQuery query = dataManager.sqlQuery(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
-                "uuid",
-                player.getUniqueId().toString()
+                "uid",
+                uid
         )) {
             ResultSet result = query.getResultSet();
             if (result.next()) {
@@ -59,21 +62,24 @@ public class StorageManager {
     }
 
     public void updatePlayerData(Player player, int level, double exp, int stagePoint, int realmPoint) {
+        int uid = ClientManagerAPI.getUserID(player.getUniqueId());
+
         dataManager.executeUpdate(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
                 new String[]{"level", "exp", "stage_point", "realm_point"},
-                new String[]{String.valueOf(level), String.valueOf(exp), String.valueOf(stagePoint), String.valueOf(realmPoint)},
-                new String[]{"uuid"},
-                new String[]{player.getUniqueId().toString()}
+                new Object[]{level, exp, stagePoint, realmPoint},
+                new String[]{"uid"},
+                new Object[]{uid}
         );
     }
 
     public void updateAllPlayerData() {
         List<Object[]> datum = new ArrayList<>();
         for (PlayerLevelData data : plugin.getPlayerData().values()) {
-            datum.add(new Object[] {data.getTotalLevel(), data.getExp(), data.getStagePoints(), data.getRealmPoints(), data.getPlayer().getUniqueId().toString()});
+            int uid = ClientManagerAPI.getUserID(data.getPlayer().getUniqueId());
+            datum.add(new Object[] {data.getTotalLevel(), data.getExp(), data.getStagePoints(), data.getRealmPoints(), uid});
         }
 
-        dataManager.executeSQLBatch("update " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName() + " SET level = ?, exp = ?, stage_point = ?, realm_point = ? WHERE uuid = ?", datum);
+        dataManager.executeSQLBatch("update " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName() + " SET level = ?, exp = ?, stage_point = ?, realm_point = ? WHERE uid = ?", datum);
     }
 }
