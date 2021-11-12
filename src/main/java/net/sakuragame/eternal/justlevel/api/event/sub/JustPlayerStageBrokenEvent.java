@@ -1,11 +1,12 @@
-package net.sakuragame.eternal.justlevel.event;
+package net.sakuragame.eternal.justlevel.api.event.sub;
 
 import lombok.Getter;
+import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerRealBrokenEvent extends JustLevelEvent {
+public class JustPlayerStageBrokenEvent extends JustLevelEvent {
 
     private final int stage;
     private final int points;
@@ -13,7 +14,7 @@ public class JustPlayerRealBrokenEvent extends JustLevelEvent {
 
     private final static HandlerList handlerList = new HandlerList();
 
-    public JustPlayerRealBrokenEvent(Player who, int stage, int points, double price) {
+    public JustPlayerStageBrokenEvent(Player who, int stage, int points, double price) {
         super(who);
         this.stage = stage;
         this.points = points;

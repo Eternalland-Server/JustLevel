@@ -40,7 +40,6 @@ public class StorageManager {
                 "uuid",
                 player.getUniqueId().toString()
         )) {
-            query.execute();
             ResultSet result = query.getResultSet();
             if (result.next()) {
                 int totalLevel = result.getInt("level");

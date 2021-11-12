@@ -1,5 +1,6 @@
-package net.sakuragame.eternal.justlevel.event;
+package net.sakuragame.eternal.justlevel.api.event.sub;
 
+import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
 import net.sakuragame.eternal.justlevel.level.LevelType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;

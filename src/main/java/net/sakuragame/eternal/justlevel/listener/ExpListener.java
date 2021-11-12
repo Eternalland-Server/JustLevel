@@ -1,7 +1,7 @@
 package net.sakuragame.eternal.justlevel.listener;
 
 import net.sakuragame.eternal.justlevel.util.LevelUtil;
-import net.sakuragame.eternal.justlevel.event.JustPlayerExpIncreaseEvent;
+import net.sakuragame.eternal.justlevel.api.event.sub.JustPlayerExpIncreaseEvent;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.bukkit.entity.Player;

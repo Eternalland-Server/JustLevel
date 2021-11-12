@@ -1,6 +1,7 @@
-package net.sakuragame.eternal.justlevel.event;
+package net.sakuragame.eternal.justlevel.api.event.sub;
 
 import lombok.Getter;
+import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
