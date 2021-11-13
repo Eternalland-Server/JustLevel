@@ -17,6 +17,7 @@ public class FileManager extends JustConfiguration {
         super(plugin);
     }
 
+    @Override
     public void init() {
         config = initFile("config.yml");
         message = initFile("message.yml");
