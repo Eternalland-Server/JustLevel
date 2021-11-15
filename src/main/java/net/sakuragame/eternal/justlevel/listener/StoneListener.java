@@ -38,15 +38,14 @@ public class StoneListener implements Listener {
         ItemTagData data = itemTag.getDeep("eternal.ident");
         if (data == null) return;
 
-        LevelDefine define = LevelDefine.getType(data.asString());
-        if (define == null) return;
+        String ident = data.asString();
 
         e.setCancelled(true);
 
         PlayerLevelData playerData = plugin.getPlayerData().get(player.getUniqueId());
 
-        switch (define) {
-            case Stage:
+        switch (ident) {
+            case "stage_stone":
                 if (player.isSneaking()) {
                     int i = item.getAmount();
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
@@ -59,7 +58,7 @@ public class StoneListener implements Listener {
                     MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.stagePointsChange, "%points%", "1"));
                 }
                 break;
-            case Realm:
+            case "realm_stone":
                 if (player.isSneaking()) {
                     int i = item.getAmount();
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
