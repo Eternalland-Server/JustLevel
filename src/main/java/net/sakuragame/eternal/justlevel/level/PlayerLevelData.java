@@ -242,26 +242,26 @@ public class PlayerLevelData {
     }
 
     public void addStagePoints(int points) {
-        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelType.Stage, points);
+        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelDefine.Stage, points);
         pointsEvent.call();
         if (pointsEvent.isCancelled()) return;
         points = pointsEvent.getPoints();
 
         setStagePoints(getStagePoints() + points);
 
-        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Stage, points);
+        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelDefine.Stage, points);
         event.call();
     }
 
     public void addRealmPoints(int points) {
-        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelType.Realm, points);
+        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelDefine.Realm, points);
         pointsEvent.call();
         if (pointsEvent.isCancelled()) return;
         points = pointsEvent.getPoints();
 
         setRealmPoints(getRealmPoints() + points);
 
-        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelType.Realm, points);
+        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelDefine.Realm, points);
         event.call();
     }
 

@@ -3,7 +3,7 @@ package net.sakuragame.eternal.justlevel.api.event.sub;
 import lombok.Getter;
 import lombok.Setter;
 import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
-import net.sakuragame.eternal.justlevel.level.LevelType;
+import net.sakuragame.eternal.justlevel.level.LevelDefine;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
@@ -12,11 +12,11 @@ import org.bukkit.event.HandlerList;
 @Setter
 public class JustPlayerIncreasePointsEvent extends JustLevelEvent implements Cancellable {
 
-    private final LevelType type;
+    private final LevelDefine type;
     private int points;
     private boolean cancel;
 
-    public JustPlayerIncreasePointsEvent(Player player, LevelType type, int points) {
+    public JustPlayerIncreasePointsEvent(Player player, LevelDefine type, int points) {
         super(player);
         this.type = type;
         this.points = points;

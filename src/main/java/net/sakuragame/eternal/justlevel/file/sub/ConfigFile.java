@@ -1,13 +1,10 @@
 package net.sakuragame.eternal.justlevel.file.sub;
 
-import com.taylorswiftcn.justwei.util.ItemBuilder;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.level.LevelType;
 import net.sakuragame.eternal.justlevel.level.RealmSetting;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -26,7 +23,6 @@ public class ConfigFile {
     public static String level_formula;
     public static Map<String, Double> expAddition;
     public static Map<Integer, RealmSetting> realmSetting;
-    public static Map<String, ItemStack> stone;
 
     public static void init() {
         config = JustLevel.getInstance().getFileManager().getConfig();
@@ -38,9 +34,6 @@ public class ConfigFile {
         level_formula = config.getString("level-formula");
         loadExpAddition();
         loadRealmSetting();
-        stone = new HashMap<>();
-        stone.put(LevelType.Stage.getId(), new ItemBuilder(config.getConfigurationSection("stone.stage")).setNBT(ID_TAG, LevelType.Stage.getId()).build());
-        stone.put(LevelType.Realm.getId(), new ItemBuilder(config.getConfigurationSection("stone.realm")).setNBT(ID_TAG, LevelType.Realm.getId()).build());
     }
 
     private static String getString(String path) {

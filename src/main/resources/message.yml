@@ -8,8 +8,6 @@ admin-help:
  - '&7/level setLevel <player> <level> - 设置等级'
  - '&7/level setStage <player> <stage> - 设置阶段'
  - '&7/level setRealm <player> <realm> - 设置境界'
- - '&7/level item get <id> <amount> - 获取突破石'
- - '&7/level item give <player> <id> <amount> - 给予玩家突破石'
  - '&7/level points <add/take/set> <player> <stage/realm> <points> - 修改玩家突破点数'
  - '&7/level reload - 重载配置文件'
  - ''

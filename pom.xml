@@ -57,6 +57,11 @@
             <name>Lumine Releases</name>
             <url>https://mvn.lumine.io/repository/maven-public/</url>
         </repository>
+
+        <repository>
+            <id>ptms</id>
+            <url>https://repo2s.ptms.ink/repository/maven-releases</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -86,6 +91,12 @@
             <artifactId>DragonCore</artifactId>
             <version>2.4.8-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ink.ptms</groupId>
+            <artifactId>Zaphkiel</artifactId>
+            <version>1.7.2</version>
         </dependency>
 
         <dependency>

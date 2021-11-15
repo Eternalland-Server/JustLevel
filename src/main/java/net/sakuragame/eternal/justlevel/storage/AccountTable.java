@@ -2,7 +2,7 @@ package net.sakuragame.eternal.justlevel.storage;
 
 public enum AccountTable {
 
-    JUST_LEVEL_ACCOUNT(new DatabaseTable("justlevel_account",
+    JUST_LEVEL_ACCOUNT(new DatabaseTable("justlevel_data",
             new String[] {
                     "`uid` int NOT NULL PRIMARY KEY",
                     "`level` int default 0",

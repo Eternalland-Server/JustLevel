@@ -2,7 +2,7 @@ package net.sakuragame.eternal.justlevel.commands.sub.points;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
-import net.sakuragame.eternal.justlevel.level.LevelType;
+import net.sakuragame.eternal.justlevel.level.LevelDefine;
 import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
@@ -32,7 +32,7 @@ public class TakeCommand extends SubCommand {
         String s3 = args[2];
 
         Player player = Bukkit.getPlayerExact(s1);
-        LevelType type = LevelType.getType(s2);
+        LevelDefine type = LevelDefine.getType(s2);
 
         if (player == null) {
             sender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");

@@ -8,28 +8,6 @@ exp-addition:
   mvp: 2.0
   svp: 1.7
   vip: 1.4
-#突破石
-stone:
-  #阶段突破石
-  stage:
-    id: STONE
-    data: 0
-    name: '&a[ &3阶段突破石 &a]'
-    lore:
-      - '&7用于增加段位突破点'
-      - ''
-      - ' &3使用一个 &7- 右键'
-      - ' &3全部使用 &7- Shift+右键'
-  #境界突破石
-  realm:
-    id: STONE
-    data: 0
-    name: '&a[ &a境界突破石 &a]'
-    lore:
-      - '&7用于增加境界突破点'
-      - ''
-      - ' &3使用一个 &7- 右键'
-      - ' &3全部使用 &7- Shift+右键'
 setting:
   #境界层级
   1:

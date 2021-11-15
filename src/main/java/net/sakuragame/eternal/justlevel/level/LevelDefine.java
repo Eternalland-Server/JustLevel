@@ -1,13 +1,13 @@
 package net.sakuragame.eternal.justlevel.level;
 
-public enum LevelType {
+public enum LevelDefine {
 
     Stage("stage"),
     Realm("realm");
 
-    private String id;
+    private final String id;
 
-    LevelType(String id) {
+    LevelDefine(String id) {
         this.id = id;
     }
 
@@ -15,8 +15,8 @@ public enum LevelType {
         return id;
     }
 
-    public static LevelType getType(String id) {
-        for (LevelType type : values()) {
+    public static LevelDefine getType(String id) {
+        for (LevelDefine type : values()) {
             if (type.getId().equals(id)) return type;
         }
 

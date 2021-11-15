@@ -1,10 +1,13 @@
 package net.sakuragame.eternal.justlevel.listener;
 
-import com.taylorswiftcn.justwei.nbt.NBTItem;
+import com.taylorswiftcn.justwei.util.MegumiUtil;
+import ink.ptms.zaphkiel.ZaphkielAPI;
+import ink.ptms.zaphkiel.api.ItemStream;
+import ink.ptms.zaphkiel.taboolib.module.nms.ItemTag;
+import ink.ptms.zaphkiel.taboolib.module.nms.ItemTagData;
 import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.level.LevelType;
+import net.sakuragame.eternal.justlevel.level.LevelDefine;
 import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
-import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.apache.commons.lang.StringUtils;
@@ -26,18 +29,23 @@ public class StoneListener implements Listener {
         if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (item == null || item.getItemMeta() == null) return;
+        if (MegumiUtil.isEmpty(item)) return;
 
-        NBTItem nbtItem = new NBTItem(item);
-        String id = nbtItem.getString(ConfigFile.ID_TAG);
-        LevelType type = LevelType.getType(id);
-        if (type == null) return;
+        ItemStream itemStream = ZaphkielAPI.INSTANCE.read(item);
+        if (itemStream.isVanilla()) return;
+
+        ItemTag itemTag = itemStream.getZaphkielData();
+        ItemTagData data = itemTag.getDeep("eternal.ident");
+        if (data == null) return;
+
+        LevelDefine define = LevelDefine.getType(data.asString());
+        if (define == null) return;
 
         e.setCancelled(true);
 
         PlayerLevelData playerData = plugin.getPlayerData().get(player.getUniqueId());
 
-        switch (type) {
+        switch (define) {
             case Stage:
                 if (player.isSneaking()) {
                     int i = item.getAmount();

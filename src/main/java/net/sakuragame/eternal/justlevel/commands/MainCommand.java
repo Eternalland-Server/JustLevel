@@ -9,7 +9,6 @@ public class MainCommand extends JustCommand {
     public MainCommand() {
         super(new HelpCommand());
         this.register(new InfoCommand());
-        this.register(new ItemCommand());
         this.register(new AddExpCommand());
         this.register(new SetExpCommand());
         this.register(new SetLevelCommand());
