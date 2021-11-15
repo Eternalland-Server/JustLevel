@@ -32,14 +32,14 @@ public class SetCommand extends SubCommand {
         String s3 = args[2];
 
         Player player = Bukkit.getPlayerExact(s1);
-        LevelDefine type = LevelDefine.getType(s2);
+        LevelDefine define = LevelDefine.get(s2);
 
         if (player == null) {
             sender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
             return;
         }
 
-        if (type == null) {
+        if (define == null) {
             sender.sendMessage(ConfigFile.Prefix + "§c无效参数: " + s2);
             sender.sendMessage(ConfigFile.Prefix + "§c请使用: stage/realm");
             return;
@@ -54,7 +54,7 @@ public class SetCommand extends SubCommand {
 
         PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
 
-        switch (type) {
+        switch (define) {
             case Realm:
                 data.setRealmPoints(points);
                 sender.sendMessage(ConfigFile.Prefix + "§a已设置该玩家境界突破点为 " + s3);

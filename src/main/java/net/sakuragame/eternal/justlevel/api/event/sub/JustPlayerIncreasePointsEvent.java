@@ -12,13 +12,13 @@ import org.bukkit.event.HandlerList;
 @Setter
 public class JustPlayerIncreasePointsEvent extends JustLevelEvent implements Cancellable {
 
-    private final LevelDefine type;
+    private final LevelDefine define;
     private int points;
     private boolean cancel;
 
-    public JustPlayerIncreasePointsEvent(Player player, LevelDefine type, int points) {
+    public JustPlayerIncreasePointsEvent(Player player, LevelDefine define, int points) {
         super(player);
-        this.type = type;
+        this.define = define;
         this.points = points;
         this.cancel = false;
     }

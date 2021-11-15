@@ -15,9 +15,9 @@ public enum LevelDefine {
         return id;
     }
 
-    public static LevelDefine getType(String id) {
-        for (LevelDefine type : values()) {
-            if (type.getId().equals(id)) return type;
+    public static LevelDefine get(String id) {
+        for (LevelDefine define : values()) {
+            if (define.getId().equals(id)) return define;
         }
 
         return null;

@@ -7,12 +7,12 @@ import org.bukkit.event.HandlerList;
 
 public class JustPlayerIncreasedPointsEvent extends JustLevelEvent {
 
-    private final LevelDefine type;
+    private final LevelDefine define;
     private final int points;
 
-    public JustPlayerIncreasedPointsEvent(Player player, LevelDefine type, int points) {
+    public JustPlayerIncreasedPointsEvent(Player player, LevelDefine define, int points) {
         super(player);
-        this.type = type;
+        this.define = define;
         this.points = points;
     }
 
