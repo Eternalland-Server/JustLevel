@@ -2,8 +2,8 @@ package net.sakuragame.eternal.justlevel.api;
 
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
-import net.sakuragame.eternal.justlevel.api.event.sub.JustPlayerRealmBrokenEvent;
-import net.sakuragame.eternal.justlevel.api.event.sub.JustPlayerStageBrokenEvent;
+import net.sakuragame.eternal.justlevel.api.event.sub.JLPlayerRealmBrokenEvent;
+import net.sakuragame.eternal.justlevel.api.event.sub.JLPlayerStageBrokenEvent;
 import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.level.RealmSetting;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
@@ -57,7 +57,7 @@ public class JustLevelAPI {
         data.syncBreakRequire();
         plugin.getEconomy().withdrawPlayer(player, setting.getStageBreakPrice());
 
-        JustLevelEvent event = new JustPlayerStageBrokenEvent(player, data.getStage(), setting.getStageConsume(), setting.getStageBreakPrice());
+        JustLevelEvent event = new JLPlayerStageBrokenEvent(player, data.getStage(), setting.getStageConsume(), setting.getStageBreakPrice());
         event.call();
     }
 
@@ -78,7 +78,7 @@ public class JustLevelAPI {
         data.syncBreakRequire();
         plugin.getEconomy().withdrawPlayer(player, setting.getRealmBreakPrice());
 
-        JustLevelEvent event = new JustPlayerRealmBrokenEvent(player, data.getRealm(), setting.getRealmConsume(), setting.getRealmBreakPrice());
+        JustLevelEvent event = new JLPlayerRealmBrokenEvent(player, data.getRealm(), setting.getRealmConsume(), setting.getRealmBreakPrice());
         event.call();
     }
 

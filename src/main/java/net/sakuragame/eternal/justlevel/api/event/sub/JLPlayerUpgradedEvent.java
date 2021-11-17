@@ -1,19 +1,20 @@
 package net.sakuragame.eternal.justlevel.api.event.sub;
 
+import lombok.Getter;
 import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
-import net.sakuragame.eternal.justlevel.level.LevelDefine;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-public class JustPlayerIncreasedPointsEvent extends JustLevelEvent {
+@Getter
+public class JLPlayerUpgradedEvent extends JustLevelEvent {
 
-    private final LevelDefine define;
-    private final int points;
+    private final int oldLevel;
+    private final int newLevel;
 
-    public JustPlayerIncreasedPointsEvent(Player player, LevelDefine define, int points) {
+    public JLPlayerUpgradedEvent(Player player, int oldLevel, int newLevel) {
         super(player);
-        this.define = define;
-        this.points = points;
+        this.oldLevel = oldLevel;
+        this.newLevel = newLevel;
     }
 
     private static final HandlerList handlerList = new HandlerList();

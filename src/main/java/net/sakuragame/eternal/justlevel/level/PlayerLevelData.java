@@ -155,7 +155,7 @@ public class PlayerLevelData {
         int oldRealm = this.realm;
         this.realm = Math.min(ConfigFile.realm_layer, Math.max(0, realm));
 
-        JustLevelEvent event = new JustPlayerRealmChangeEvent(player, oldRealm, this.realm);
+        JustLevelEvent event = new JLPlayerRealmChangeEvent(player, oldRealm, this.realm);
         event.call();
 
         syncRealm();
@@ -165,14 +165,14 @@ public class PlayerLevelData {
         int oldStage = this.stage;
         this.stage = Math.min(ConfigFile.stage_layer, Math.max(0, stage));
 
-        JustLevelEvent event = new JustPlayerStageChangeEvent(player, oldStage, this.stage, realm);
+        JustLevelEvent event = new JLPlayerStageChangeEvent(player, oldStage, this.stage, realm);
         event.call();
 
         syncStage();
     }
 
     public void addLevel(int upgrade) {
-        JustPlayerUpgradeEvent upgradeEvent = new JustPlayerUpgradeEvent(player, level, upgrade);
+        JLPlayerUpgradeEvent upgradeEvent = new JLPlayerUpgradeEvent(player, level, upgrade);
         upgradeEvent.call();
         if (upgradeEvent.isCancelled()) return;
         upgrade = upgradeEvent.getUpgrade();
@@ -180,7 +180,7 @@ public class PlayerLevelData {
         int oldLevel = level;
         setLevel(level + upgrade);
 
-        JustLevelEvent upgradedEvent = new JustPlayerUpgradedEvent(player, oldLevel, level);
+        JustLevelEvent upgradedEvent = new JLPlayerUpgradedEvent(player, oldLevel, level);
         upgradedEvent.call();
     }
 
@@ -206,7 +206,7 @@ public class PlayerLevelData {
         if (realm == ConfigFile.realm_layer && stage == ConfigFile.stage_layer && level == ConfigFile.stage_level) return;
         if (level == ConfigFile.stage_level && exp == getUpgradeExp()) return;
 
-        JustPlayerExpIncreaseEvent increaseEvent = new JustPlayerExpIncreaseEvent(player, level, exp, value);
+        JLPlayerExpIncreaseEvent increaseEvent = new JLPlayerExpIncreaseEvent(player, level, exp, value);
         increaseEvent.call();
         if (increaseEvent.isCancelled()) return;
         value = increaseEvent.getIncrease();
@@ -234,7 +234,7 @@ public class PlayerLevelData {
         if (upgrade != 0) {
             addLevel(upgrade);
         }
-        JustLevelEvent increasedEvent = new JustPlayerExpIncreasedEvent(player, level, exp, value);
+        JustLevelEvent increasedEvent = new JLPlayerExpIncreasedEvent(player, level, exp, value);
         increasedEvent.call();
 
         updateExpBar();
@@ -242,26 +242,26 @@ public class PlayerLevelData {
     }
 
     public void addStagePoints(int points) {
-        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelDefine.Stage, points);
+        JLPlayerIncreasePointsEvent pointsEvent = new JLPlayerIncreasePointsEvent(player, LevelDefine.Stage, points);
         pointsEvent.call();
         if (pointsEvent.isCancelled()) return;
         points = pointsEvent.getPoints();
 
         setStagePoints(getStagePoints() + points);
 
-        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelDefine.Stage, points);
+        JustLevelEvent event = new JLPlayerIncreasedPointsEvent(player, LevelDefine.Stage, points);
         event.call();
     }
 
     public void addRealmPoints(int points) {
-        JustPlayerIncreasePointsEvent pointsEvent = new JustPlayerIncreasePointsEvent(player, LevelDefine.Realm, points);
+        JLPlayerIncreasePointsEvent pointsEvent = new JLPlayerIncreasePointsEvent(player, LevelDefine.Realm, points);
         pointsEvent.call();
         if (pointsEvent.isCancelled()) return;
         points = pointsEvent.getPoints();
 
         setRealmPoints(getRealmPoints() + points);
 
-        JustLevelEvent event = new JustPlayerIncreasedPointsEvent(player, LevelDefine.Realm, points);
+        JustLevelEvent event = new JLPlayerIncreasedPointsEvent(player, LevelDefine.Realm, points);
         event.call();
     }
 

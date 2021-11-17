@@ -1,6 +1,7 @@
 package net.sakuragame.eternal.justlevel.listener;
 
 import net.sakuragame.eternal.justlevel.JustLevel;
+import net.sakuragame.eternal.justlevel.api.event.sub.JLPlayerInitFinishedEvent;
 import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,13 +21,16 @@ public class PlayerListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> loadPlayerData(player), 10);
+        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> initPlayerData(player), 10);
     }
 
-    private void loadPlayerData(Player player) {
+    private void initPlayerData(Player player) {
         if (player == null) return;
         PlayerLevelData data = plugin.getStorageManager().getPlayerData(player);
         plugin.getPlayerData().put(player.getUniqueId(), data);
+
+        JLPlayerInitFinishedEvent event = new JLPlayerInitFinishedEvent(player);
+        event.call();
 
         Bukkit.getScheduler().runTaskLater(plugin, data::syncPlaceHolder, 40);
     }

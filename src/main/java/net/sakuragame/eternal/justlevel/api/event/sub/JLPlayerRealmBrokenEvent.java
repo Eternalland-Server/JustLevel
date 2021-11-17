@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerRealmBrokenEvent extends JustLevelEvent {
+public class JLPlayerRealmBrokenEvent extends JustLevelEvent {
 
     private final int stage;
     private final int points;
@@ -14,7 +14,7 @@ public class JustPlayerRealmBrokenEvent extends JustLevelEvent {
 
     private final static HandlerList handlerList = new HandlerList();
 
-    public JustPlayerRealmBrokenEvent(Player who, int stage, int points, double price) {
+    public JLPlayerRealmBrokenEvent(Player who, int stage, int points, double price) {
         super(who);
         this.stage = stage;
         this.points = points;

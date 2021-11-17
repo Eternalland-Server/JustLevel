@@ -1,25 +1,38 @@
 package net.sakuragame.eternal.justlevel.api.event.sub;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 @Getter
-public class JustPlayerExpIncreasedEvent extends JustLevelEvent {
+@Setter
+public class JLPlayerUpgradeEvent extends JustLevelEvent implements Cancellable {
 
     private final int level;
-    private final double exp;
-    private final double increase;
+    private int upgrade;
+    private boolean cancel;
 
-    public JustPlayerExpIncreasedEvent(Player player, int level, double exp, double increase) {
+    public JLPlayerUpgradeEvent(Player player, int level, int upgrade) {
         super(player);
         this.level = level;
-        this.exp = exp;
-        this.increase = increase;
+        this.upgrade = upgrade;
+        this.cancel = false;
     }
 
     private static final HandlerList handlerList = new HandlerList();
+
+    @Override
+    public boolean isCancelled() {
+        return this.cancel;
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
 
     @Override
     public HandlerList getHandlers() {
