@@ -27,6 +27,7 @@ public class StorageManager {
 
     public void insertPlayerData(Player player) {
         int uid = ClientManagerAPI.getUserID(player.getUniqueId());
+        if (uid == -1) return;
 
         dataManager.executeInsert(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),

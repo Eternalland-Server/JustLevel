@@ -6,7 +6,7 @@ public enum AccountTable {
             new String[] {
                     "`uid` int NOT NULL PRIMARY KEY",
                     "`level` int default 0",
-                    "`exp` double default 0",
+                    "`exp` double(16,2) default 0",
                     "`stage_point` int default 0",
                     "`realm_point` int default 0"
             }));
