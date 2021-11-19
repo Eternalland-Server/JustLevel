@@ -75,6 +75,10 @@ public class JustLevel extends JavaPlugin {
         RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
         if (rsp != null) {
             economy = rsp.getProvider();
+            getLogger().info("Hook vault success!");
+        }
+        else {
+            getLogger().info("Hook vault failed!");
         }
     }
 
