@@ -73,14 +73,4 @@ public class StorageManager {
                 new Object[]{uid}
         );
     }
-
-    public void updateAllPlayerData() {
-        List<Object[]> datum = new ArrayList<>();
-        for (PlayerLevelData data : plugin.getPlayerData().values()) {
-            int uid = ClientManagerAPI.getUserID(data.getPlayer().getUniqueId());
-            datum.add(new Object[] {data.getTotalLevel(), data.getExp(), data.getStagePoints(), data.getRealmPoints(), uid});
-        }
-
-        dataManager.executeSQLBatch("update " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName() + " SET level = ?, exp = ?, stage_point = ?, realm_point = ? WHERE uid = ?", datum);
-    }
 }

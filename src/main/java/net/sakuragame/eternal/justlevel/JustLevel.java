@@ -13,6 +13,7 @@ import net.sakuragame.eternal.justlevel.listener.PlayerListener;
 import net.sakuragame.eternal.justlevel.listener.StoneListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -62,7 +63,9 @@ public class JustLevel extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        storageManager.updateAllPlayerData();
+        for (PlayerLevelData data : playerData.values()) {
+            data.save();
+        }
         getLogger().info("卸载成功!");
     }
 
