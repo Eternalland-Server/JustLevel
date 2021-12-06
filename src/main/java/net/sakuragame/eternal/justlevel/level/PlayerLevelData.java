@@ -98,12 +98,12 @@ public class PlayerLevelData {
                 player,
                 stageRequire,
                 realmRequire,
-                String.format("%s &f等级: %s", stageA ? "┦" : "┧", stageA ? "&a" + ConfigFile.stage_level : "&c" + ConfigFile.stage_level),
-                String.format("%s &f突破石: %s", stageB ? "┦" : "┧", stageB ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
-                String.format("%s &f金币: %s", stageC ? "┦" : "┧", stageC ? "&a" + setting.getStageBreakPrice() : "&c" + setting.getStageBreakPrice()),
-                String.format("%s &f阶段: %s", realmA ? "┦" : "┧", realmA ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
-                String.format("%s &f境界石: %s", realmB ? "┦" : "┧", realmB ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
-                String.format("%s &f金币: %s", realmC ? "┦" : "┧", realmC ? "&a" + setting.getRealmBreakPrice() : "&c" + setting.getRealmBreakPrice())
+                String.format("%s &f等级: %s", stageA ? "⁍" : "⁌", stageA ? "&a" + ConfigFile.stage_level : "&c" + ConfigFile.stage_level),
+                String.format("%s &f突破石: %s", stageB ? "⁍" : "⁌", stageB ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
+                String.format("%s &f金币: %s", stageC ? "⁍" : "⁌", stageC ? "&a" + setting.getStageBreakPrice() : "&c" + setting.getStageBreakPrice()),
+                String.format("%s &f阶段: %s", realmA ? "⁍" : "⁌", realmA ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
+                String.format("%s &f境界石: %s", realmB ? "⁍" : "⁌", realmB ? "&a" + setting.getStageConsume() : "&c" + setting.getStageConsume()),
+                String.format("%s &f金币: %s", realmC ? "⁍" : "⁌", realmC ? "&a" + setting.getRealmBreakPrice() : "&c" + setting.getRealmBreakPrice())
         );
     }
 
