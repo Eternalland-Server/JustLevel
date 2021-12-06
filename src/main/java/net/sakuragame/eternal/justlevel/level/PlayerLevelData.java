@@ -215,6 +215,8 @@ public class PlayerLevelData {
         int upgrade = 0;
         setExp(0);
         while (experience > 0) {
+            if (level + upgrade >= 200) break;
+
             double upgradeExp = LevelUtil.getUpgradeRequireExp(level + upgrade);
             if (this.level + upgrade == ConfigFile.stage_level) {
                 setExp(upgradeExp);
