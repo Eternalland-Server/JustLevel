@@ -96,9 +96,10 @@
         <dependency>
             <groupId>ink.ptms</groupId>
             <artifactId>Zaphkiel</artifactId>
-            <version>1.7.2</version>
+            <version>1.7.6</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/.lib/Zaphkiel-1.7.6.jar</systemPath>
         </dependency>
-
         <dependency>
             <groupId>net.sakuragame.eternal</groupId>
             <artifactId>JustMessage</artifactId>

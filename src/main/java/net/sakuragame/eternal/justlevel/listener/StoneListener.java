@@ -2,6 +2,7 @@ package net.sakuragame.eternal.justlevel.listener;
 
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import ink.ptms.zaphkiel.ZaphkielAPI;
+import ink.ptms.zaphkiel.api.Item;
 import ink.ptms.zaphkiel.api.ItemStream;
 import ink.ptms.zaphkiel.taboolib.module.nms.ItemTag;
 import ink.ptms.zaphkiel.taboolib.module.nms.ItemTagData;
@@ -31,20 +32,16 @@ public class StoneListener implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (MegumiUtil.isEmpty(item)) return;
 
-        ItemStream itemStream = ZaphkielAPI.INSTANCE.read(item);
-        if (itemStream.isVanilla()) return;
+        Item zapItem = ZaphkielAPI.INSTANCE.getItem(item);
+        if (zapItem == null) return;
 
-        ItemTag itemTag = itemStream.getZaphkielData();
-        ItemTagData data = itemTag.getDeep("eternal.ident");
-        if (data == null) return;
-
-        String ident = data.asString();
+        String id = zapItem.getId();
 
         e.setCancelled(true);
 
         PlayerLevelData playerData = plugin.getPlayerData().get(player.getUniqueId());
 
-        switch (ident) {
+        switch (id) {
             case "stage_stone":
                 if (player.isSneaking()) {
                     int i = item.getAmount();
