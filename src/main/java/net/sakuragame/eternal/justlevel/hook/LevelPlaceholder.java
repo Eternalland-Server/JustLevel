@@ -1,8 +1,10 @@
 package net.sakuragame.eternal.justlevel.hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.JustLevel;
+import net.sakuragame.eternal.justlevel.level.RealmSetting;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,6 +42,10 @@ public class LevelPlaceholder extends PlaceholderExpansion {
         PlayerLevelData data = plugin.getPlayerData().get(uuid);
 
         if (data == null) return "";
+
+        if (params.equalsIgnoreCase("prefix")) {
+            return data.getRealPrefix();
+        }
 
         if (params.equalsIgnoreCase("level")) {
             return String.valueOf(data.getLevel());

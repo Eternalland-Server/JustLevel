@@ -303,6 +303,10 @@ public class PlayerLevelData {
         return ConfigFile.realmSetting.get(realm).getName();
     }
 
+    public String getRealPrefix() {
+        return ConfigFile.realmSetting.get(realm).getPrefix();
+    }
+
     public void save() {
         int totalLevel = getTotalLevel();
         JustLevel.getInstance().getStorageManager().updatePlayerData(player, totalLevel, exp, stagePoints, realmPoints);

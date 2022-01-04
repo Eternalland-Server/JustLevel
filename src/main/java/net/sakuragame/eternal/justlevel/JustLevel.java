@@ -1,19 +1,18 @@
 package net.sakuragame.eternal.justlevel;
 
+import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import net.sakuragame.eternal.justlevel.commands.MainCommand;
+import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.hook.LevelPlaceholder;
 import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.listener.ExpListener;
 import net.sakuragame.eternal.justlevel.listener.MythicMobListener;
-import net.sakuragame.eternal.justlevel.storage.StorageManager;
-import net.sakuragame.eternal.justlevel.util.LevelUtil;
-import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.listener.PlayerListener;
 import net.sakuragame.eternal.justlevel.listener.StoneListener;
-import lombok.Getter;
+import net.sakuragame.eternal.justlevel.storage.StorageManager;
+import net.sakuragame.eternal.justlevel.util.LevelUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
