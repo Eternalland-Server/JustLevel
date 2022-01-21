@@ -37,7 +37,6 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerLogin(PlayerLoginEvent e) {
         Player player = e.getPlayer();
-
         PlayerLevelData account = JustLevel.getUserManager().getAccount(player.getUniqueId());
 
         if (account == null) {
@@ -49,6 +48,15 @@ public class PlayerListener implements Listener {
 
         PlayerDataLoadEvent event = new PlayerDataLoadEvent(player);
         event.call();
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        Player player = e.getPlayer();
+        PlayerLevelData account = JustLevel.getUserManager().getAccount(player.getUniqueId());
+        if (account == null) return;
+
+        account.updateVanillaInfo();
     }
 
     @EventHandler

@@ -29,7 +29,6 @@ public abstract class LevelAccount {
         this.exp = 0;
         this.stagePoints = 0;
         this.realmPoints = 0;
-        this.updateVanillaExp();
     }
 
     public LevelAccount(UUID uuid, int realm, int stage, int level, double exp, int stagePoints, int realmPoints) {
@@ -40,7 +39,6 @@ public abstract class LevelAccount {
         this.exp = exp;
         this.stagePoints = stagePoints;
         this.realmPoints = realmPoints;
-        this.updateVanillaExp();
     }
 
     public abstract void saveData();
@@ -128,6 +126,11 @@ public abstract class LevelAccount {
 
     public double getUpgradeExp() {
         return Utils.getLevelUpExp(this.level);
+    }
+
+    public void updateVanillaInfo() {
+        this.updateVanillaExp();
+        this.updateVanillaLevel();
     }
 
     public void updateVanillaExp() {
