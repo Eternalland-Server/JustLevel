@@ -6,10 +6,7 @@ import net.sakuragame.eternal.justlevel.commands.MainCommand;
 import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.hook.LevelPlaceholder;
 import net.sakuragame.eternal.justlevel.core.UserManager;
-import net.sakuragame.eternal.justlevel.listener.ExpListener;
-import net.sakuragame.eternal.justlevel.listener.MythicMobListener;
-import net.sakuragame.eternal.justlevel.listener.PlayerListener;
-import net.sakuragame.eternal.justlevel.listener.StoneListener;
+import net.sakuragame.eternal.justlevel.listener.*;
 import net.sakuragame.eternal.justlevel.storage.StorageManager;
 import net.sakuragame.eternal.justlevel.util.Utils;
 import org.bukkit.Bukkit;
@@ -56,6 +53,7 @@ public class JustLevel extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
         Bukkit.getPluginManager().registerEvents(new ExpListener(), this);
         Bukkit.getPluginManager().registerEvents(new MythicMobListener(), this);
+        Bukkit.getPluginManager().registerEvents(new UIListener(), this);
 
         getLogger().info("注册命令...");
         getCommand("jlevel").setExecutor(new MainCommand());
