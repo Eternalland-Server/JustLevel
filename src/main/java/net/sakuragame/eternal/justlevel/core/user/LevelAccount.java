@@ -76,15 +76,15 @@ public abstract class LevelAccount {
     }
 
     public void setRealm(int i) {
-        this.realm = Math.max(1, Math.min(Define.Realm.getMax(), realm));
+        this.realm = Math.max(1, Math.min(Define.Realm.getMax(), i));
     }
 
     public void setStage(int i) {
-        this.stage = Math.max(1, Math.min(Define.Stage.getMax(), stage));
+        this.stage = Math.max(1, Math.min(Define.Stage.getMax(), i));
     }
 
     public void setLevel(int i) {
-        this.level = Math.max(0, Math.min(Define.Level.getMax(), level));
+        this.level = Math.max(0, Math.min(Define.Level.getMax(), i));
         this.updateVanillaLevel();
     }
 
