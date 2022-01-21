@@ -1,10 +1,8 @@
 package net.sakuragame.eternal.justlevel.hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
-import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
+import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.level.RealmSetting;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,12 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public class LevelPlaceholder extends PlaceholderExpansion {
-
-    private final JustLevel plugin;
-
-    public LevelPlaceholder() {
-        this.plugin = JustLevel.getInstance();
-    }
 
     @Override
     public @NotNull String getIdentifier() {
@@ -39,48 +31,41 @@ public class LevelPlaceholder extends PlaceholderExpansion {
         if (player == null) return "";
 
         UUID uuid = player.getUniqueId();
-        PlayerLevelData data = plugin.getPlayerData().get(uuid);
-
-        if (data == null) return "";
 
         if (params.equalsIgnoreCase("prefix")) {
-            return data.getRealPrefix();
+            return JustLevelAPI.getRealmPrefix(uuid);
         }
 
         if (params.equalsIgnoreCase("level")) {
-            return String.valueOf(data.getLevel());
-        }
-
-        if (params.equalsIgnoreCase("total_level")) {
-            return String.valueOf(data.getTotalLevel());
+            return String.valueOf(JustLevelAPI.getLevel(uuid));
         }
 
         if (params.equalsIgnoreCase("exp")) {
-            return String.valueOf(data.getExp());
+            return String.valueOf(JustLevelAPI.getRealmPrefix(uuid));
         }
 
         if (params.equalsIgnoreCase("upgrade_exp")) {
-            return String.valueOf(data.getUpgradeExp());
+            return String.valueOf(JustLevelAPI.getUpgradeExp(uuid));
         }
 
         if (params.equalsIgnoreCase("stage")) {
-            return String.valueOf(data.getStage());
+            return String.valueOf(JustLevelAPI.getStage(uuid));
         }
 
         if (params.equalsIgnoreCase("realm")) {
-            return String.valueOf(data.getRealm());
+            return String.valueOf(JustLevelAPI.getRealm(uuid));
         }
 
         if (params.equalsIgnoreCase("realm_name")) {
-            return String.valueOf(data.getRealmName());
-        }
-
-        if (params.equalsIgnoreCase("stage_points")) {
-            return String.valueOf(data.getStagePoints());
+            return String.valueOf(JustLevelAPI.getRealmName(uuid));
         }
 
         if (params.equalsIgnoreCase("realm_points")) {
-            return String.valueOf(data.getRealmPoints());
+            return String.valueOf(JustLevelAPI.getRealmPoints(uuid));
+        }
+
+        if (params.equalsIgnoreCase("stage_points")) {
+            return String.valueOf(JustLevelAPI.getStagePoints(uuid));
         }
 
         return "";

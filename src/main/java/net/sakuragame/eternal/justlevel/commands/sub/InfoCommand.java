@@ -1,9 +1,9 @@
 package net.sakuragame.eternal.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
+import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.commands.CommandPerms;
-import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
-import net.sakuragame.eternal.justlevel.util.LevelUtil;
+import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
@@ -15,11 +15,9 @@ import java.text.DecimalFormat;
 
 public class InfoCommand extends SubCommand {
 
-    private final JustLevel plugin;
     private final DecimalFormat format;
 
     public InfoCommand() {
-        this.plugin = JustLevel.getInstance();
         this.format = new DecimalFormat("#.#");
     }
 
@@ -48,16 +46,16 @@ public class InfoCommand extends SubCommand {
     }
 
     private void sendInfo(Player player) {
-        PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
+        PlayerLevelData account = JustLevelAPI.getUserData(player);
         MessageFile.playerInfo.forEach(s -> player.sendMessage(s
                 .replace("%player%", player.getName())
-                .replace("%level%", String.valueOf(data.getLevel()))
-                .replace("%current_exp%", format.format(data.getExp()))
-                .replace("%total_exp%", String.valueOf(LevelUtil.getUpgradeRequireExp(data.getLevel())))
-                .replace("%stage%", String.valueOf(data.getStage()))
-                .replace("%realm%", String.valueOf(data.getRealm()))
-                .replace("%stage_points%", String.valueOf(data.getStagePoints()))
-                .replace("%realm_points%", String.valueOf(data.getRealmPoints()))
+                .replace("%level%", String.valueOf(account.getLevel()))
+                .replace("%current_exp%", format.format(account.getExp()))
+                .replace("%total_exp%", format.format(account.getUpgradeExp()))
+                .replace("%stage%", String.valueOf(account.getStage()))
+                .replace("%realm%", String.valueOf(account.getRealm()))
+                .replace("%stage_points%", String.valueOf(account.getStagePoints()))
+                .replace("%realm_points%", String.valueOf(account.getRealmPoints()))
         ));
     }
 

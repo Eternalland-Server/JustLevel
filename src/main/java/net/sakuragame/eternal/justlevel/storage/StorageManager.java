@@ -1,23 +1,19 @@
 package net.sakuragame.eternal.justlevel.storage;
 
-import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
+import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.serversystems.manage.api.database.DataManager;
 import net.sakuragame.serversystems.manage.api.database.DatabaseQuery;
 import net.sakuragame.serversystems.manage.client.api.ClientManagerAPI;
-import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 public class StorageManager {
 
-    private final JustLevel plugin;
     private final DataManager dataManager;
 
-    public StorageManager(JustLevel plugin) {
-        this.plugin = plugin;
+    public StorageManager() {
         this.dataManager = ClientManagerAPI.getDataManager();
     }
 
@@ -25,19 +21,9 @@ public class StorageManager {
         AccountTable.JUST_LEVEL_ACCOUNT.createTable();
     }
 
-    public void insertPlayerData(Player player) {
-        int uid = ClientManagerAPI.getUserID(player.getUniqueId());
-        if (uid == -1) return;
-
-        dataManager.executeInsert(
-                AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
-                new String[]{"uid"},
-                new Object[]{uid}
-        );
-    }
-
-    public PlayerLevelData getPlayerData(Player player) {
-        int uid = ClientManagerAPI.getUserID(player.getUniqueId());
+    public PlayerLevelData loadData(UUID uuid) {
+        int uid = ClientManagerAPI.getUserID(uuid);
+        if (uid == -1) return null;
 
         try (DatabaseQuery query = dataManager.sqlQuery(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
@@ -46,31 +32,30 @@ public class StorageManager {
         )) {
             ResultSet result = query.getResultSet();
             if (result.next()) {
-                int totalLevel = result.getInt("level");
-                double currentExp = result.getDouble("exp");
+                int realm = result.getInt("realm");
+                int stage = result.getInt("stage");
+                int level = result.getInt("level");
+                double exp = result.getDouble("exp");
                 int stagePoint = result.getInt("stage_point");
                 int realmPoint = result.getInt("realm_point");
 
-                return new PlayerLevelData(player, totalLevel, currentExp, stagePoint, realmPoint);
+                return new PlayerLevelData(uuid, realm, stage, level, exp, stagePoint, realmPoint);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        insertPlayerData(player);
-
-        return new PlayerLevelData(player);
+        return new PlayerLevelData(uuid);
     }
 
-    public void updatePlayerData(Player player, int level, double exp, int stagePoint, int realmPoint) {
-        int uid = ClientManagerAPI.getUserID(player.getUniqueId());
+    public void saveData(UUID uuid, int realm, int stage, int level, double exp, int realmPoint, int stagePoint) {
+        int uid = ClientManagerAPI.getUserID(uuid);
+        if (uid == -1) return;
 
-        dataManager.executeUpdate(
+        dataManager.executeReplace(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
-                new String[]{"level", "exp", "stage_point", "realm_point"},
-                new Object[]{level, exp, stagePoint, realmPoint},
-                new String[]{"uid"},
-                new Object[]{uid}
+                new String[]{"uid", "realm", "stage", "level", "exp", "realm_point", "stage_point"},
+                new Object[]{uid, realm, stage, level, exp, realmPoint, stagePoint}
         );
     }
 }

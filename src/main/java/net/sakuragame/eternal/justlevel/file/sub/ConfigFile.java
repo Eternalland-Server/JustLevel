@@ -2,7 +2,7 @@ package net.sakuragame.eternal.justlevel.file.sub;
 
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.level.RealmSetting;
+import net.sakuragame.eternal.justlevel.core.Realm;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -14,18 +14,16 @@ import java.util.Map;
 public class ConfigFile {
     private static YamlConfiguration config;
 
-    public static final String ID_TAG = "JUST_LEVEL_ID";
-
     public static String Prefix;
     public static Integer realm_layer;
     public static Integer stage_layer;
     public static Integer stage_level;
     public static String level_formula;
     public static Map<String, Double> expAddition;
-    public static Map<Integer, RealmSetting> realmSetting;
+    public static Map<Integer, Realm> realmSetting;
 
     public static void init() {
-        config = JustLevel.getInstance().getFileManager().getConfig();
+        config = JustLevel.getFileManager().getConfig();
 
         Prefix = getString("Prefix");
         realm_layer = 21;
@@ -70,7 +68,7 @@ public class ConfigFile {
             int realmConsume = section.getInt(s + ".realm-consume");
             int stageBreakPrice = section.getInt(s + ".stage-break-price");
             int realmBreakPrice = section.getInt(s + ".realm-break-price");
-            realmSetting.put(layer, new RealmSetting(layer, name, prefix, stageConsume, realmConsume, stageBreakPrice, realmBreakPrice));
+            realmSetting.put(layer, new Realm(layer, name, prefix, stageConsume, realmConsume, stageBreakPrice, realmBreakPrice));
         }
     }
 }

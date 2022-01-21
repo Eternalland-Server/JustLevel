@@ -1,14 +1,13 @@
-package net.sakuragame.eternal.justlevel.api.event.sub;
+package net.sakuragame.eternal.justlevel.api.event;
 
-import net.sakuragame.eternal.justlevel.api.event.JustLevelEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-public class JLPlayerInitFinishedEvent extends JustLevelEvent {
+public class PlayerDataLoadEvent extends JustEvent {
 
     private final static HandlerList handlerList = new HandlerList();
 
-    public JLPlayerInitFinishedEvent(Player who) {
+    public PlayerDataLoadEvent(Player who) {
         super(who);
     }
 

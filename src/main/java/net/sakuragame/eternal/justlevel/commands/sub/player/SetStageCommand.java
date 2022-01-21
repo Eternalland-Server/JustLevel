@@ -3,20 +3,14 @@ package net.sakuragame.eternal.justlevel.commands.sub.player;
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.eternal.justlevel.JustLevel;
+import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.commands.CommandPerms;
-import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SetStageCommand extends SubCommand {
-
-    private final JustLevel plugin;
-
-    public SetStageCommand() {
-        this.plugin = JustLevel.getInstance();
-    }
 
     @Override
     public String getIdentifier() {
@@ -41,8 +35,7 @@ public class SetStageCommand extends SubCommand {
         }
 
         int value = Integer.parseInt(s2);
-        PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
-        data.setStage(value);
+        JustLevelAPI.setStage(player, value);
 
         sender.sendMessage(ConfigFile.Prefix + "§a设置玩家阶段成功!");
     }

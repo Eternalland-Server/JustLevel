@@ -5,31 +5,25 @@ import net.milkbowl.vault.economy.Economy;
 import net.sakuragame.eternal.justlevel.commands.MainCommand;
 import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.hook.LevelPlaceholder;
-import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
+import net.sakuragame.eternal.justlevel.core.UserManager;
 import net.sakuragame.eternal.justlevel.listener.ExpListener;
 import net.sakuragame.eternal.justlevel.listener.MythicMobListener;
 import net.sakuragame.eternal.justlevel.listener.PlayerListener;
 import net.sakuragame.eternal.justlevel.listener.StoneListener;
 import net.sakuragame.eternal.justlevel.storage.StorageManager;
-import net.sakuragame.eternal.justlevel.util.LevelUtil;
+import net.sakuragame.eternal.justlevel.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class JustLevel extends JavaPlugin {
     @Getter private static JustLevel instance;
 
-    @Getter private FileManager fileManager;
-    @Getter private StorageManager storageManager;
+    @Getter private static FileManager fileManager;
+    @Getter private static StorageManager storageManager;
+    @Getter private static UserManager userManager;
 
     @Getter private Economy economy;
-
-    @Getter
-    private Map<UUID, PlayerLevelData> playerData;
 
     @Override
     public void onEnable() {
@@ -37,22 +31,33 @@ public class JustLevel extends JavaPlugin {
 
         instance = this;
 
-        playerData = new HashMap<>();
-
+        getLogger().info("初始化文件...");
         fileManager = new FileManager(this);
-        storageManager = new StorageManager(this);
         fileManager.init();
+
+        getLogger().info("初始化数据库...");
+        storageManager = new StorageManager();
         storageManager.init();
-        LevelUtil.conversionExp();
-        loadOnlinePlayer();
 
+        getLogger().info("初始化用户管理...");
+        userManager = new UserManager(this);
+
+        getLogger().info("计算经验公式...");
+        Utils.conversionExp();
+
+        getLogger().info("注册PAPI变量...");
         new LevelPlaceholder().register();
-        setupEconomy();
 
+        getLogger().info("兼容Vault...");
+        this.setupEconomy();
+
+        getLogger().info("注册事件...");
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
         Bukkit.getPluginManager().registerEvents(new ExpListener(), this);
         Bukkit.getPluginManager().registerEvents(new MythicMobListener(), this);
+
+        getLogger().info("注册命令...");
         getCommand("jlevel").setExecutor(new MainCommand());
 
         long end = System.currentTimeMillis();
@@ -62,9 +67,6 @@ public class JustLevel extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (PlayerLevelData data : playerData.values()) {
-            data.save();
-        }
         getLogger().info("卸载成功!");
     }
 
@@ -84,12 +86,7 @@ public class JustLevel extends JavaPlugin {
         }
     }
 
-    private void loadOnlinePlayer() {
-        Bukkit.getOnlinePlayers().forEach(player -> playerData.put(player.getUniqueId(), storageManager.getPlayerData(player)));
-    }
-
     public void reload() {
         fileManager.init();
-        /*LevelUtil.conversionExp();*/
     }
 }

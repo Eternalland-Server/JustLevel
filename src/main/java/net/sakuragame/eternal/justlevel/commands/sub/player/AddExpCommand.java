@@ -3,20 +3,14 @@ package net.sakuragame.eternal.justlevel.commands.sub.player;
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.eternal.justlevel.JustLevel;
+import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.commands.CommandPerms;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
-import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class AddExpCommand extends SubCommand {
-
-    private final JustLevel plugin;
-
-    public AddExpCommand() {
-        this.plugin = JustLevel.getInstance();
-    }
 
     @Override
     public String getIdentifier() {
@@ -41,8 +35,7 @@ public class AddExpCommand extends SubCommand {
         }
 
         double value = Double.parseDouble(s2);
-        PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
-        data.addExp(value);
+        JustLevelAPI.addExp(player, value);
 
         sender.sendMessage(ConfigFile.Prefix + "§a已增加玩家经验!");
     }

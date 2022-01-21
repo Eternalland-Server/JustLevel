@@ -1,11 +1,11 @@
-package net.sakuragame.eternal.justlevel.level;
+package net.sakuragame.eternal.justlevel.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RealmSetting {
+public class Realm {
 
     private int layer;
     private String name;

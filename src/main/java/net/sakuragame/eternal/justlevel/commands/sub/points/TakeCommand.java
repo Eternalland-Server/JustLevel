@@ -2,8 +2,8 @@ package net.sakuragame.eternal.justlevel.commands.sub.points;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import com.taylorswiftcn.justwei.util.MegumiUtil;
-import net.sakuragame.eternal.justlevel.level.LevelDefine;
-import net.sakuragame.eternal.justlevel.level.PlayerLevelData;
+import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
+import net.sakuragame.eternal.justlevel.core.Define;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import org.bukkit.Bukkit;
@@ -11,12 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class TakeCommand extends SubCommand {
-
-    private final JustLevel plugin;
-
-    public TakeCommand() {
-        this.plugin = JustLevel.getInstance();
-    }
 
     @Override
     public String getIdentifier() {
@@ -32,7 +26,7 @@ public class TakeCommand extends SubCommand {
         String s3 = args[2];
 
         Player player = Bukkit.getPlayerExact(s1);
-        LevelDefine define = LevelDefine.get(s2);
+        Define define = Define.match(s2);
 
         if (player == null) {
             sender.sendMessage(ConfigFile.Prefix + "§c该玩家不在线");
@@ -52,15 +46,13 @@ public class TakeCommand extends SubCommand {
 
         int points = Integer.parseInt(s3);
 
-        PlayerLevelData data = plugin.getPlayerData().get(player.getUniqueId());
-
         switch (define) {
             case Realm:
-                data.takeRealmPoints(points);
+                JustLevelAPI.takeRealmPoints(player, points);
                 sender.sendMessage(ConfigFile.Prefix + "§a已减少该玩家 " + s3 + " 境界突破点");
                 break;
             case Stage:
-                data.takeStagePoints(points);
+                JustLevelAPI.takeStagePoints(player, points);
                 sender.sendMessage(ConfigFile.Prefix + "§a已减少该玩家 " + s3 + " 阶段突破点");
                 break;
         }
