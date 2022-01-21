@@ -47,6 +47,9 @@ public class UIListener implements Listener {
     public void onBreakButtonClick(UIFCompSubmitEvent e) {
         Player player = e.getPlayer();
 
+        String screenID = e.getScreenID();
+        if (!screenID.equals("player_breakThough")) return;
+
         String plugin = e.getParams().getParam(0);
         if (!plugin.equals(JustLevel.getInstance().getName())) return;
 
