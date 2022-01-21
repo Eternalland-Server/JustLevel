@@ -1,6 +1,7 @@
 package net.sakuragame.eternal.justlevel.api;
 
 import net.sakuragame.eternal.justlevel.JustLevel;
+import net.sakuragame.eternal.justlevel.core.Define;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import org.bukkit.entity.Player;
 
@@ -34,6 +35,17 @@ public class JustLevelAPI {
         PlayerLevelData account = getUserData(uuid);
         if (account == null) return -1;
         return account.getStage();
+    }
+
+    public static int getTotalStage(Player player) {
+        return getTotalStage(player.getUniqueId());
+    }
+
+    public static int getTotalStage(UUID uuid) {
+        PlayerLevelData account = getUserData(uuid);
+        if (account == null) return -1;
+
+        return (account.getRealm() - 1) * Define.Stage.getMax() + account.getStage();
     }
 
     public static int getLevel(Player player) {
