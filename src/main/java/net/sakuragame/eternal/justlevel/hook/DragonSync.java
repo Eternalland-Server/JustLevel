@@ -56,7 +56,7 @@ public class DragonSync {
 
         Map<String, String> map = new HashMap<String, String>() {{
             put(PLAYER_STAGE_PAPI, String.valueOf(account.getStage()));
-            put(PLAYER_REALM_PAPI, String.valueOf(account.getRealm()));
+            put(PLAYER_REALM_PAPI, JustLevel.getUserManager().getRealmName(player.getUniqueId()));
         }};
 
         PacketSender.sendSyncPlaceholder(player, map);
