@@ -5,7 +5,7 @@ import com.taylorswiftcn.megumi.uifactory.event.screen.UIFScreenOpenEvent;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.api.event.*;
-import net.sakuragame.eternal.justlevel.hook.DragonSync;
+import net.sakuragame.eternal.justlevel.hook.ClientPlaceholder;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,27 +20,27 @@ public class UIListener implements Listener {
 
         if (!screenID.equals("player_breakThough")) return;
 
-        DragonSync.sendBreakRequire(player);
+        ClientPlaceholder.sendBreakRequire(player);
     }
 
     @EventHandler
     public void onExpChange(PlayerExpChangeEvent e) {
-        DragonSync.sendExp(e.getPlayer());
+        ClientPlaceholder.sendExp(e.getPlayer());
     }
 
     @EventHandler
     public void onRealmChange(PlayerRealmChangeEvent e) {
-        DragonSync.sendLevel(e.getPlayer());
+        ClientPlaceholder.sendLevel(e.getPlayer());
     }
 
     @EventHandler
     public void onStageChange(PlayerStageChangeEvent e) {
-        DragonSync.sendLevel(e.getPlayer());
+        ClientPlaceholder.sendLevel(e.getPlayer());
     }
 
     @EventHandler
     public void onPointsChange(PlayerPointChangeEvent e) {
-        DragonSync.sendPoints(e.getPlayer());
+        ClientPlaceholder.sendPoints(e.getPlayer());
     }
 
     @EventHandler
@@ -71,7 +71,7 @@ public class UIListener implements Listener {
         int stage = e.getStage();
         MessageAPI.sendActionTip(player, "§3§l阶段提升➚§6§l(" + stage + ")");
 
-        DragonSync.sendBreakRequire(player);
+        ClientPlaceholder.sendBreakRequire(player);
     }
 
     @EventHandler
@@ -80,7 +80,7 @@ public class UIListener implements Listener {
         int realm = e.getRealm();
         MessageAPI.sendActionTip(player, "§a§l境界提升➚§6§l(" + realm + ")");
 
-        DragonSync.sendBreakRequire(player);
+        ClientPlaceholder.sendBreakRequire(player);
     }
 
 }

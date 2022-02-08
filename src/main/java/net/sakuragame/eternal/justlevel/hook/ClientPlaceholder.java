@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DragonSync {
+public class ClientPlaceholder {
 
     private final static String PLAYER_CURRENT_EXP_PAPI = "player_current_exp";
     private final static String PLAYER_UPGRADE_EXP_PAPI = "player_upgrade_exp";

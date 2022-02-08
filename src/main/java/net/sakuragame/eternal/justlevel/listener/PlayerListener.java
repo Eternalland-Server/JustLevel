@@ -4,11 +4,10 @@ import com.taylorswiftcn.megumi.uifactory.event.screen.UIFScreenOpenEvent;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.PlayerDataLoadEvent;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
-import net.sakuragame.eternal.justlevel.hook.DragonSync;
+import net.sakuragame.eternal.justlevel.hook.ClientPlaceholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
 
@@ -18,45 +17,25 @@ public class PlayerListener implements Listener {
 
     private final JustLevel plugin = JustLevel.getInstance();
 
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onPreLogin(AsyncPlayerPreLoginEvent e) {
-        if (e.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED) {
-            return;
-        }
-        UUID uuid = e.getUniqueId();
-        JustLevel.getUserManager().loadAccount(uuid);
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onPreLoginMonitor(AsyncPlayerPreLoginEvent e) {
-        if (e.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED) {
-            JustLevel.getUserManager().removeAccount(e.getUniqueId());
-        }
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerLogin(PlayerLoginEvent e) {
-        Player player = e.getPlayer();
-        PlayerLevelData account = JustLevel.getUserManager().getAccount(player.getUniqueId());
-
-        if (account == null) {
-            e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
-            e.setKickMessage("账户未被正确加载，请重新进入。");
-            plugin.getLogger().info("玩家 " + player.getName() + " 账户数据载入失败!");
-            return;
-        }
-
-        PlayerDataLoadEvent event = new PlayerDataLoadEvent(player);
-        event.call();
-    }
-
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        PlayerLevelData account = JustLevel.getUserManager().getAccount(player.getUniqueId());
-        if (account == null) return;
+        UUID uuid = player.getUniqueId();
 
-        account.updateVanillaInfo();
+        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
+            JustLevel.getUserManager().loadAccount(uuid);
+            PlayerLevelData account = JustLevel.getUserManager().getAccount(uuid);
+            if (account == null) {
+                player.kickPlayer("账户未被正确加载，请重新进入。");
+                plugin.getLogger().info("玩家 " + player.getName() + " 账户数据载入失败!");
+            }
+            else {
+                account.updateVanillaInfo();
+
+                PlayerDataLoadEvent event = new PlayerDataLoadEvent(player);
+                event.call();
+            }
+        }, 10);
     }
 
     @EventHandler
@@ -64,7 +43,7 @@ public class PlayerListener implements Listener {
         Player player = e.getPlayer();
         if (!e.getScreenID().equals("huds")) return;
 
-        DragonSync.sendALL(player);
+        ClientPlaceholder.sendALL(player);
     }
 
     @EventHandler
