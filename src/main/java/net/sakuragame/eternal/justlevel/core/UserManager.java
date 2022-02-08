@@ -29,8 +29,10 @@ public class UserManager {
         accounts.put(uuid, data);
     }
 
-    public void removeAccount(UUID uuid) {
-        accounts.remove(uuid);
+    public void saveAccount(UUID uuid) {
+        PlayerLevelData account = accounts.remove(uuid);
+        if (account == null) return;
+        account.saveData();
     }
 
     public String getRealmPrefix(UUID uuid) {
