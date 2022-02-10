@@ -13,7 +13,8 @@ import java.text.DecimalFormat;
 
 public class ExpListener implements Listener {
 
-    private final DecimalFormat format = new DecimalFormat("#");
+    private final DecimalFormat a = new DecimalFormat("#");
+    private final DecimalFormat b = new DecimalFormat("#.#");
 
     @EventHandler
     public void onExpIncrease(PlayerExpIncreaseEvent.Pre e) {
@@ -32,11 +33,12 @@ public class ExpListener implements Listener {
         Player player = e.getPlayer();
         double amount = e.getAmount();
         double addition = e.getAddition();
+        double total = amount + addition;
 
         MessageAPI.sendActionTip(player,
                 MessageFile.expChange
-                        .replace("%exp%", format.format(amount))
-                        .replace("%addition%", format.format(addition))
+                        .replace("%exp%", a.format(total))
+                        .replace("%multiple%", b.format(amount / total))
         );
     }
 }

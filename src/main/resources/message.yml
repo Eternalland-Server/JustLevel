@@ -23,6 +23,6 @@ player-info:
  - ''
 message:
   no-permission: '&3你没有权限: %s%'
-  exp-change: '&a&l+ %exp%经验 &6&l(➚%addition%)'
+  exp-change: '&a&l+ %exp%经验 &6&l(&c&lx%multiple%&6&l)'
   stage-points-change: '&a&l+ %points%阶段突破点'
   realm-points-change: '&a&l+ %points%境界突破点'
