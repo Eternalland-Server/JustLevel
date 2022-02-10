@@ -1,8 +1,9 @@
 package net.sakuragame.eternal.justlevel.file.sub;
 
 import com.taylorswiftcn.justwei.util.MegumiUtil;
+import net.sakuragame.eternal.dragoncore.util.Pair;
 import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.core.Realm;
+import net.sakuragame.eternal.justlevel.core.level.Realm;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -21,6 +22,7 @@ public class ConfigFile {
     public static String level_formula;
     public static Map<String, Double> expAddition;
     public static Map<Integer, Realm> realmSetting;
+    public static Map<String, Pair<Integer, Double>> additionCard;
 
     public static void init() {
         config = JustLevel.getFileManager().getConfig();
@@ -32,6 +34,7 @@ public class ConfigFile {
         level_formula = config.getString("level-formula");
         loadExpAddition();
         loadRealmSetting();
+        loadAdditionCard();
     }
 
     private static String getString(String path) {
@@ -69,6 +72,18 @@ public class ConfigFile {
             int stageBreakPrice = section.getInt(s + ".stage-break-price");
             int realmBreakPrice = section.getInt(s + ".realm-break-price");
             realmSetting.put(layer, new Realm(layer, name, prefix, stageConsume, realmConsume, stageBreakPrice, realmBreakPrice));
+        }
+    }
+
+    private static void loadAdditionCard() {
+        YamlConfiguration yaml = JustLevel.getFileManager().getCard();
+        additionCard = new HashMap<>();
+
+        for (String key : yaml.getKeys(false)) {
+            int duration = yaml.getInt(key + ".duration");
+            double addition = yaml.getDouble(key + ".addition");
+
+            additionCard.put(key, new Pair<>(duration, addition));
         }
     }
 }

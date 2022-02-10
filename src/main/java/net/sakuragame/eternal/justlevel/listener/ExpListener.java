@@ -1,5 +1,6 @@
 package net.sakuragame.eternal.justlevel.listener;
 
+import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.api.event.PlayerExpIncreaseEvent;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justlevel.util.Utils;
@@ -18,9 +19,12 @@ public class ExpListener implements Listener {
     public void onExpIncrease(PlayerExpIncreaseEvent.Pre e) {
         Player player = e.getPlayer();
         double amount = e.getAmount();
-        double addition = Utils.getExpAddition(player, amount);
+        double support = Utils.getExpAddition(player);
+        double card = JustLevelAPI.getCardAddition(player);
 
-        e.addAddition(addition);
+        double value = amount * (support + card);
+
+        e.addAddition(value);
     }
 
     @EventHandler

@@ -12,6 +12,7 @@ public class FileManager extends JustConfiguration {
 
     @Getter private YamlConfiguration config;
     @Getter private YamlConfiguration message;
+    @Getter private YamlConfiguration card;
 
     public FileManager(JustLevel plugin) {
         super(plugin);
@@ -21,6 +22,7 @@ public class FileManager extends JustConfiguration {
     public void init() {
         config = initFile("config.yml");
         message = initFile("message.yml");
+        card = initFile("card.yml");
 
         ConfigFile.init();
         MessageFile.init();

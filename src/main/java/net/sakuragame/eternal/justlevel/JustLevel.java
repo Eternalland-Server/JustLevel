@@ -40,7 +40,7 @@ public class JustLevel extends JavaPlugin {
         userManager = new UserManager(this);
 
         getLogger().info("计算经验公式...");
-        Utils.conversionExp();
+        Utils.initExp();
 
         getLogger().info("注册PAPI变量...");
         new LevelPlaceholder().register();
@@ -51,6 +51,7 @@ public class JustLevel extends JavaPlugin {
         getLogger().info("注册事件...");
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
+        Bukkit.getPluginManager().registerEvents(new CardListener(), this);
         Bukkit.getPluginManager().registerEvents(new ExpListener(), this);
         Bukkit.getPluginManager().registerEvents(new MythicMobListener(), this);
         Bukkit.getPluginManager().registerEvents(new UIListener(), this);

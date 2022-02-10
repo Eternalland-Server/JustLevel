@@ -1,7 +1,7 @@
 package net.sakuragame.eternal.justlevel.core.user;
 
 import lombok.Getter;
-import net.sakuragame.eternal.justlevel.core.Define;
+import net.sakuragame.eternal.justlevel.core.level.Define;
 import net.sakuragame.eternal.justlevel.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -1,0 +1,12 @@
+half_hour_exp_card:
+  duration: 30
+  addtition: 1.0
+one_hour_exp_card:
+  duration: 60
+  addtition: 1.0
+three_hour_exp_card:
+  duration: 180
+  addtition: 1.0
+half_hour_treble_exp_card:
+  duration: 30
+  addtition: 2.0

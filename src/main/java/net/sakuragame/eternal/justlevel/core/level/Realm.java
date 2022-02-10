@@ -1,4 +1,4 @@
-package net.sakuragame.eternal.justlevel.core;
+package net.sakuragame.eternal.justlevel.core.level;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

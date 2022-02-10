@@ -1,13 +1,13 @@
-Prefix: ' &7&l[境界] '
-#等级经验共识
+Prefix: ' &8&l[&6&l亘古大陆&8&l] &7'
+#等级经验公式
 level-formula: 'Math.pow(level, 2)+24*level+35'
-#会员玩家多倍经验
+#会员玩家经验加成
 exp-addition:
-  #权限节点: <倍数>
+  #权限节点: <加成>
   #权限: <插件名>.<节点>
-  mvp: 2.0
-  svp: 1.7
-  vip: 1.4
+  mvp: 1.0
+  svp: 0.7
+  vip: 0.4
 setting:
   #境界层级
   1:

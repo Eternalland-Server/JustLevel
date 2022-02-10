@@ -19,7 +19,7 @@ public class MessageFile {
     public static String realmPointsChange;
 
     public static void init() {
-        message = JustLevel.getInstance().getFileManager().getMessage();
+        message = JustLevel.getFileManager().getMessage();
 
         help = getStringList("help");
         adminHelp = getStringList("admin-help");

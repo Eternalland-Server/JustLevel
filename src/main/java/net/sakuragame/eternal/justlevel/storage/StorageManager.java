@@ -1,9 +1,10 @@
 package net.sakuragame.eternal.justlevel.storage;
 
+import net.sakuragame.eternal.dragoncore.util.Pair;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
-import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.serversystems.manage.api.database.DataManager;
 import net.sakuragame.serversystems.manage.api.database.DatabaseQuery;
+import net.sakuragame.serversystems.manage.api.redis.RedisManager;
 import net.sakuragame.serversystems.manage.client.api.ClientManagerAPI;
 
 import java.sql.ResultSet;
@@ -12,9 +13,11 @@ import java.util.UUID;
 public class StorageManager {
 
     private final DataManager dataManager;
+    private final RedisManager redisManager;
 
     public StorageManager() {
         this.dataManager = ClientManagerAPI.getDataManager();
+        this.redisManager = ClientManagerAPI.getRedisManager();
     }
 
     public void init() {
@@ -57,5 +60,26 @@ public class StorageManager {
                 new String[]{"uid", "realm", "stage", "level", "exp", "realm_point", "stage_point"},
                 new Object[]{uid, realm, stage, level, exp, realmPoint, stagePoint}
         );
+    }
+
+    public void setUseCard(UUID uuid, String card, int expire) {
+        String key = getUserKey(uuid);
+        redisManager.getStandaloneConn().async()
+                .set(key, card);
+        redisManager.getStandaloneConn().async()
+                .expire(key, expire);
+    }
+
+    public Pair<String, Long> getUseCard(UUID uuid) {
+        String key = getUserKey(uuid);
+        String card = redisManager.getStandaloneConn().sync().get(key);
+        if (card == null) return null;
+        long expire = redisManager.getStandaloneConn().sync().ttl(key);
+
+        return new Pair<>(card, expire);
+    }
+
+    public String getUserKey(UUID uuid) {
+        return "JustStore:" + uuid.toString();
     }
 }

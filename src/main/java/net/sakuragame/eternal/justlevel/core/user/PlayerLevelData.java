@@ -2,7 +2,7 @@ package net.sakuragame.eternal.justlevel.core.user;
 
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.*;
-import net.sakuragame.eternal.justlevel.core.Define;
+import net.sakuragame.eternal.justlevel.core.level.Define;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;

@@ -3,8 +3,8 @@ package net.sakuragame.eternal.justlevel.hook;
 import net.sakuragame.eternal.dragoncore.network.PacketSender;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
-import net.sakuragame.eternal.justlevel.core.Define;
-import net.sakuragame.eternal.justlevel.core.Realm;
+import net.sakuragame.eternal.justlevel.core.level.Define;
+import net.sakuragame.eternal.justlevel.core.level.Realm;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import org.bukkit.entity.Player;
@@ -32,7 +32,7 @@ public class ClientPlaceholder {
 
     private final static DecimalFormat FORMAT = new DecimalFormat("0");
 
-    public static void sendALL(Player player) {
+    public static void send(Player player) {
         sendExp(player);
         sendLevel(player);
         sendPoints(player);
