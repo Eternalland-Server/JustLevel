@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class CardListener implements Listener {
@@ -31,6 +32,11 @@ public class CardListener implements Listener {
 
         CardManager.use(player, id);
         item.setAmount(item.getAmount() - 1);
-        player.sendMessage(ConfigFile.Prefix + "你使用了: " + zapItem.getName().get("NAME"));
+        player.sendMessage(ConfigFile.Prefix + "你使用了: " + MegumiUtil.onReplace(zapItem.getName().get("NAME")));
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        CardManager.clear(e.getPlayer().getUniqueId());
     }
 }

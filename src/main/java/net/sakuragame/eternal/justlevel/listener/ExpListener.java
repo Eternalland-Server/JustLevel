@@ -38,7 +38,7 @@ public class ExpListener implements Listener {
         MessageAPI.sendActionTip(player,
                 MessageFile.expChange
                         .replace("%exp%", a.format(total))
-                        .replace("%multiple%", b.format(amount / total))
+                        .replace("%multiple%", b.format(total / amount))
         );
     }
 }

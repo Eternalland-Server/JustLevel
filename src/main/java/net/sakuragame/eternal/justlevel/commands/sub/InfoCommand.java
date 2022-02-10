@@ -57,6 +57,9 @@ public class InfoCommand extends SubCommand {
                 .replace("%stage_points%", String.valueOf(account.getStagePoints()))
                 .replace("%realm_points%", String.valueOf(account.getRealmPoints()))
         ));
+
+        player.sendMessage("§7会员经验加成: " + JustLevelAPI.getSupportAddition(player));
+        player.sendMessage("§7经验卡加成: " + JustLevelAPI.getCardAddition(player));
     }
 
     @Override

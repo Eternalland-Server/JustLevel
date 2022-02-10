@@ -80,7 +80,7 @@ public class ConfigFile {
         additionCard = new HashMap<>();
 
         for (String key : yaml.getKeys(false)) {
-            int duration = yaml.getInt(key + ".duration");
+            int duration = yaml.getInt(key + ".duration") * 60;
             double addition = yaml.getDouble(key + ".addition");
 
             additionCard.put(key, new Pair<>(duration, addition));

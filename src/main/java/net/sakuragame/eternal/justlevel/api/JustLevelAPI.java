@@ -44,7 +44,6 @@ public class JustLevelAPI {
     public static double getCardAddition(UUID uuid) {
         String card = CardManager.getCurrentUse(uuid);
         if (card == null) return 0;
-
         return ConfigFile.additionCard.get(card).getValue();
     }
 

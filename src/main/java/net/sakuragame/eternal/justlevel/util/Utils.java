@@ -31,6 +31,7 @@ public class Utils {
 
                     expCache.put(level, exp);
                 }
+                return;
             }
         }
 

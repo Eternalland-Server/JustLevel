@@ -80,6 +80,6 @@ public class StorageManager {
     }
 
     public String getUserKey(UUID uuid) {
-        return "JustStore:" + uuid.toString();
+        return "JustLevel:" + uuid.toString();
     }
 }

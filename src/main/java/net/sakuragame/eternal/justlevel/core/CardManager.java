@@ -7,6 +7,7 @@ import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +30,7 @@ public class CardManager {
         }
 
         int duration = ConfigFile.additionCard.get(card).getKey();
+        JustLevel.getStorageManager().setUseCard(uuid, card, duration);
         add(uuid, card, duration);
 
         PlayerCardUsedEvent event = new PlayerCardUsedEvent(Bukkit.getPlayer(uuid), card);
@@ -40,14 +42,14 @@ public class CardManager {
     }
 
     public static void add(UUID uuid, String card, long expire) {
-        int id = new BukkitRunnable() {
+        BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
                 using.remove(uuid);
             }
-        }.runTaskLaterAsynchronously(plugin, expire * 20).getTaskId();
+        }.runTaskLaterAsynchronously(plugin, expire * 20);
 
-        using.put(uuid, new Pair<>(card, id));
+        using.put(uuid, new Pair<>(card, task.getTaskId()));
     }
 
     public static String getCurrentUse(Player player) {
@@ -59,6 +61,13 @@ public class CardManager {
         if (current == null) return null;
 
         return current.getKey();
+    }
+
+    public static void clear(UUID uuid) {
+        Pair<String, Integer> data = using.remove(uuid);
+        if (data == null) return;
+
+        Bukkit.getScheduler().cancelTask(data.getValue());
     }
 
 }
