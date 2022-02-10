@@ -5,6 +5,8 @@ import net.sakuragame.eternal.justlevel.core.CardManager;
 import net.sakuragame.eternal.justlevel.core.level.Define;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
+import net.sakuragame.eternal.justlevel.util.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -17,6 +19,22 @@ public class JustLevelAPI {
 
     public static PlayerLevelData getUserData(UUID uuid) {
         return JustLevel.getUserManager().getAccount(uuid);
+    }
+
+    public static double getTotalAddition(Player player) {
+        return getSupportAddition(player) + getCardAddition(player);
+    }
+
+    public static double getTotalAddition(UUID uuid) {
+        return getSupportAddition(uuid) + getCardAddition(uuid);
+    }
+
+    public static double getSupportAddition(Player player) {
+        return Utils.getExpAddition(player);
+    }
+
+    public static double getSupportAddition(UUID uuid) {
+        return Utils.getExpAddition(Bukkit.getPlayer(uuid));
     }
 
     public static double getCardAddition(Player player) {
