@@ -15,6 +15,7 @@ public class MainCommand extends JustCommand {
         this.register(new SetStageCommand());
         this.register(new SetRealmCommand());
         this.register(new PointsCommand());
+        this.register(new MultiExpCommand());
         this.register(new ReloadCommand());
     }
 }

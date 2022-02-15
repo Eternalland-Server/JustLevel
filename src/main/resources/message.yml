@@ -9,6 +9,7 @@ admin-help:
  - '&7/level setStage <player> <stage> - 设置阶段'
  - '&7/level setRealm <player> <realm> - 设置境界'
  - '&7/level points <add/take/set> <player> <stage/realm> <points> - 修改玩家突破点数'
+ - '&7/level multiexp <倍数> <时间> <理由> - 开启全服多倍经验'
  - '&7/level reload - 重载配置文件'
  - ''
 player-info:
