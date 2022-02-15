@@ -57,6 +57,10 @@ public class PlayerListener implements Listener {
         if (!e.getScreenID().equals("huds")) return;
 
         ClientPlaceholder.send(player);
+
+        if (JustLevel.getMultiExpManager().isValid()) {
+            JustLevel.getMultiExpManager().addIcon(player);
+        }
     }
 
     @EventHandler

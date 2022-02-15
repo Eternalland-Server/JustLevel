@@ -17,6 +17,7 @@ public class MessageFile {
     public static String expChange;
     public static String stagePointsChange;
     public static String realmPointsChange;
+    public static List<String> multiExp;
 
     public static void init() {
         message = JustLevel.getFileManager().getMessage();
@@ -29,6 +30,7 @@ public class MessageFile {
         expChange = getString("message.exp-change");
         stagePointsChange = getString("message.stage-points-change");
         realmPointsChange = getString("message.realm-points-change");
+        multiExp = getStringList("message.multi-exp");
     }
 
     private static String getString(String path) {

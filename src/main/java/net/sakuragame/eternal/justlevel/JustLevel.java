@@ -3,6 +3,7 @@ package net.sakuragame.eternal.justlevel;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import net.sakuragame.eternal.justlevel.commands.MainCommand;
+import net.sakuragame.eternal.justlevel.core.MultiExpManager;
 import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.hook.LevelPlaceholder;
 import net.sakuragame.eternal.justlevel.core.UserManager;
@@ -19,6 +20,7 @@ public class JustLevel extends JavaPlugin {
     @Getter private static FileManager fileManager;
     @Getter private static StorageManager storageManager;
     @Getter private static UserManager userManager;
+    @Getter private static MultiExpManager multiExpManager;
 
     @Getter private Economy economy;
 
@@ -38,6 +40,9 @@ public class JustLevel extends JavaPlugin {
 
         getLogger().info("初始化用户管理...");
         userManager = new UserManager(this);
+
+        getLogger().info("初始化全服多倍经验...");
+        multiExpManager = new MultiExpManager();
 
         getLogger().info("计算经验公式...");
         Utils.initExp();

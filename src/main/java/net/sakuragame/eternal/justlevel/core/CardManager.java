@@ -1,12 +1,10 @@
 package net.sakuragame.eternal.justlevel.core;
 
-import com.taylorswiftcn.justwei.util.MegumiUtil;
 import net.sakuragame.eternal.dragoncore.util.Pair;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.PlayerCardUsedEvent;
 import net.sakuragame.eternal.justlevel.core.level.Card;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
-import net.sakuragame.eternal.justlevel.util.Utils;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import net.sakuragame.eternal.justmessage.icon.IconProperty;
 import org.bukkit.Bukkit;
