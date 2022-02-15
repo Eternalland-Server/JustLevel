@@ -1,8 +1,8 @@
 package net.sakuragame.eternal.justlevel.file.sub;
 
 import com.taylorswiftcn.justwei.util.MegumiUtil;
-import net.sakuragame.eternal.dragoncore.util.Pair;
 import net.sakuragame.eternal.justlevel.JustLevel;
+import net.sakuragame.eternal.justlevel.core.level.Card;
 import net.sakuragame.eternal.justlevel.core.level.Realm;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,7 +22,7 @@ public class ConfigFile {
     public static String level_formula;
     public static Map<String, Double> expAddition;
     public static Map<Integer, Realm> realmSetting;
-    public static Map<String, Pair<Integer, Double>> additionCard;
+    public static Map<String, Card> additionCard;
 
     public static void init() {
         config = JustLevel.getFileManager().getConfig();
@@ -80,10 +80,13 @@ public class ConfigFile {
         additionCard = new HashMap<>();
 
         for (String key : yaml.getKeys(false)) {
+            String name = MegumiUtil.onReplace(key + ".name");
+            String texture = yaml.getString(key + ".card");
             int duration = yaml.getInt(key + ".duration") * 60;
             double addition = yaml.getDouble(key + ".addition");
 
-            additionCard.put(key, new Pair<>(duration, addition));
+
+            additionCard.put(key, new Card(name, texture, duration, addition));
         }
     }
 }
