@@ -83,7 +83,7 @@ public class MultiExpManager extends RedisMessageListener {
     }
 
     public void addIcon(Player player) {
-        MessageAPI.addIcon(player, KEY, new IconProperty("prop/100/23.png", this.reason));
+        MessageAPI.addIcon(player, KEY, new IconProperty("icon/prop/100/23.png", this.reason));
     }
 
     public void update(double addition, int minute, String reason) {

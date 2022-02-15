@@ -80,8 +80,8 @@ public class ConfigFile {
         additionCard = new HashMap<>();
 
         for (String key : yaml.getKeys(false)) {
-            String name = MegumiUtil.onReplace(key + ".name");
-            String texture = yaml.getString(key + ".card");
+            String name = MegumiUtil.onReplace(yaml.getString(key + ".name"));
+            String texture = yaml.getString(key + ".texture");
             int duration = yaml.getInt(key + ".duration") * 60;
             double addition = yaml.getDouble(key + ".addition");
 
