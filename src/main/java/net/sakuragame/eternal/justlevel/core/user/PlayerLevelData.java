@@ -88,7 +88,7 @@ public class PlayerLevelData extends LevelAccount {
         if (preEvent.isCancelled()) return;
 
         int levelUP = 0;
-        double addition = preEvent.getAmount();
+        double addition = preEvent.getAddition();
         double expPool = value + addition + this.getExp();
         this.setExp(0);
 
