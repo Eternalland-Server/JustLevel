@@ -27,7 +27,7 @@ public class PlayerListener implements Listener {
         Pair<String, Long> result = JustLevel.getStorageManager().getUseCard(uuid);
         if (result == null) return;
 
-        CardManager.add(uuid, result.getKey(), result.getValue());
+        CardManager.add(uuid, result.getKey(), Math.toIntExact(result.getValue()));
     }
 
     @EventHandler
@@ -57,10 +57,6 @@ public class PlayerListener implements Listener {
         if (!e.getScreenID().equals("huds")) return;
 
         ClientPlaceholder.send(player);
-
-        if (JustLevel.getMultiExpManager().isValid()) {
-            JustLevel.getMultiExpManager().addIcon(player);
-        }
     }
 
     @EventHandler

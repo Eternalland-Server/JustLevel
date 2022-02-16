@@ -7,8 +7,6 @@ import net.sakuragame.eternal.justmessage.icon.IconProperty;
 import net.sakuragame.serversystems.manage.api.redis.RedisMessageListener;
 import net.sakuragame.serversystems.manage.client.api.ClientManagerAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Calendar;
 
@@ -19,7 +17,6 @@ public class MultiExpManager extends RedisMessageListener {
     private double addition = 0;
     private long expire = 0;
     private String reason;
-    private int tid;
 
     private final String KEY = "server_multi_exp";
 
@@ -35,8 +32,6 @@ public class MultiExpManager extends RedisMessageListener {
         if (!serviceName.equals(plugin.getName())) return;
 
         if (channel.equals(KEY)) {
-            if (this.isValid()) Bukkit.getScheduler().cancelTask(this.tid);
-
             double addition = Double.parseDouble(messages[0]);
             int minute = Integer.parseInt(messages[1]);
             String reason = messages[2];
@@ -46,12 +41,12 @@ public class MultiExpManager extends RedisMessageListener {
     }
 
     public void set(double addition, int minute, String reason) {
-        if (this.isValid()) Bukkit.getScheduler().cancelTask(this.tid);
+        if (this.isValid()) MessageAPI.unregisterIcon(KEY);
 
         this.addition = addition;
         this.expire = getExpire(minute);
         this.reason = reason;
-        this.tid = startCooldown(minute * 60);
+        this.registerIcon(minute * 60);
 
         Bukkit.getOnlinePlayers().forEach(player -> MessageFile.multiExp.forEach(s -> player.sendMessage(s
                 .replace("<addition>", String.valueOf(addition + 1))
@@ -71,19 +66,8 @@ public class MultiExpManager extends RedisMessageListener {
         return this.reason;
     }
 
-    public int startCooldown(int second) {
-        Bukkit.getOnlinePlayers().forEach(this::addIcon);
-
-        return new BukkitRunnable() {
-            @Override
-            public void run() {
-                Bukkit.getOnlinePlayers().forEach(player -> MessageAPI.delIcon(player, KEY));
-            }
-        }.runTaskLaterAsynchronously(JustLevel.getInstance(), second * 20L).getTaskId();
-    }
-
-    public void addIcon(Player player) {
-        MessageAPI.addIcon(player, KEY, new IconProperty("icon/prop/100/23.png", this.reason));
+    public void registerIcon(int second) {
+        MessageAPI.registerIcon(KEY, new IconProperty(KEY, "icon/system/1.png", this.reason, second));
     }
 
     public void update(double addition, int minute, String reason) {

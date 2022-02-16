@@ -40,24 +40,23 @@ public class CardManager {
         event.call();
     }
 
-    public static void add(Player player, String cID, long expire) {
-        add(player.getUniqueId(), cID, expire);
+    public static void add(Player player, String cardID, int duration) {
+        add(player.getUniqueId(), cardID, duration);
     }
 
-    public static void add(UUID uuid, String cID, long expire) {
+    public static void add(UUID uuid, String cardID, int duration) {
         Player player = Bukkit.getPlayer(uuid);
-        Card card = ConfigFile.additionCard.get(cID);
+        Card card = ConfigFile.additionCard.get(cardID);
 
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
                 using.remove(uuid);
-                MessageAPI.delIcon(player, cID);
             }
-        }.runTaskLaterAsynchronously(plugin, expire * 20);
+        }.runTaskLaterAsynchronously(plugin, duration * 20L);
 
-        using.put(uuid, new Pair<>(cID, task.getTaskId()));
-        MessageAPI.addIcon(player, cID, new IconProperty(card.getTexture(), card.getName()));
+        using.put(uuid, new Pair<>(cardID, task.getTaskId()));
+        MessageAPI.registerIcon(player, cardID, new IconProperty(cardID, card.getTexture(), card.getName(), duration));
     }
 
     public static String getCurrentUse(Player player) {
