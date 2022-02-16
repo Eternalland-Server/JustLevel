@@ -47,13 +47,6 @@ public class PlayerListener implements Listener {
         if (!e.getScreenID().equals("huds")) return;
 
         ClientPlaceholder.send(player);
-    }
-
-    @EventHandler
-    public void onIconOpen(UIFScreenOpenEvent e) {
-        Player player = e.getPlayer();
-        if (!e.getScreenID().equals("iconBar")) return;
-
         CardManager.load(player);
     }
 
