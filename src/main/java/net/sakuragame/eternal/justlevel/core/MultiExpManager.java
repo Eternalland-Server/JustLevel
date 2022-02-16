@@ -67,7 +67,7 @@ public class MultiExpManager extends RedisMessageListener {
     }
 
     public void registerIcon(int second) {
-        MessageAPI.registerIcon(KEY, new IconProperty(KEY, "icon/system/1.png", this.reason, second));
+        MessageAPI.registerIcon(KEY, new IconProperty(KEY, "icon/system/2.png", this.reason, second));
     }
 
     public void update(double addition, int minute, String reason) {
