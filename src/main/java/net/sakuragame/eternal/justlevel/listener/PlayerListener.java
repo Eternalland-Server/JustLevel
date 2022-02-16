@@ -1,7 +1,6 @@
 package net.sakuragame.eternal.justlevel.listener;
 
 import com.taylorswiftcn.megumi.uifactory.event.screen.UIFScreenOpenEvent;
-import net.sakuragame.eternal.dragoncore.util.Pair;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.PlayerDataLoadEvent;
 import net.sakuragame.eternal.justlevel.core.CardManager;
@@ -10,25 +9,16 @@ import net.sakuragame.eternal.justlevel.hook.ClientPlaceholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
 
 public class PlayerListener implements Listener {
 
     private final JustLevel plugin = JustLevel.getInstance();
-
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onLogin(AsyncPlayerPreLoginEvent e) {
-        if (e.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED) return;
-        UUID uuid = e.getUniqueId();
-        Pair<String, Long> result = JustLevel.getStorageManager().getUseCard(uuid);
-        if (result == null) return;
-
-        CardManager.add(uuid, result.getKey(), Math.toIntExact(result.getValue()));
-    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -57,6 +47,14 @@ public class PlayerListener implements Listener {
         if (!e.getScreenID().equals("huds")) return;
 
         ClientPlaceholder.send(player);
+    }
+
+    @EventHandler
+    public void onIconOpen(UIFScreenOpenEvent e) {
+        Player player = e.getPlayer();
+        if (!e.getScreenID().equals("iconBar")) return;
+
+        CardManager.load(player);
     }
 
     @EventHandler

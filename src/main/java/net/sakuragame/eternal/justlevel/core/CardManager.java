@@ -21,6 +21,13 @@ public class CardManager {
     private final static JustLevel plugin = JustLevel.getInstance();
     private final static Map<UUID, Pair<String, Integer>> using = new HashMap<>();
 
+    public static void load(Player player) {
+        UUID uuid = player.getUniqueId();
+        Pair<String, Long> result = JustLevel.getStorageManager().getUseCard(uuid);
+        if (result == null) return;
+        CardManager.add(uuid, result.getKey(), Math.toIntExact(result.getValue()));
+    }
+
     public static void use(Player player, String card) {
         use(player.getUniqueId(), card);
     }
