@@ -3,6 +3,7 @@ package net.sakuragame.eternal.justlevel.core.user;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.*;
 import net.sakuragame.eternal.justlevel.core.level.Define;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -112,6 +113,7 @@ public class PlayerLevelData extends LevelAccount {
 
         if (levelUP != 0) {
             this.addLevel(levelUP);
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         }
 
         PlayerExpIncreaseEvent.Post postEvent = new PlayerExpIncreaseEvent.Post(player, value, addition);
