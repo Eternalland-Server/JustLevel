@@ -26,6 +26,8 @@ public class PlayerListener implements Listener {
         UUID uuid = player.getUniqueId();
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
+            if (!player.isOnline()) return;
+
             JustLevel.getUserManager().loadAccount(uuid);
             PlayerLevelData account = JustLevel.getUserManager().getAccount(uuid);
             if (account == null) {
