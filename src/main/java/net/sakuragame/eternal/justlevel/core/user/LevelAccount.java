@@ -85,7 +85,7 @@ public abstract class LevelAccount {
 
     public void setLevel(int i) {
         this.level = Math.max(0, Math.min(Define.Level.getMax(), i));
-        this.updateVanillaLevel();
+        this.updateVanillaInfo();
     }
 
     public void setExp(double exp) {
@@ -134,7 +134,8 @@ public abstract class LevelAccount {
     }
 
     public void updateVanillaExp() {
-        getBukkitPlayer().setExp((float) (this.exp / getUpgradeExp()));
+        double upgrade = getUpgradeExp();
+        getBukkitPlayer().setExp((float) (Math.min(upgrade, this.exp) / upgrade));
     }
 
     public void updateVanillaLevel() {
