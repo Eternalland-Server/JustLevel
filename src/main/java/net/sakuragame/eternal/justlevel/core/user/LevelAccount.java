@@ -112,16 +112,12 @@ public abstract class LevelAccount {
         return this.level == Define.Level.getMax();
     }
 
-    public boolean isMaxExp() {
-        return this.exp == this.getUpgradeExp();
-    }
-
     public boolean canBreakRealm() {
         return !this.isMaxRealm() && this.isMaxStage() && this.isMaxLevel();
     }
 
     public boolean canBreakStage() {
-        return this.isMaxLevel() && this.isMaxExp();
+        return this.isMaxLevel();
     }
 
     public double getUpgradeExp() {

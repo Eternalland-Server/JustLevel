@@ -78,7 +78,7 @@ public class UserManager {
 
         if (account == null) return false;
 
-        if (!account.canBreakStage()) {
+        if (!account.canBreakRealm()) {
             return true;
         }
 
