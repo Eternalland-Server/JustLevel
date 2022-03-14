@@ -69,7 +69,7 @@ public class UIListener implements Listener {
     public void onStageBroken(PlayerBrokenEvent.Stage e) {
         Player player = e.getPlayer();
         int stage = e.getStage();
-        MessageAPI.sendActionTip(player, "§3§l阶段提升➚§6§l(" + stage + ")");
+        MessageAPI.sendActionTip(player, "§3§l阶段提升➚§6§l(" + stage + "阶)");
 
         ClientPlaceholder.sendBreakRequire(player);
     }
@@ -78,7 +78,7 @@ public class UIListener implements Listener {
     public void onRealmBroken(PlayerBrokenEvent.Realm e) {
         Player player = e.getPlayer();
         int realm = e.getRealm();
-        MessageAPI.sendActionTip(player, "§a§l境界提升➚§6§l(" + realm + ")");
+        MessageAPI.sendActionTip(player, "§a§l境界提升➚§6§l(" + realm + "层境界)");
 
         ClientPlaceholder.sendBreakRequire(player);
     }

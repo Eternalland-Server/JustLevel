@@ -5,6 +5,7 @@ import net.sakuragame.eternal.justlevel.api.event.PlayerBrokenEvent;
 import net.sakuragame.eternal.justlevel.core.level.Realm;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -70,6 +71,8 @@ public class UserManager {
         PlayerBrokenEvent.Stage event = new PlayerBrokenEvent.Stage(player, account.getStage());
         event.call();
 
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
+
         return true;
     }
 
@@ -93,6 +96,8 @@ public class UserManager {
 
         PlayerBrokenEvent.Realm event = new PlayerBrokenEvent.Realm(player, account.getRealm());
         event.call();
+
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
 
         return false;
     }
