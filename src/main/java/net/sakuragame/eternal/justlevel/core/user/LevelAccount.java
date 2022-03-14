@@ -117,7 +117,7 @@ public abstract class LevelAccount {
     }
 
     public boolean canBreakRealm() {
-        return this.isMaxRealm() && this.isMaxStage() && this.isMaxLevel();
+        return !this.isMaxRealm() && this.isMaxStage() && this.isMaxLevel();
     }
 
     public boolean canBreakStage() {
