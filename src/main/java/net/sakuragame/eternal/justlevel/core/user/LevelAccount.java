@@ -117,7 +117,7 @@ public abstract class LevelAccount {
     }
 
     public boolean canBreakStage() {
-        return this.isMaxLevel();
+        return this.isMaxLevel() && !this.isMaxStage();
     }
 
     public double getUpgradeExp() {

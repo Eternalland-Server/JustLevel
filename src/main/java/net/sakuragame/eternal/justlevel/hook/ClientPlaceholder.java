@@ -84,7 +84,7 @@ public class ClientPlaceholder {
         String s_rq_1 = (account.isMaxLevel() ? "⁍" : "⁌") + " &f等级: " + (account.isMaxLevel() ? "&a" : "&c") + Define.Level.getMax();
         String s_rq_2 = (account.getStagePoints() >= realm.getStageConsume() ? "⁍" : "⁌") + " &f突破点: " + (account.getStagePoints() >= realm.getStageConsume() ? "&a" : "&c") + realm.getStageConsume();
         String s_rq_3 = (balance >= realm.getStageBreakPrice() ? "⁍" : "⁌") + " &f金币: " + (balance >= realm.getStageBreakPrice() ? "&a" : "&c") + realm.getStageBreakPrice();
-        String r_rq_1 = (account.isMaxStage() ? "⁍" : "⁌") + " &f阶段: " + (account.isMaxStage() ? "&a" : "&c") + Define.Stage.getMax();
+        String r_rq_1 = (account.isMaxStage() && account.isMaxLevel() ? "⁍" : "⁌") + " &f阶段: " + (account.isMaxStage() ? "&a" : "&c") + Define.Stage.getMax() + "(并满级)";
         String r_rq_2 = (account.getRealmPoints() >= realm.getRealmConsume() ? "⁍" : "⁌") + " &f境界点: " + (account.getRealmPoints() >= realm.getRealmConsume() ? "&a" : "&c") + realm.getRealmConsume();
         String r_rq_3 = (balance >= realm.getRealmBreakPrice() ? "⁍" : "⁌") + " &f金币: " + (balance >= realm.getRealmBreakPrice() ? "&a" : "&c") + realm.getRealmBreakPrice();
 
