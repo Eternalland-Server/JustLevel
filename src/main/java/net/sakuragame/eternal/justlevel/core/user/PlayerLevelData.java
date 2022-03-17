@@ -3,6 +3,7 @@ package net.sakuragame.eternal.justlevel.core.user;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.*;
 import net.sakuragame.eternal.justlevel.core.level.Define;
+import net.sakuragame.eternal.justlevel.util.Utils;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -94,7 +95,7 @@ public class PlayerLevelData extends LevelAccount {
         this.setExp(0);
 
         while (expPool > 0) {
-            double upgradeExp = this.getUpgradeExp();
+            double upgradeExp = Utils.getLevelUpExp(this.getLevel() + levelUP);
 
             if (this.getLevel() + levelUP >= Define.Level.getMax()) {
                 this.setExp(upgradeExp);

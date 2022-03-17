@@ -52,7 +52,7 @@ public abstract class LevelAccount {
     }
 
     public void addRealm() {
-        this.setStage(this.realm + 1);
+        this.setRealm(this.realm + 1);
     }
 
     public void addStage() {

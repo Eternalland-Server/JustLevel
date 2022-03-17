@@ -8,6 +8,7 @@ import net.sakuragame.eternal.justlevel.util.Utils;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import java.text.DecimalFormat;
@@ -30,7 +31,7 @@ public class ExpListener implements Listener {
         e.addAddition(value);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onExpChange(PlayerExpIncreaseEvent.Post e) {
         Player player = e.getPlayer();
         double amount = e.getAmount();
