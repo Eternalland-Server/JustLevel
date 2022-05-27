@@ -18,7 +18,7 @@ public class UIListener implements Listener {
         Player player = e.getPlayer();
         String screenID = e.getScreenID();
 
-        if (!screenID.equals("player_breakThough")) return;
+        if (!screenID.equals("user_level")) return;
 
         ClientPlaceholder.sendBreakRequire(player);
     }
@@ -47,13 +47,10 @@ public class UIListener implements Listener {
     public void onBreakButtonClick(UIFCompSubmitEvent e) {
         Player player = e.getPlayer();
 
-        String screenID = e.getScreenID();
-        if (!screenID.equals("player_breakThough")) return;
+        if (!e.getScreenID().equals("user_level")) return;
+        if (!e.getCompID().equals("break")) return;
 
-        String plugin = e.getParams().getParam(0);
-        if (!plugin.equals(JustLevel.getInstance().getName())) return;
-
-        int index = e.getParams().getParamI(1);
+        int index = e.getParams().getParamI(0);
 
         if (index == 0) {
             JustLevelAPI.tryBreakStage(player);
