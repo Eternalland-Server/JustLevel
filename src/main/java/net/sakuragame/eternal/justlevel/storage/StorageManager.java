@@ -64,10 +64,8 @@ public class StorageManager {
 
     public void setUseCard(UUID uuid, String card, int expire) {
         String key = getUserKey(uuid);
-        redisManager.getStandaloneConn().async()
-                .set(key, card);
-        redisManager.getStandaloneConn().async()
-                .expire(key, expire);
+        redisManager.getStandaloneConn().async().set(key, card);
+        redisManager.getStandaloneConn().async().expire(key, expire);
     }
 
     public Pair<String, Long> getUseCard(UUID uuid) {
