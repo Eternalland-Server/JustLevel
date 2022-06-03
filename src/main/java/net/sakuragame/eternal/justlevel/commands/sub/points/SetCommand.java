@@ -38,7 +38,7 @@ public class SetCommand extends SubCommand {
             return;
         }
 
-        if (!MegumiUtil.isNumber(s3)) {
+        if (!MegumiUtil.isInteger(s3)) {
             sender.sendMessage(ConfigFile.Prefix + "§c无效值: " + s3);
             return;
         }
