@@ -9,7 +9,6 @@ depend:
   - PlaceholderAPI
   - MythicMobs
   - DragonCore
-  - Vault
   - GemsEconomy
 
 commands:

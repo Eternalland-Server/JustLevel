@@ -1,17 +1,15 @@
 package net.sakuragame.eternal.justlevel;
 
 import lombok.Getter;
-import net.milkbowl.vault.economy.Economy;
 import net.sakuragame.eternal.justlevel.commands.MainCommand;
 import net.sakuragame.eternal.justlevel.core.MultiExpManager;
+import net.sakuragame.eternal.justlevel.core.UserManager;
 import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.hook.LevelPlaceholder;
-import net.sakuragame.eternal.justlevel.core.UserManager;
 import net.sakuragame.eternal.justlevel.listener.*;
 import net.sakuragame.eternal.justlevel.storage.StorageManager;
 import net.sakuragame.eternal.justlevel.util.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class JustLevel extends JavaPlugin {
@@ -21,8 +19,6 @@ public class JustLevel extends JavaPlugin {
     @Getter private static StorageManager storageManager;
     @Getter private static UserManager userManager;
     @Getter private static MultiExpManager multiExpManager;
-
-    @Getter private Economy economy;
 
     @Override
     public void onEnable() {
@@ -50,9 +46,6 @@ public class JustLevel extends JavaPlugin {
         getLogger().info("注册PAPI变量...");
         new LevelPlaceholder().register();
 
-        getLogger().info("兼容Vault...");
-        this.setupEconomy();
-
         getLogger().info("注册事件...");
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
@@ -77,17 +70,6 @@ public class JustLevel extends JavaPlugin {
     public String getVersion() {
         String packet = Bukkit.getServer().getClass().getPackage().getName();
         return packet.substring(packet.lastIndexOf('.') + 1);
-    }
-
-    private void setupEconomy() {
-        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
-        if (rsp != null) {
-            economy = rsp.getProvider();
-            getLogger().info("Hook vault success!");
-        }
-        else {
-            getLogger().info("Hook vault failed!");
-        }
     }
 
     public void reload() {

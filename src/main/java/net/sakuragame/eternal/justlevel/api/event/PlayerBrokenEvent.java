@@ -8,22 +8,22 @@ public class PlayerBrokenEvent {
     @Getter
     public static class Realm extends JustEvent {
 
-        private final int realm;
+        private final int level;
 
-        public Realm(Player who, int realm) {
+        public Realm(Player who, int level) {
             super(who);
-            this.realm = realm;
+            this.level = level;
         }
     }
 
     @Getter
     public static class Stage extends JustEvent {
 
-        private final int stage;
+        private final int level;
 
-        public Stage(Player who, int stage) {
+        public Stage(Player who, int level) {
             super(who);
-            this.stage = stage;
+            this.level = level;
         }
     }
 }

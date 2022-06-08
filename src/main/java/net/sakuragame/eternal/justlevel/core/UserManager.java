@@ -1,5 +1,6 @@
 package net.sakuragame.eternal.justlevel.core;
 
+import net.sakuragame.eternal.gemseconomy.api.GemsEconomyAPI;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.PlayerBrokenEvent;
 import net.sakuragame.eternal.justlevel.core.level.Realm;
@@ -52,53 +53,53 @@ public class UserManager {
     }
 
     public boolean tryBreakStage(Player player) {
+        UUID uuid = player.getUniqueId();
         PlayerLevelData account = this.getAccount(player.getUniqueId());
 
         if (account == null) return false;
-
-        if (!account.canBreakStage()) {
-            return false;
-        }
+        if (!account.canBreakStage()) return false;
 
         Realm realm = ConfigFile.realmSetting.get(account.getRealm());
+
+        if (account.getStagePoints() < realm.getStageConsume()) return false;
+        if (GemsEconomyAPI.getBalance(uuid) < realm.getStageBreakPrice()) return false;
 
         account.setLevel(0);
         account.setExp(0);
         account.addStage();
         account.takeStagePoints(realm.getStageConsume());
-        plugin.getEconomy().withdrawPlayer(player, realm.getStageBreakPrice());
+        GemsEconomyAPI.withdraw(uuid, realm.getStageBreakPrice());
 
         PlayerBrokenEvent.Stage event = new PlayerBrokenEvent.Stage(player, account.getStage());
         event.call();
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
-
         return true;
     }
 
     public boolean tryBreakRealm(Player player) {
+        UUID uuid = player.getUniqueId();
         PlayerLevelData account = this.getAccount(player.getUniqueId());
 
         if (account == null) return false;
-
-        if (!account.canBreakRealm()) {
-            return true;
-        }
+        if (!account.canBreakRealm()) return false;
 
         Realm realm = ConfigFile.realmSetting.get(account.getRealm());
+
+        if (account.getRealmPoints() < realm.getRealmConsume()) return false;
+        if (GemsEconomyAPI.getBalance(uuid) < realm.getRealmBreakPrice()) return false;
 
         account.setLevel(0);
         account.setExp(0);
         account.setStage(1);
         account.addRealm();
         account.takeRealmPoints(realm.getRealmConsume());
-        plugin.getEconomy().withdrawPlayer(player, realm.getRealmBreakPrice());
+        GemsEconomyAPI.withdraw(uuid, realm.getRealmBreakPrice());
 
         PlayerBrokenEvent.Realm event = new PlayerBrokenEvent.Realm(player, account.getRealm());
         event.call();
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
-
         return false;
     }
 }
