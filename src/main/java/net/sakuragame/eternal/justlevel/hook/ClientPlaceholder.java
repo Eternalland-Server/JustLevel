@@ -1,6 +1,7 @@
 package net.sakuragame.eternal.justlevel.hook;
 
 import net.sakuragame.eternal.dragoncore.network.PacketSender;
+import net.sakuragame.eternal.gemseconomy.api.GemsEconomyAPI;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.core.level.Define;
@@ -79,7 +80,7 @@ public class ClientPlaceholder {
         if (account == null) return;
 
         Realm realm = ConfigFile.realmSetting.get(account.getRealm());
-        double balance = JustLevel.getInstance().getEconomy().getBalance(player);
+        double balance = GemsEconomyAPI.getBalance(player.getUniqueId());
 
         String s_rq_1 = (account.isMaxLevel() ? "⁍" : "⁌") + " &f等级: " + (account.isMaxLevel() ? "&a" : "&c") + Define.Level.getMax() + "级";
         String s_rq_2 = (account.getStagePoints() >= realm.getStageConsume() ? "⁍" : "⁌") + " &f突破点: " + (account.getStagePoints() >= realm.getStageConsume() ? "&a" : "&c") + realm.getStageConsume();
