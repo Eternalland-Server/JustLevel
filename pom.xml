@@ -57,11 +57,6 @@
             <name>Lumine Releases</name>
             <url>https://mvn.lumine.io/repository/maven-public/</url>
         </repository>
-
-        <repository>
-            <id>ptms</id>
-            <url>https://repo2s.ptms.ink/repository/maven-releases</url>
-        </repository>
     </repositories>
 
     <dependencies>

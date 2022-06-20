@@ -8,7 +8,6 @@ import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.hook.LevelPlaceholder;
 import net.sakuragame.eternal.justlevel.listener.*;
 import net.sakuragame.eternal.justlevel.storage.StorageManager;
-import net.sakuragame.eternal.justlevel.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,9 +38,6 @@ public class JustLevel extends JavaPlugin {
 
         getLogger().info("初始化全服多倍经验...");
         multiExpManager = new MultiExpManager();
-
-        getLogger().info("计算经验公式...");
-        Utils.initExp();
 
         getLogger().info("注册PAPI变量...");
         new LevelPlaceholder().register();

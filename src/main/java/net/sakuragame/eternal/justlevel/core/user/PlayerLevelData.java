@@ -95,7 +95,7 @@ public class PlayerLevelData extends LevelAccount {
         this.setExp(0);
 
         while (expPool > 0) {
-            double upgradeExp = Utils.getLevelUpExp(this.getLevel() + levelUP);
+            double upgradeExp = Utils.getUpgradeRequireExp(this.getRealm(), this.getStage(), this.getLevel() + levelUP);
 
             if (this.getLevel() + levelUP >= Define.Level.getMax()) {
                 this.setExp(upgradeExp);

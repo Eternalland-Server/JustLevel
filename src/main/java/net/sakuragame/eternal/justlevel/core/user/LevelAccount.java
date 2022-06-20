@@ -89,7 +89,7 @@ public abstract class LevelAccount {
     }
 
     public void setExp(double exp) {
-        this.exp = Math.max(0, Math.min(Utils.getLevelUpExp(this.level), exp));
+        this.exp = Math.max(0, Math.min(Utils.getUpgradeRequireExp(this.realm, this.stage, this.level), exp));
     }
 
     public void setRealmPoints(int realmPoints) {
@@ -121,7 +121,7 @@ public abstract class LevelAccount {
     }
 
     public double getUpgradeExp() {
-        return Utils.getLevelUpExp(this.level);
+        return Utils.getUpgradeRequireExp(this.realm, this.stage, this.level);
     }
 
     public void updateVanillaInfo() {
