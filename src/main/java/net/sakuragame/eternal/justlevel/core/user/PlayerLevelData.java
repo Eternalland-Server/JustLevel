@@ -2,8 +2,10 @@ package net.sakuragame.eternal.justlevel.core.user;
 
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.event.*;
+import net.sakuragame.eternal.justlevel.core.AutoSave;
 import net.sakuragame.eternal.justlevel.core.level.Define;
 import net.sakuragame.eternal.justlevel.util.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -11,12 +13,16 @@ import java.util.UUID;
 
 public class PlayerLevelData extends LevelAccount {
 
+    private final int tid;
+
     public PlayerLevelData(UUID uuid) {
         super(uuid);
+        this.tid = new AutoSave(uuid).runTaskTimer(JustLevel.getInstance(), 6000, 6000).getTaskId();
     }
 
     public PlayerLevelData(UUID uuid, int realm, int stage, int level, double exp, int stagePoints, int realmPoints) {
         super(uuid, realm, stage, level, exp, stagePoints, realmPoints);
+        this.tid = new AutoSave(uuid).runTaskTimer(JustLevel.getInstance(), 6000, 6000).getTaskId();
     }
 
     @Override
@@ -52,19 +58,6 @@ public class PlayerLevelData extends LevelAccount {
         super.setExp(exp);
         PlayerExpChangeEvent event = new PlayerExpChangeEvent(this.getBukkitPlayer(), this.getExp());
         event.call();
-    }
-
-    @Override
-    public void saveData() {
-        JustLevel.getStorageManager().saveData(
-                this.getUUID(),
-                this.getRealm(),
-                this.getStage(),
-                this.getLevel(),
-                this.getExp(),
-                this.getRealmPoints(),
-                this.getStagePoints()
-        );
     }
 
     @Override
@@ -121,5 +114,22 @@ public class PlayerLevelData extends LevelAccount {
         postEvent.call();
 
         updateVanillaExp();
+    }
+
+    @Override
+    public void saveData() {
+        JustLevel.getStorageManager().saveData(
+                this.getUUID(),
+                this.getRealm(),
+                this.getStage(),
+                this.getLevel(),
+                this.getExp(),
+                this.getRealmPoints(),
+                this.getStagePoints()
+        );
+    }
+
+    public void cancelAutoSave() {
+        Bukkit.getScheduler().cancelTask(this.tid);
     }
 }

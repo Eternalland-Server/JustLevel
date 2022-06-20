@@ -40,7 +40,7 @@ public class PlayerListener implements Listener {
                 PlayerDataLoadEvent event = new PlayerDataLoadEvent(player);
                 event.call();
             }
-        }, 10);
+        }, 30);
     }
 
     @EventHandler
@@ -57,7 +57,7 @@ public class PlayerListener implements Listener {
         Player player = e.getPlayer();
         UUID uuid = player.getUniqueId();
 
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> JustLevel.getUserManager().saveAccount(uuid));
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> JustLevel.getUserManager().removeAccount(uuid));
     }
 
     @EventHandler

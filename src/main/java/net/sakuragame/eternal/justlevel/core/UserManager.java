@@ -32,10 +32,11 @@ public class UserManager {
         accounts.put(uuid, data);
     }
 
-    public void saveAccount(UUID uuid) {
+    public void removeAccount(UUID uuid) {
         PlayerLevelData account = accounts.remove(uuid);
         if (account == null) return;
         account.saveData();
+        account.cancelAutoSave();
     }
 
     public String getRealmPrefix(UUID uuid) {
