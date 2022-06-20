@@ -52,17 +52,17 @@ public class UserManager {
         return ConfigFile.realmSetting.get(account.getRealm()).getName();
     }
 
-    public boolean tryBreakStage(Player player) {
+    public void tryBreakStage(Player player) {
         UUID uuid = player.getUniqueId();
         PlayerLevelData account = this.getAccount(player.getUniqueId());
 
-        if (account == null) return false;
-        if (!account.canBreakStage()) return false;
+        if (account == null) return;
+        if (!account.canBreakStage()) return;
 
         Realm realm = ConfigFile.realmSetting.get(account.getRealm());
 
-        if (account.getStagePoints() < realm.getStageConsume()) return false;
-        if (GemsEconomyAPI.getBalance(uuid) < realm.getStageBreakPrice()) return false;
+        if (account.getStagePoints() < realm.getStageConsume()) return;
+        if (GemsEconomyAPI.getBalance(uuid) < realm.getStageBreakPrice()) return;
 
         account.setLevel(0);
         account.setExp(0);
@@ -74,20 +74,19 @@ public class UserManager {
         event.call();
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
-        return true;
     }
 
-    public boolean tryBreakRealm(Player player) {
+    public void tryBreakRealm(Player player) {
         UUID uuid = player.getUniqueId();
         PlayerLevelData account = this.getAccount(player.getUniqueId());
 
-        if (account == null) return false;
-        if (!account.canBreakRealm()) return false;
+        if (account == null) return;
+        if (!account.canBreakRealm()) return;
 
         Realm realm = ConfigFile.realmSetting.get(account.getRealm());
 
-        if (account.getRealmPoints() < realm.getRealmConsume()) return false;
-        if (GemsEconomyAPI.getBalance(uuid) < realm.getRealmBreakPrice()) return false;
+        if (account.getRealmPoints() < realm.getRealmConsume()) return;
+        if (GemsEconomyAPI.getBalance(uuid) < realm.getRealmBreakPrice()) return;
 
         account.setLevel(0);
         account.setExp(0);
@@ -100,6 +99,5 @@ public class UserManager {
         event.call();
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
-        return false;
     }
 }

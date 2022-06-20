@@ -172,6 +172,7 @@ public class JustLevelAPI {
         PlayerLevelData account = getUserData(uuid);
         if (account == null) return;
         account.setLevel(level);
+        account.setExp(0);
     }
 
     public static void setExp(Player player, double exp) {
@@ -254,12 +255,12 @@ public class JustLevelAPI {
         account.takeStagePoints(i);
     }
 
-    public static boolean tryBreakRealm(Player player) {
-        return JustLevel.getUserManager().tryBreakRealm(player);
+    public static void tryBreakRealm(Player player) {
+        JustLevel.getUserManager().tryBreakRealm(player);
     }
 
-    public static boolean tryBreakStage(Player player) {
-        return JustLevel.getUserManager().tryBreakStage(player);
+    public static void tryBreakStage(Player player) {
+        JustLevel.getUserManager().tryBreakStage(player);
     }
 
 }

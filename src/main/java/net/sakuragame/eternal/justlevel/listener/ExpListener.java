@@ -3,6 +3,7 @@ package net.sakuragame.eternal.justlevel.listener;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.api.event.PlayerExpIncreaseEvent;
+import net.sakuragame.eternal.justlevel.api.event.PlayerLevelChangeEvent;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justlevel.util.Utils;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
@@ -43,5 +44,14 @@ public class ExpListener implements Listener {
                         .replace("%exp%", a.format(total))
                         .replace("%multiple%", b.format(total / amount))
         );
+    }
+
+    @EventHandler
+    public void onLevelChange(PlayerLevelChangeEvent e) {
+        Player player = e.getPlayer();
+        int level = e.getNewLevel();
+        if (level != 200) return;
+
+        player.sendTitle("", "§3§l200级已达成 §8§l| §3§l境界突破已开启", 10, 60, 10);
     }
 }

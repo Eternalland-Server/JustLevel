@@ -114,7 +114,7 @@ public class PlayerLevelData extends LevelAccount {
 
         if (levelUP != 0) {
             this.addLevel(levelUP);
-            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.33f, 1);
         }
 
         PlayerExpIncreaseEvent.Post postEvent = new PlayerExpIncreaseEvent.Post(player, value, addition);

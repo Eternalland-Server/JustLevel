@@ -2,6 +2,8 @@ package net.sakuragame.eternal.justlevel.listener;
 
 import com.taylorswiftcn.megumi.uifactory.event.comp.UIFCompSubmitEvent;
 import com.taylorswiftcn.megumi.uifactory.event.screen.UIFScreenOpenEvent;
+import net.sakuragame.eternal.dragoncore.network.PacketSender;
+import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.api.event.*;
 import net.sakuragame.eternal.justlevel.core.level.Realm;
@@ -12,6 +14,11 @@ import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class UIListener implements Listener {
 
@@ -68,7 +75,15 @@ public class UIListener implements Listener {
     public void onStageBroken(PlayerBrokenEvent.Stage e) {
         Player player = e.getPlayer();
         int stage = e.getLevel();
-        MessageAPI.sendActionTip(player, "§3§l阶段提升➚§6§l(" + stage + "阶)");
+
+        Queue<String> messages = new PriorityQueue<>();
+        messages.add("&a&l破功伤害➚&6&l(+500)");
+        messages.add("&a&l阶段提升➚&6&l(" + stage + "阶)");
+
+        NotifyQueue queue = new NotifyQueue(player, messages);
+        queue.runTaskTimerAsynchronously(JustLevel.getInstance(), 0, 10);
+
+        PacketSender.sendPlaySound(player, "sounds/l/0.ogg", 0.5f, 1, false, 0, 0, 0);
 
         ClientPlaceholder.sendBreakRequire(player);
     }
@@ -79,10 +94,39 @@ public class UIListener implements Listener {
         int level = e.getLevel();
         Realm realm = ConfigFile.realmSetting.get(level);
 
-        MessageAPI.sendActionTip(player, "§a§l境界提升➚§6§l(" + level + "层境界)");
+        Queue<String> messages = new PriorityQueue<>();
+        messages.add("&a&l破功伤害➚&6&l(+20000)");
+        messages.add("&a&l境界提升➚&6&l(" + level + "层)");
+
+        NotifyQueue queue = new NotifyQueue(player, messages);
+        queue.runTaskTimerAsynchronously(JustLevel.getInstance(), 0, 10);
+
+        PacketSender.sendPlaySound(player, "sounds/l/1.ogg", 0.5f, 1, false, 0, 0, 0);
+
         JustMessage.getChatManager().sendAll("⒝ §a恭喜§7" + player.getName() + "§a突破到更高的境界!" + realm.getPrefix() + "§a!");
 
         ClientPlaceholder.sendBreakRequire(player);
+    }
+
+    private static class NotifyQueue extends BukkitRunnable {
+
+        private final Player player;
+        private final Queue<String> messages;
+
+        public NotifyQueue(Player player, Queue<String> messages) {
+            this.player = player;
+            this.messages = messages;
+        }
+
+        @Override
+        public void run() {
+            if (!this.player.isOnline() || this.messages.size() == 0) {
+                cancel();
+                return;
+            }
+
+            MessageAPI.sendActionTip(player, this.messages.poll());
+        }
     }
 
 }

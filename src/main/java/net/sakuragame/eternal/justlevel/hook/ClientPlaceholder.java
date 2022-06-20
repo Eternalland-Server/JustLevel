@@ -90,8 +90,8 @@ public class ClientPlaceholder {
         String r_rq_3 = (balance >= realm.getRealmBreakPrice() ? "⁍" : "⁌") + " &f金币: " + (balance >= realm.getRealmBreakPrice() ? "&a" : "&c") + realm.getRealmBreakPrice();
 
         Map<String, String> map = new HashMap<String, String>() {{
-            put(STAGE_CAN_BREAK_PAPI, account.canBreakStage() && balance >= realm.getStageBreakPrice() ? "1" : "0");
-            put(REALM_CAN_BREAK_PAPI, account.canBreakRealm() && balance >= realm.getRealmBreakPrice() ? "1" : "0");
+            put(STAGE_CAN_BREAK_PAPI, account.canBreakStage() && account.getStagePoints() >= realm.getStageConsume() && balance >= realm.getStageBreakPrice() ? "1" : "0");
+            put(REALM_CAN_BREAK_PAPI, account.canBreakRealm() && account.getRealmPoints() >= realm.getRealmConsume() && balance >= realm.getRealmBreakPrice() ? "1" : "0");
             put(STAGE_BREAK_REQUIRE_1_PAPI, s_rq_1);
             put(STAGE_BREAK_REQUIRE_2_PAPI, s_rq_2);
             put(STAGE_BREAK_REQUIRE_3_PAPI, s_rq_3);
