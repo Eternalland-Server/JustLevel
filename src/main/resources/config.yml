@@ -1,6 +1,4 @@
 Prefix: ' &8&l[&6&l亘古大陆&8&l] &7'
-#等级经验公式
-level-formula: 'Math.pow(level, 2)+24*level+35'
 #会员玩家经验加成
 exp-addition:
   #权限节点: <加成>

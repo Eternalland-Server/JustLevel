@@ -7,6 +7,7 @@ import net.sakuragame.eternal.justlevel.api.event.PlayerLevelChangeEvent;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justlevel.util.Utils;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -39,11 +40,8 @@ public class ExpListener implements Listener {
         double addition = e.getAddition();
         double total = amount + addition;
 
-        MessageAPI.sendActionTip(player,
-                MessageFile.expChange
-                        .replace("%exp%", a.format(total))
-                        .replace("%multiple%", b.format(total / amount))
-        );
+        MessageAPI.sendInformMessage(player, "&8[&e+&8] &e" + a.format(total) + "EXP &c&l(x" + b.format(total / amount) + ")");
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.33f, 1);
     }
 
     @EventHandler

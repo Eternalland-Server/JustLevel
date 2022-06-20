@@ -9,6 +9,7 @@ import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -42,12 +43,14 @@ public class StoneListener implements Listener {
                     int i = item.getAmount();
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                     account.addStagePoints(i);
-                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.stagePointsChange, "%points%", String.valueOf(i)));
+                    MessageAPI.sendInformMessage(player, "&8[&6+&8] &f" + i + " &7阶段突破点");
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_XYLOPHONE, 0.6f, 1);
                 }
                 else {
                     item.setAmount(item.getAmount() - 1);
                     account.addStagePoints(1);
-                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.stagePointsChange, "%points%", "1"));
+                    MessageAPI.sendInformMessage(player, "&8[&6+&8] &f1 &7阶段突破点");
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_XYLOPHONE, 0.4f, 1);
                 }
                 break;
             case "stone_realm":
@@ -55,12 +58,14 @@ public class StoneListener implements Listener {
                     int i = item.getAmount();
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                     account.addRealmPoints(i);
-                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.realmPointsChange, "%points%", String.valueOf(i)));
+                    MessageAPI.sendInformMessage(player, "&8[&6+&8] &f" + i + " &7境界突破点");
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_XYLOPHONE, 0.6f, 1);
                 }
                 else {
                     item.setAmount(item.getAmount() - 1);
                     account.addRealmPoints(1);
-                    MessageAPI.sendActionTip(player, StringUtils.replace(MessageFile.realmPointsChange, "%points%", "1"));
+                    MessageAPI.sendInformMessage(player, "&8[&6+&8] &f1 &7境界突破点");
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_XYLOPHONE, 0.4f, 1);
                 }
                 break;
         }

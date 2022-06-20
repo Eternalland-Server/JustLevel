@@ -19,7 +19,6 @@ public class ConfigFile {
     public static Integer realm_layer;
     public static Integer stage_layer;
     public static Integer stage_level;
-    public static String level_formula;
     public static Map<String, Double> expAddition;
     public static Map<Integer, Realm> realmSetting;
     public static Map<String, Card> additionCard;
@@ -31,7 +30,6 @@ public class ConfigFile {
         realm_layer = 21;
         stage_layer = 10;
         stage_level = 200;
-        level_formula = config.getString("level-formula");
         loadExpAddition();
         loadRealmSetting();
         loadAdditionCard();

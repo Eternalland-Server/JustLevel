@@ -48,10 +48,7 @@ public class MultiExpManager extends RedisMessageListener {
         this.reason = reason;
         this.registerIcon(minute * 60);
 
-        Bukkit.getOnlinePlayers().forEach(player -> MessageFile.multiExp.forEach(s -> player.sendMessage(s
-                .replace("<addition>", String.valueOf(addition + 1))
-                .replace("<minute>", String.valueOf(minute))
-        )));
+        Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage("⒠ &7已开启全服 &a" + (addition + 1) + " &7倍经验加成&8(&e" + minute + "分钟&8)"));
     }
 
     public boolean isValid() {
