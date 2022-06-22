@@ -53,7 +53,7 @@ public class JustLevelAPI {
 
     public static int getRealm(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
         return account.getRealm();
     }
 
@@ -63,7 +63,7 @@ public class JustLevelAPI {
 
     public static int getStage(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
         return account.getStage();
     }
 
@@ -73,7 +73,7 @@ public class JustLevelAPI {
 
     public static int getTotalStage(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
 
         return (account.getRealm() - 1) * Define.Stage.getMax() + account.getStage();
     }
@@ -84,8 +84,18 @@ public class JustLevelAPI {
 
     public static int getLevel(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
         return account.getLevel();
+    }
+    
+    public static int getTotalLevel(Player player) {
+        return getTotalLevel(player.getUniqueId());
+    }
+    
+    public static int getTotalLevel(UUID uuid) {
+        PlayerLevelData account = getUserData(uuid);
+        if (account == null) return 0;
+        return (account.getRealm() - 1) * 2000 + (account.getStage() - 1) * 200 + account.getLevel();
     }
 
     public static double getExp(Player player) {
@@ -94,7 +104,7 @@ public class JustLevelAPI {
 
     public static double getExp(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
         return account.getExp();
     }
 
@@ -104,7 +114,7 @@ public class JustLevelAPI {
 
     public static double getUpgradeExp(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
         return account.getUpgradeExp();
     }
 
@@ -114,7 +124,7 @@ public class JustLevelAPI {
 
     public static int getRealmPoints(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
         return account.getRealmPoints();
     }
 
@@ -124,7 +134,7 @@ public class JustLevelAPI {
 
     public static int getStagePoints(UUID uuid) {
         PlayerLevelData account = getUserData(uuid);
-        if (account == null) return -1;
+        if (account == null) return 0;
         return account.getStagePoints();
     }
 
