@@ -106,6 +106,6 @@ public class UserManager {
 
     private void sendQueueNotify(Player player, Queue<String> messages) {
         NotifyQueue queue = new NotifyQueue(player, messages);
-        queue.runTaskTimerAsynchronously(JustLevel.getInstance(), 0, 8);
+        queue.runTaskTimerAsynchronously(JustLevel.getInstance(), 0, 10);
     }
 }

@@ -72,7 +72,7 @@ public class UIListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onStageBroken(PlayerBrokenEvent.Stage e) {
         Player player = e.getPlayer();
         int stage = e.getLevel();
@@ -85,7 +85,7 @@ public class UIListener implements Listener {
         ClientPlaceholder.sendBreakRequire(player);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onRealmBroken(PlayerBrokenEvent.Realm e) {
         Player player = e.getPlayer();
         int level = e.getLevel();
