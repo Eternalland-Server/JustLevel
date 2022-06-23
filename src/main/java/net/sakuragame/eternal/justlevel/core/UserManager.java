@@ -66,9 +66,8 @@ public class UserManager {
         if (account.getStagePoints() < realm.getStageConsume()) return;
         if (GemsEconomyAPI.getBalance(uuid) < realm.getStageBreakPrice()) return;
 
-        account.setLevel(0);
-        account.setExp(0);
-        account.addStage();
+        account.set(account.getRealm(), account.getStage() + 1, 0, 0);
+
         account.takeStagePoints(realm.getStageConsume());
         GemsEconomyAPI.withdraw(uuid, realm.getStageBreakPrice());
 
@@ -92,10 +91,8 @@ public class UserManager {
         if (account.getRealmPoints() < realm.getRealmConsume()) return;
         if (GemsEconomyAPI.getBalance(uuid) < realm.getRealmBreakPrice()) return;
 
-        account.setLevel(0);
-        account.setExp(0);
-        account.setStage(1);
-        account.addRealm();
+        account.set(account.getRealm() + 1, 1, 0, 0);
+
         account.takeRealmPoints(realm.getRealmConsume());
         GemsEconomyAPI.withdraw(uuid, realm.getRealmBreakPrice());
 

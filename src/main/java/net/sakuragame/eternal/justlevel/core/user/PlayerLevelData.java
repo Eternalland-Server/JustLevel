@@ -40,6 +40,21 @@ public class PlayerLevelData extends LevelAccount {
     }
 
     @Override
+    public void setLevel(int level) {
+        int old = this.getLevel();
+        super.setLevel(level);
+        PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(this.getBukkitPlayer(), old, level);
+        event.call();
+    }
+
+    @Override
+    public void setExp(double exp) {
+        super.setExp(exp);
+        PlayerExpChangeEvent event = new PlayerExpChangeEvent(this.getBukkitPlayer(), this.getExp());
+        event.call();
+    }
+
+    @Override
     public void setRealmPoints(int realmPoints) {
         super.setRealmPoints(realmPoints);
         PlayerPointChangeEvent.Realm event = new PlayerPointChangeEvent.Realm(this.getBukkitPlayer(), this.getRealmPoints());
@@ -50,13 +65,6 @@ public class PlayerLevelData extends LevelAccount {
     public void setStagePoints(int stagePoints) {
         super.setStagePoints(stagePoints);
         PlayerPointChangeEvent.Stage event = new PlayerPointChangeEvent.Stage(this.getBukkitPlayer(), this.getStagePoints());
-        event.call();
-    }
-
-    @Override
-    public void setExp(double exp) {
-        super.setExp(exp);
-        PlayerExpChangeEvent event = new PlayerExpChangeEvent(this.getBukkitPlayer(), this.getExp());
         event.call();
     }
 
