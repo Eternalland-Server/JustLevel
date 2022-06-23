@@ -93,10 +93,11 @@ public abstract class LevelAccount {
     }
 
     public void set(int realm, int stage, int level, double exp) {
-        this.setRealm(realm);
-        this.setStage(stage);
-        this.setLevel(level);
-        this.setExp(exp);
+        this.realm = Math.max(1, Math.min(Define.Realm.getMax(), realm));
+        this.stage = Math.max(1, Math.min(Define.Stage.getMax(), stage));
+        this.level = Math.max(0, Math.min(Define.Level.getMax(), level));
+        this.exp = Math.max(0, Math.min(Utils.getUpgradeRequireExp(this.realm, this.stage, this.level), exp));
+        this.updateVanillaInfo();
     }
 
     public void setRealmPoints(int realmPoints) {

@@ -26,21 +26,27 @@ public class PlayerLevelData extends LevelAccount {
     }
 
     @Override
-    public void setRealm(int i) {
-        super.setRealm(i);
+    public void setRealm(int realm) {
+        if (realm == this.getRealm()) return;
+
+        super.setRealm(realm);
         PlayerRealmChangeEvent event = new PlayerRealmChangeEvent(this.getBukkitPlayer(), this.getRealm());
         event.call();
     }
 
     @Override
-    public void setStage(int i) {
-        super.setStage(i);
+    public void setStage(int stage) {
+        if (stage == this.getStage()) return;
+
+        super.setStage(stage);
         PlayerStageChangeEvent event = new PlayerStageChangeEvent(this.getBukkitPlayer(), this.getStage());
         event.call();
     }
 
     @Override
     public void setLevel(int level) {
+        if (level == this.getLevel()) return;
+
         int old = this.getLevel();
         super.setLevel(level);
         PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(this.getBukkitPlayer(), old, level);
