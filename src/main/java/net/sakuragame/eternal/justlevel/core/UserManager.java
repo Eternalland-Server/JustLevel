@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 import java.util.UUID;
 
 public class UserManager {
@@ -74,6 +75,8 @@ public class UserManager {
         PlayerBrokenEvent.Stage event = new PlayerBrokenEvent.Stage(player, account.getStage());
         event.call();
 
+        this.sendQueueNotify(player, event.getMessages());
+
         Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
     }
 
@@ -99,6 +102,13 @@ public class UserManager {
         PlayerBrokenEvent.Realm event = new PlayerBrokenEvent.Realm(player, account.getRealm());
         event.call();
 
+        this.sendQueueNotify(player, event.getMessages());
+
         Bukkit.getScheduler().runTaskAsynchronously(plugin, account::saveData);
+    }
+
+    private void sendQueueNotify(Player player, Queue<String> messages) {
+        NotifyQueue queue = new NotifyQueue(player, messages);
+        queue.runTaskTimerAsynchronously(JustLevel.getInstance(), 0, 8);
     }
 }

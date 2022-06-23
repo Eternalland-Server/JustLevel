@@ -13,6 +13,7 @@ import net.sakuragame.eternal.justmessage.JustMessage;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -71,62 +72,33 @@ public class UIListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onStageBroken(PlayerBrokenEvent.Stage e) {
         Player player = e.getPlayer();
         int stage = e.getLevel();
 
-        Queue<String> messages = new PriorityQueue<>();
-        messages.add("&a&l破功伤害➚&6&l(+500)");
-        messages.add("&a&l阶段提升➚&6&l(" + stage + "阶)");
-
-        NotifyQueue queue = new NotifyQueue(player, messages);
-        queue.runTaskTimerAsynchronously(JustLevel.getInstance(), 0, 10);
+        e.addMessage("&a&l破功伤害➚&6&l(+500)");
+        e.addMessage("&a&l阶段提升➚&6&l(" + stage + "阶)");
 
         PacketSender.sendPlaySound(player, "sounds/l/0.ogg", 0.5f, 1, false, 0, 0, 0);
 
         ClientPlaceholder.sendBreakRequire(player);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onRealmBroken(PlayerBrokenEvent.Realm e) {
         Player player = e.getPlayer();
         int level = e.getLevel();
         Realm realm = ConfigFile.realmSetting.get(level);
 
-        Queue<String> messages = new PriorityQueue<>();
-        messages.add("&a&l破功伤害➚&6&l(+20000)");
-        messages.add("&a&l境界提升➚&6&l(" + level + "层)");
-
-        NotifyQueue queue = new NotifyQueue(player, messages);
-        queue.runTaskTimerAsynchronously(JustLevel.getInstance(), 0, 10);
+        e.addMessage("&a&l破功伤害➚&6&l(+20000)");
+        e.addMessage("&a&l境界提升➚&6&l(" + level + "层)");
 
         PacketSender.sendPlaySound(player, "sounds/l/1.ogg", 0.5f, 1, false, 0, 0, 0);
 
         JustMessage.getChatManager().sendAll("⒝ §a恭喜§7" + player.getName() + "§a突破到更高的境界!" + realm.getPrefix() + "§a!");
 
         ClientPlaceholder.sendBreakRequire(player);
-    }
-
-    private static class NotifyQueue extends BukkitRunnable {
-
-        private final Player player;
-        private final Queue<String> messages;
-
-        public NotifyQueue(Player player, Queue<String> messages) {
-            this.player = player;
-            this.messages = messages;
-        }
-
-        @Override
-        public void run() {
-            if (!this.player.isOnline() || this.messages.size() == 0) {
-                cancel();
-                return;
-            }
-
-            MessageAPI.sendActionTip(player, this.messages.poll());
-        }
     }
 
 }
