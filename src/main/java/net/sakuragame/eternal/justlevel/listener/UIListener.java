@@ -77,8 +77,8 @@ public class UIListener implements Listener {
         Player player = e.getPlayer();
         int stage = e.getLevel();
 
-        e.addMessage("&a&l破功伤害➚&6&l(+500)");
-        e.addMessage("&a&l阶段提升➚&6&l(" + stage + "阶)");
+        e.addMessage("&a&l破功伤害➚&8&l[ &e&l+500 &8&l]");
+        e.addMessage("&a&l阶段提升➚&8&l[ &e&l" + stage + "阶 &8&l]");
 
         PacketSender.sendPlaySound(player, "sounds/l/0.ogg", 0.5f, 1, false, 0, 0, 0);
 
@@ -91,8 +91,8 @@ public class UIListener implements Listener {
         int level = e.getLevel();
         Realm realm = ConfigFile.realmSetting.get(level);
 
-        e.addMessage("&a&l破功伤害➚&6&l(+20000)");
-        e.addMessage("&a&l境界提升➚&6&l(" + level + "层)");
+        e.addMessage("&a&l破功伤害➚&8&l[ &e&l+20000 &8&l]");
+        e.addMessage("&a&l境界提升➚&8&l[ &e&l" + level + "层 &8&l]");
 
         PacketSender.sendPlaySound(player, "sounds/l/1.ogg", 0.5f, 1, false, 0, 0, 0);
 
