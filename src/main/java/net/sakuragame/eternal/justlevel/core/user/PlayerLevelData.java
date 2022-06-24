@@ -80,9 +80,6 @@ public class PlayerLevelData extends LevelAccount {
         int newLevel = oldLevel + value;
 
         this.setLevel(newLevel);
-
-        PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(this.getBukkitPlayer(), oldLevel, newLevel);
-        event.call();
     }
 
     @Override
