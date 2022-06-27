@@ -52,7 +52,7 @@ public class ExpListener implements Listener {
         int post = e.getNewLevel();
         int change = post - pre;
 
-        String s = (change > 0 ? "&a+" : "&c") + change;
+        String s = (change > 0 ? "§a+" : "§c") + change;
         if (post != 200) {
             player.sendTitle("", "§a§l等级提升(" + s + ") §8§l[§eLv." + pre + "§8§l] §3§l➜ §8§l[§eLv." + post + "§8§l]", 0, 60, 0);
         }
