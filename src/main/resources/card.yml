@@ -4,7 +4,7 @@ half_hour_exp_card:
   duration: 30
   addition: 1.0
 one_hour_exp_card:
-  name: '&e双倍经验卡卡'
+  name: '&e双倍经验卡'
   icon: '༢'
   duration: 60
   addition: 1.0
