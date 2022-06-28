@@ -1,20 +1,20 @@
 half_hour_exp_card:
-  name: '&b&l30分钟双倍卡'
+  name: '30分钟双倍卡'
   icon: '༡'
   duration: 30
   addition: 1.0
 one_hour_exp_card:
-  name: '&b&l1小时双倍卡'
+  name: '1小时双倍卡'
   icon: '༢'
   duration: 60
   addition: 1.0
 three_hour_exp_card:
-  name: '&b&l3小时双倍卡'
+  name: '3小时双倍卡'
   icon: '༣'
   duration: 180
   addition: 1.0
 half_hour_treble_exp_card:
-  name: '&b&l30分钟三倍卡'
+  name: '30分钟三倍卡'
   icon: '༤'
   duration: 30
   addition: 2.0
