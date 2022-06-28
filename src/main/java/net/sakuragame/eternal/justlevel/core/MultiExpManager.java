@@ -47,7 +47,7 @@ public class MultiExpManager extends RedisMessageListener {
 
         MessageAPI.applyPublicGains(KEY, new GainsProperty("༦" + this.reason, this.expire));
 
-        Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage("⒠ &7已开启全服 &a" + (addition + 1) + " &7倍经验加成&8(&e" + minute + "分钟&8)"));
+        Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage("⒠ §7已开启全服 §a" + (addition + 1) + " §7倍经验加成§8(§e" + minute + "分钟§8)"));
     }
 
     public boolean isValid() {
