@@ -7,7 +7,7 @@ import net.sakuragame.eternal.justlevel.api.event.PlayerCardUsedEvent;
 import net.sakuragame.eternal.justlevel.core.level.Card;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
-import net.sakuragame.eternal.justmessage.icon.IconProperty;
+import net.sakuragame.eternal.justmessage.gains.GainsProperty;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -68,7 +68,7 @@ public class CardManager {
 
         using.put(uuid, new Pair<>(cardID, task.getTaskId()));
         sendCardPlaceholder(player, card.getAddition());
-        MessageAPI.registerIcon(player, "exp_card", new IconProperty(cardID, card.getTexture(), card.getName(), duration));
+        MessageAPI.applyGains(player, "exp_card", new GainsProperty(card.getDisplay(), System.currentTimeMillis() + duration * 1000L));
     }
 
     public static void sendCardPlaceholder(Player player, double value) {

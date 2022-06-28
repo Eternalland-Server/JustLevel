@@ -1,14 +1,12 @@
 package net.sakuragame.eternal.justlevel.core;
 
 import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
-import net.sakuragame.eternal.justmessage.icon.IconProperty;
+import net.sakuragame.eternal.justmessage.gains.GainsProperty;
 import net.sakuragame.serversystems.manage.api.redis.RedisMessageListener;
 import net.sakuragame.serversystems.manage.client.api.ClientManagerAPI;
 import org.bukkit.Bukkit;
 
-import java.util.Calendar;
 
 public class MultiExpManager extends RedisMessageListener {
 
@@ -41,12 +39,13 @@ public class MultiExpManager extends RedisMessageListener {
     }
 
     public void set(double addition, int minute, String reason) {
-        if (this.isValid()) MessageAPI.unregisterIcon(KEY);
+        if (this.isValid()) MessageAPI.removePublicGains(KEY);
 
         this.addition = addition;
-        this.expire = getExpire(minute);
+        this.expire = System.currentTimeMillis() + minute * 60 * 1000L;
         this.reason = reason;
-        this.registerIcon(minute * 60);
+
+        MessageAPI.applyPublicGains(KEY, new GainsProperty("༦" + this.reason, this.expire));
 
         Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage("⒠ &7已开启全服 &a" + (addition + 1) + " &7倍经验加成&8(&e" + minute + "分钟&8)"));
     }
@@ -63,19 +62,9 @@ public class MultiExpManager extends RedisMessageListener {
         return this.reason;
     }
 
-    public void registerIcon(int second) {
-        MessageAPI.registerIcon(KEY, new IconProperty(KEY, "icon/system/2.png", this.reason, second));
-    }
 
     public void update(double addition, int minute, String reason) {
         ClientManagerAPI.getRedisManager().publishAsync(plugin.getName(), KEY, String.valueOf(addition), String.valueOf(minute), reason);
     }
-
-    private long getExpire(int minute) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(minute, minute);
-        return calendar.getTimeInMillis();
-    }
-
 
 }

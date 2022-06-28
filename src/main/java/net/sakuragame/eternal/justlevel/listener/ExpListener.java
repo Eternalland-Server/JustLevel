@@ -4,6 +4,7 @@ import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.api.event.PlayerExpIncreaseEvent;
 import net.sakuragame.eternal.justlevel.api.event.PlayerLevelChangeEvent;
+import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
 import net.sakuragame.eternal.justlevel.util.Utils;
@@ -41,7 +42,9 @@ public class ExpListener implements Listener {
         double addition = e.getAddition();
         double total = amount + addition;
 
-        MessageAPI.sendInformMessage(player, "§8[§e+§8] §e" + a.format(total) + "EXP §c§l(x" + b.format(total / amount) + ")");
+        PlayerLevelData account = JustLevelAPI.getUserData(player.getUniqueId());
+
+        MessageAPI.sendInformMessage(player, "§8[§e+§8] §e" + a.format(total) + "EXP §c(x" + b.format(total / amount) + ")" + (account.isMaxLevel() ? " §a[可突破]" : ""));
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.33f, 1);
     }
 

@@ -84,8 +84,8 @@ public class PlayerLevelData extends LevelAccount {
 
     @Override
     public void addExp(double value) {
-        if (this.canBreakRealm()) return;
-        if (this.canBreakStage()) return;
+        /*if (this.canBreakRealm()) return;
+        if (this.canBreakStage()) return;*/
 
         Player player = this.getBukkitPlayer();
 

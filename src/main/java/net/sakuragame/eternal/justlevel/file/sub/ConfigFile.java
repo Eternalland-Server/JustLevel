@@ -79,12 +79,12 @@ public class ConfigFile {
 
         for (String key : yaml.getKeys(false)) {
             String name = MegumiUtil.onReplace(yaml.getString(key + ".name"));
-            String texture = yaml.getString(key + ".texture");
+            String icon = yaml.getString(key + ".icon");
             int duration = yaml.getInt(key + ".duration") * 60;
             double addition = yaml.getDouble(key + ".addition");
 
 
-            additionCard.put(key, new Card(name, texture, duration, addition));
+            additionCard.put(key, new Card(name, icon, duration, addition));
         }
     }
 }

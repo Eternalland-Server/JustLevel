@@ -6,15 +6,19 @@ import lombok.Getter;
 public class Card {
 
     private final String name;
-    private final String texture;
+    private final String icon;
     private final int duration;
     private final double addition;
 
 
-    public Card(String name, String texture, int duration, double addition) {
+    public Card(String name, String icon, int duration, double addition) {
         this.name = name;
-        this.texture = texture;
+        this.icon = icon;
         this.duration = duration;
         this.addition = addition;
+    }
+
+    public String getDisplay() {
+        return this.icon + this.name;
     }
 }

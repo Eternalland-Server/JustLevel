@@ -1,20 +1,20 @@
 half_hour_exp_card:
   name: '&b&l30分钟双倍卡'
-  texture: 'icon/prop/100/21.png'
+  icon: '༡'
   duration: 30
   addition: 1.0
 one_hour_exp_card:
   name: '&b&l1小时双倍卡'
-  texture: 'icon/prop/100/22.png'
+  icon: '༢'
   duration: 60
   addition: 1.0
 three_hour_exp_card:
   name: '&b&l3小时双倍卡'
-  texture: 'icon/prop/100/23.png'
+  icon: '༣'
   duration: 180
   addition: 1.0
 half_hour_treble_exp_card:
   name: '&b&l30分钟三倍卡'
-  texture: 'icon/prop/100/24.png'
+  icon: '༤'
   duration: 30
   addition: 2.0

@@ -24,7 +24,6 @@ public class PlayerExpIncreaseEvent {
 
     @Getter
     public static class Post extends JustEvent {
-
         private final double amount;
         private final double addition;
 
