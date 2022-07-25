@@ -8,6 +8,8 @@ import net.sakuragame.serversystems.manage.api.redis.RedisManager;
 import net.sakuragame.serversystems.manage.client.api.ClientManagerAPI;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class StorageManager {
@@ -49,6 +51,26 @@ public class StorageManager {
         }
 
         return new PlayerLevelData(uuid);
+    }
+
+    public Map<Integer, Integer> getAllPlayerLevel() {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        try (DatabaseQuery query = dataManager.createQuery("SELECT * FROM " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName() + ";")) {
+            ResultSet result = query.getResultSet();
+            int uid = result.getInt("uid");
+            int realm = result.getInt("realm");
+            int stage = result.getInt("stage");
+            int level = result.getInt("level");
+
+            int total = (realm - 1) * 2000 + (stage - 1) * 200 + level;
+
+            map.put(uid, total);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
     }
 
     public void saveData(UUID uuid, int realm, int stage, int level, double exp, int realmPoint, int stagePoint) {

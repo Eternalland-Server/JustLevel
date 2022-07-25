@@ -17,12 +17,12 @@ public class PlayerLevelData extends LevelAccount {
 
     public PlayerLevelData(UUID uuid) {
         super(uuid);
-        this.tid = new AutoSave(uuid).runTaskTimer(JustLevel.getInstance(), 6000, 6000).getTaskId();
+        this.tid = new AutoSave(uuid).runTaskTimerAsynchronously(JustLevel.getInstance(), 6000, 6000).getTaskId();
     }
 
     public PlayerLevelData(UUID uuid, int realm, int stage, int level, double exp, int stagePoints, int realmPoints) {
         super(uuid, realm, stage, level, exp, stagePoints, realmPoints);
-        this.tid = new AutoSave(uuid).runTaskTimer(JustLevel.getInstance(), 6000, 6000).getTaskId();
+        this.tid = new AutoSave(uuid).runTaskTimerAsynchronously(JustLevel.getInstance(), 6000, 6000).getTaskId();
     }
 
     @Override
