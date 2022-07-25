@@ -58,14 +58,16 @@ public class StorageManager {
 
         try (DatabaseQuery query = dataManager.createQuery("SELECT * FROM " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName())) {
             ResultSet result = query.getResultSet();
-            int uid = result.getInt("uid");
-            int realm = result.getInt("realm");
-            int stage = result.getInt("stage");
-            int level = result.getInt("level");
+            while (result.next()) {
+                int uid = result.getInt("uid");
+                int realm = result.getInt("realm");
+                int stage = result.getInt("stage");
+                int level = result.getInt("level");
 
-            int total = (realm - 1) * 2000 + (stage - 1) * 200 + level;
+                int total = (realm - 1) * 2000 + (stage - 1) * 200 + level;
 
-            map.put(uid, total);
+                map.put(uid, total);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
