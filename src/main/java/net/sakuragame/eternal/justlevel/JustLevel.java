@@ -44,7 +44,7 @@ public class JustLevel extends JavaPlugin {
 
         getLogger().info("注册事件...");
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
-        Bukkit.getPluginManager().registerEvents(new StoneListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PropListener(), this);
         Bukkit.getPluginManager().registerEvents(new CardListener(), this);
         Bukkit.getPluginManager().registerEvents(new ExpListener(), this);
         Bukkit.getPluginManager().registerEvents(new MythicMobListener(), this);
