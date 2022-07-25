@@ -56,7 +56,7 @@ public class StorageManager {
     public Map<Integer, Integer> getAllPlayerLevel() {
         Map<Integer, Integer> map = new HashMap<>();
 
-        try (DatabaseQuery query = dataManager.createQuery("SELECT * FROM " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName() + ";")) {
+        try (DatabaseQuery query = dataManager.createQuery("SELECT * FROM " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName())) {
             ResultSet result = query.getResultSet();
             int uid = result.getInt("uid");
             int realm = result.getInt("realm");
