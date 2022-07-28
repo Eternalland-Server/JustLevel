@@ -146,6 +146,10 @@ public class JustLevelAPI {
         return JustLevel.getUserManager().getRealmPrefix(uuid);
     }
 
+    public static String getRealPrefix(int realm) {
+        return ConfigFile.realmSetting.get(realm).getPrefix();
+    }
+
     public static String getRealmName(Player player) {
         return getRealmName(player.getUniqueId());
     }
