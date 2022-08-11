@@ -1,4 +1,4 @@
-package net.sakuragame.eternal.justlevel.listener;
+package net.sakuragame.eternal.justlevel.listener.hook;
 
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicDropLoadEvent;
 import io.lumine.xikage.mythicmobs.drops.Drop;

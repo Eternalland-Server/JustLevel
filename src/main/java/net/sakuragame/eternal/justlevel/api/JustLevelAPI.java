@@ -229,6 +229,16 @@ public class JustLevelAPI {
         account.addExp(exp);
     }
 
+    public static void addLevel(Player player, int level) {
+        addLevel(player.getUniqueId(), level);
+    }
+
+    public static void addLevel(UUID uuid, int level) {
+        PlayerLevelData account = getUserData(uuid);
+        if (account == null) return;
+        account.addLevel(level);
+    }
+
     public static void addRealmPoints(Player player, int i) {
         addRealmPoints(player.getUniqueId(), i);
     }

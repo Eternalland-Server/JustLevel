@@ -3,10 +3,13 @@ package net.sakuragame.eternal.justlevel;
 import lombok.Getter;
 import net.sakuragame.eternal.justlevel.commands.MainCommand;
 import net.sakuragame.eternal.justlevel.core.MultiExpManager;
+import net.sakuragame.eternal.justlevel.core.PropGenerate;
 import net.sakuragame.eternal.justlevel.core.UserManager;
 import net.sakuragame.eternal.justlevel.file.FileManager;
 import net.sakuragame.eternal.justlevel.hook.LevelPlaceholder;
 import net.sakuragame.eternal.justlevel.listener.*;
+import net.sakuragame.eternal.justlevel.listener.hook.ZaphkielListener;
+import net.sakuragame.eternal.justlevel.listener.hook.MythicMobListener;
 import net.sakuragame.eternal.justlevel.storage.StorageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +21,7 @@ public class JustLevel extends JavaPlugin {
     @Getter private static StorageManager storageManager;
     @Getter private static UserManager userManager;
     @Getter private static MultiExpManager multiExpManager;
+    @Getter private static PropGenerate propGenerate;
 
     @Override
     public void onEnable() {
@@ -39,16 +43,20 @@ public class JustLevel extends JavaPlugin {
         getLogger().info("初始化全服多倍经验...");
         multiExpManager = new MultiExpManager();
 
+        propGenerate = new PropGenerate();
+
         getLogger().info("注册PAPI变量...");
         new LevelPlaceholder().register();
 
         getLogger().info("注册事件...");
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PropListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ItemUseListener(), this);
         Bukkit.getPluginManager().registerEvents(new CardListener(), this);
         Bukkit.getPluginManager().registerEvents(new ExpListener(), this);
         Bukkit.getPluginManager().registerEvents(new MythicMobListener(), this);
         Bukkit.getPluginManager().registerEvents(new UIListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ZaphkielListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PropListener(), this);
 
         getLogger().info("注册命令...");
         getCommand("jlevel").setExecutor(new MainCommand());
