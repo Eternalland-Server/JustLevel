@@ -12,14 +12,17 @@ import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class PropListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPickup(PlayerPickupItemEvent e) {
+        if (e.isCancelled()) return;
+
         Player player = e.getPlayer();
         Item item = e.getItem();
 
