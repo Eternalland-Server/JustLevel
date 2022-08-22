@@ -15,14 +15,15 @@ public class PropCommand extends SubCommand {
 
     @Override
     public void perform(CommandSender sender, String[] args) {
-        if (args.length != 3) return;
+        if (args.length != 4) return;
 
         Player player = this.getPlayer();
         int type = Integer.parseInt(args[0]);
         int value = Integer.parseInt(args[1]);
         int amount = Integer.parseInt(args[2]);
+        int radius = Integer.parseInt(args[3]);
 
-        JustLevel.getPropGenerate().spawn(type, player.getLocation(), value, amount);
+        JustLevel.getPropGenerate().spawn(type, player.getLocation(), value, amount, radius);
         sender.sendMessage(ConfigFile.Prefix + "已生成道具");
     }
 
