@@ -2,8 +2,6 @@ package net.sakuragame.eternal.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
 import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
-import net.sakuragame.eternal.justlevel.api.PropGenerateAPI;
 import net.sakuragame.eternal.justlevel.commands.CommandPerms;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import org.bukkit.command.CommandSender;
@@ -24,7 +22,7 @@ public class PropCommand extends SubCommand {
         int value = Integer.parseInt(args[1]);
         int amount = Integer.parseInt(args[2]);
 
-        JustLevel.getPropGenerate().spawn(type, player.getLocation().clone().add(0, -2, 0), value, amount, value);
+        JustLevel.getPropGenerate().spawn(type, player.getLocation(), value, amount);
         sender.sendMessage(ConfigFile.Prefix + "已生成道具");
     }
 
