@@ -4,13 +4,16 @@ import ink.ptms.zaphkiel.ZaphkielAPI;
 import ink.ptms.zaphkiel.api.ItemStream;
 import ink.ptms.zaphkiel.taboolib.module.nms.ItemTag;
 import lombok.Getter;
+import net.sakuragame.eternal.justlevel.util.Numbers;
 import org.bukkit.Location;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public class PropGenerate {
 
     @Getter
-    public enum Item {
+    public enum ItemEnum {
 
         EXP(0, "exp_item", "&e"),
         LEVEL(1, "level_item", "&e"),
@@ -21,16 +24,16 @@ public class PropGenerate {
         private final String ID;
         private final String color;
 
-        Item(int index, String ID, String color) {
+        ItemEnum(int index, String ID, String color) {
             this.index = index;
             this.ID = ID;
             this.color = color;
         }
 
-        public static Item match(int index) {
-            for (Item item : values()) {
-                if (item.getIndex() != index) continue;
-                return item;
+        public static ItemEnum match(int index) {
+            for (ItemEnum itemEnum : values()) {
+                if (itemEnum.getIndex() != index) continue;
+                return itemEnum;
             }
 
             return null;
@@ -58,11 +61,20 @@ public class PropGenerate {
         location.getWorld().dropItem(location, item);
     }
 
-    public ItemStack generate(int type, int value, int amount) {
-        Item item = Item.match(type);
-        if (item == null) return null;
+    public void spawn(int type, Location location, int value, int amount, int radius) {
+        ItemStack item = this.generate(type, value, amount);
+        if (radius <= 0) {
+            this.spawn(type, location, value, amount);
+            return;
+        }
+        this.itemSpray(location, item, amount, radius);
+    }
 
-        ItemStream itemStream = ZaphkielAPI.INSTANCE.getItem(item.getID(), null);
+    public ItemStack generate(int type, int value, int amount) {
+        ItemEnum itemEnum = ItemEnum.match(type);
+        if (itemEnum == null) return null;
+
+        ItemStream itemStream = ZaphkielAPI.INSTANCE.getItem(itemEnum.getID(), null);
         if (itemStream == null) return null;
         ItemTag itemTag = itemStream.getZaphkielData();
         itemTag.putDeep("parkour.type", type);
@@ -72,5 +84,21 @@ public class PropGenerate {
         itemStack.setAmount(amount);
 
         return itemStack;
+    }
+
+    public void itemSpray(Location location, ItemStack item, int amount, double radius) {
+        item.setAmount(1);
+        for (int i = 0; i < amount; i++) {
+            Location loc = location.clone();
+            loc.setX(loc.getX() - radius + Numbers.randomDouble() * radius * 2);
+            loc.setZ(loc.getZ() - radius + Numbers.randomDouble() * radius * 2);
+            Item entityItem = loc.getWorld().dropItem(loc, item);
+            entityItem.setVelocity(new Vector(
+                    Numbers.randomDouble() - 0.5,
+                    Numbers.randomDouble() - 0.5,
+                    Numbers.randomDouble() - 0.5
+                    )
+            );
+        }
     }
 }

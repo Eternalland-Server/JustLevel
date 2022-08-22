@@ -42,24 +42,24 @@ public class PropListener implements Listener {
         item.remove();
         e.setCancelled(true);
 
-        PropGenerate.Item propItem = PropGenerate.Item.match(type);
-        if (propItem == null) return;
+        PropGenerate.ItemEnum propItemEnum = PropGenerate.ItemEnum.match(type);
+        if (propItemEnum == null) return;
 
-        switch (propItem) {
+        switch (propItemEnum) {
             case EXP:
                 JustLevelAPI.addExp(player, value);
                 break;
             case LEVEL:
                 JustLevelAPI.addLevel(player, value);
-                MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItem.getColor() + value + "级");
+                MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItemEnum.getColor() + value + "级");
                 break;
             case MONEY:
                 GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Money);
-                MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItem.getColor() + value + "金币");
+                MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItemEnum.getColor() + value + "金币");
                 break;
             case COINS:
                 GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Coins);
-                MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItem.getColor() + value + "点劵");
+                MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItemEnum.getColor() + value + "点劵");
                 break;
         }
 

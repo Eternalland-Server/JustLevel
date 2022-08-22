@@ -21,9 +21,9 @@ public class ZaphkielListener implements Listener {
         int type = tagData.asInt();
         int value = itemTag.getDeep("parkour.value").asInt();
 
-        PropGenerate.Item item = PropGenerate.Item.match(type);
-        if (item == null) return;
+        PropGenerate.ItemEnum itemEnum = PropGenerate.ItemEnum.match(type);
+        if (itemEnum == null) return;
 
-        e.addName("VALUE", item.getColor() + value);
+        e.addName("VALUE", itemEnum.getColor() + value);
     }
 }

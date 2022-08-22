@@ -1,7 +1,7 @@
 # JustLevel
 > author: justwei
 
-Zaphkiel item:
+Zaphkiel itemEnum:
 ```yaml
 __group__:
   material: EGG
