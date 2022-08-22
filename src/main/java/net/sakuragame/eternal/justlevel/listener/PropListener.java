@@ -9,6 +9,7 @@ import net.sakuragame.eternal.gemseconomy.currency.EternalCurrency;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.core.PropGenerate;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
+import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,18 +48,21 @@ public class PropListener implements Listener {
         switch (propItem) {
             case EXP:
                 JustLevelAPI.addExp(player, value);
-                return;
+                break;
             case LEVEL:
                 JustLevelAPI.addLevel(player, value);
                 MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItem.getColor() + value + "级");
-                return;
+                break;
             case MONEY:
                 GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Money);
                 MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItem.getColor() + value + "金币");
-                return;
+                break;
             case COINS:
                 GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Coins);
                 MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItem.getColor() + value + "点劵");
+                break;
         }
+
+        player.playSound(player.getLocation(), Sound.BLOCK_END_PORTAL_FRAME_FILL, 0.33f, 1f);
     }
 }
