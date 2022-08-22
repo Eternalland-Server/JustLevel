@@ -2,6 +2,7 @@ package net.sakuragame.eternal.justlevel.api;
 
 import net.sakuragame.eternal.justlevel.JustLevel;
 import org.bukkit.Location;
+import org.bukkit.inventory.ItemStack;
 
 public class PropGenerateAPI {
 
@@ -23,6 +24,10 @@ public class PropGenerateAPI {
 
     public static void spawn(int type, Location location, int value, int amount) {
         JustLevel.getPropGenerate().spawn(type, location, value, amount);
+    }
+
+    public static ItemStack generate(int type, int value, int amount) {
+        return JustLevel.getPropGenerate().generate(type, value, amount);
     }
 
 }
