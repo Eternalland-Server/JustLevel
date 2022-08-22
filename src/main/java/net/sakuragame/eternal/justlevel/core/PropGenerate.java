@@ -38,27 +38,32 @@ public class PropGenerate {
     }
 
     public void spawnExpProp(Location location, int value, int amount) {
-        this.generate(0, location, value, amount);
+        this.spawn(0, location, value, amount);
     }
 
     public void spawnLevelProp(Location location, int value, int amount) {
-        this.generate(1, location, value, amount);
+        this.spawn(1, location, value, amount);
     }
 
     public void spawnMoneyProp(Location location, int value, int amount) {
-        this.generate(2, location, value, amount);
+        this.spawn(2, location, value, amount);
     }
 
     public void spawnCoinsProp(Location location, int value, int amount) {
-        this.generate(3, location, value, amount);
+        this.spawn(3, location, value, amount);
     }
 
-    public void generate(int type, Location location, int value, int amount) {
+    public void spawn(int type, Location location, int value, int amount) {
+        ItemStack item = this.generate(type, value, amount);
+        location.getWorld().dropItem(location, item);
+    }
+
+    public ItemStack generate(int type, int value, int amount) {
         Item item = Item.match(type);
-        if (item == null) return;
+        if (item == null) return null;
 
         ItemStream itemStream = ZaphkielAPI.INSTANCE.getItem(item.getID(), null);
-        if (itemStream == null) return;
+        if (itemStream == null) return null;
         ItemTag itemTag = itemStream.getZaphkielData();
         itemTag.putDeep("parkour.type", type);
         itemTag.putDeep("parkour.value", value);
@@ -66,6 +71,6 @@ public class PropGenerate {
         ItemStack itemStack = itemStream.rebuildToItemStack(null);
         itemStack.setAmount(amount);
 
-        location.getWorld().dropItem(location, itemStack);
+        return itemStack;
     }
 }

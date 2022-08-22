@@ -22,7 +22,7 @@ public class PropGenerateAPI {
     }
 
     public static void spawn(int type, Location location, int value, int amount) {
-        JustLevel.getPropGenerate().generate(type, location, value, amount);
+        JustLevel.getPropGenerate().spawn(type, location, value, amount);
     }
 
 }
