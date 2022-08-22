@@ -61,7 +61,7 @@ public class PropGenerate {
         location.getWorld().dropItem(location, item);
     }
 
-    public void spawn(int type, Location location, int value, int amount, int radius) {
+    public void spawn(int type, Location location, int value, int amount, double radius) {
         ItemStack item = this.generate(type, value, amount);
         if (radius <= 0) {
             this.spawn(type, location, value, amount);

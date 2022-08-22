@@ -26,6 +26,10 @@ public class PropGenerateAPI {
         JustLevel.getPropGenerate().spawn(type, location, value, amount);
     }
 
+    public static void spawn(int type, Location location, int value, int amount, double radius) {
+        JustLevel.getPropGenerate().spawn(type, location, value, amount, radius);
+    }
+
     public static ItemStack generate(int type, int value, int amount) {
         return JustLevel.getPropGenerate().generate(type, value, amount);
     }
