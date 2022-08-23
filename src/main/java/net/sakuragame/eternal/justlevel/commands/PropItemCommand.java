@@ -1,16 +1,18 @@
-package net.sakuragame.eternal.justlevel.commands.sub;
+package net.sakuragame.eternal.justlevel.commands;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
-import net.sakuragame.eternal.justlevel.JustLevel;
-import net.sakuragame.eternal.justlevel.commands.CommandPerms;
-import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-public class PropCommand extends SubCommand {
+import java.util.Arrays;
+
+public class PropItemCommand extends SubCommand {
     @Override
     public String getIdentifier() {
-        return "prop";
+        return "propItem";
     }
 
     @Override
@@ -22,8 +24,13 @@ public class PropCommand extends SubCommand {
         int value = Integer.parseInt(args[1]);
         int amount = Integer.parseInt(args[2]);
 
-        JustLevel.getPropGenerate().spawn(type, player.getLocation(), value, amount);
-        sender.sendMessage(ConfigFile.Prefix + "已生成道具");
+        ItemStack item = new ItemStack(Material.BLAZE_ROD);
+        ItemMeta meta = item.getItemMeta();
+        meta.setLore(Arrays.asList(type + "", value + "", amount + ""));
+        item.setItemMeta(meta);
+        meta.setDisplayName("Prop Edit");
+
+        player.getInventory().addItem(item);
     }
 
     @Override
