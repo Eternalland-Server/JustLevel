@@ -87,12 +87,14 @@ public class PropListener implements Listener {
         Block block = e.getClickedBlock();
         if (block == null) return;
 
+        e.setCancelled(true);
+
         List<String> lore = item.getItemMeta().getLore();
         int type = Integer.parseInt(lore.get(0));
         int value = Integer.parseInt(lore.get(1));
         int amount = Integer.parseInt(lore.get(2));
 
-        Location location = block.getLocation().add(0.5, 1, 0.5);
+        Location location = new Location(block.getWorld(), block.getX() + 0.5, block.getY() + 1, block.getZ() + 0.5);
 
         JustLevel.getPropGenerate().spawn(type, location, value, amount);
     }

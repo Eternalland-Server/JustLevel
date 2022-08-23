@@ -1,6 +1,7 @@
-package net.sakuragame.eternal.justlevel.commands;
+package net.sakuragame.eternal.justlevel.commands.sub;
 
 import com.taylorswiftcn.justwei.commands.sub.SubCommand;
+import net.sakuragame.eternal.justlevel.commands.CommandPerms;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,8 +28,8 @@ public class PropItemCommand extends SubCommand {
         ItemStack item = new ItemStack(Material.BLAZE_ROD);
         ItemMeta meta = item.getItemMeta();
         meta.setLore(Arrays.asList(type + "", value + "", amount + ""));
-        item.setItemMeta(meta);
         meta.setDisplayName("Prop Edit");
+        item.setItemMeta(meta);
 
         player.getInventory().addItem(item);
     }

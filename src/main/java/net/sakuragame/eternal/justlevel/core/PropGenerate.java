@@ -4,6 +4,7 @@ import ink.ptms.zaphkiel.ZaphkielAPI;
 import ink.ptms.zaphkiel.api.ItemStream;
 import ink.ptms.zaphkiel.taboolib.module.nms.ItemTag;
 import lombok.Getter;
+import net.sakuragame.eternal.dragoncore.util.Scheduler;
 import net.sakuragame.eternal.justlevel.util.Numbers;
 import org.bukkit.Location;
 import org.bukkit.entity.Item;
@@ -59,7 +60,8 @@ public class PropGenerate {
     public void spawn(int type, Location location, int value, int amount) {
         ItemStack itemStack = this.generate(type, value, amount);
         Item item = location.getWorld().dropItem(location, itemStack);
-        item.teleport(location);
+
+        Scheduler.runLater(() -> item.teleport(location), 10);
     }
 
     public void spawn(int type, Location location, int value, int amount, double radius) {
