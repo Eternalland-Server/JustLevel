@@ -73,7 +73,7 @@ public class PropListener implements Listener {
                 break;
         }
 
-        player.playSound(player.getLocation(), Sound.BLOCK_END_PORTAL_FRAME_FILL, 0.33f, 1f);
+        player.playSound(player.getLocation(), Sound.BLOCK_END_PORTAL_FRAME_FILL, 1f, 1f);
     }
 
     @EventHandler
