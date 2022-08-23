@@ -56,7 +56,7 @@ public class PropListener implements Listener {
 
         switch (propItemEnum) {
             case EXP:
-                value = value * (1 + (JustLevelAPI.getTotalStage(player) / 10));
+                value = (int) (value * (1 + (JustLevelAPI.getTotalStage(player) / 10d)));
                 JustLevelAPI.addExp(player, value);
                 break;
             case LEVEL:
