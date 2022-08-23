@@ -60,7 +60,6 @@ public class PropGenerate {
     public void spawn(int type, Location location, int value, int amount) {
         ItemStack itemStack = this.generate(type, value, amount);
         Item item = location.getWorld().dropItem(location, itemStack);
-        item.setTicksLived(999999999);
 
         Scheduler.runLater(() -> item.teleport(location), 10);
     }
