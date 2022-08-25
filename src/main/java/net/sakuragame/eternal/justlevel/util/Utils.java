@@ -11,8 +11,8 @@ public class Utils {
     public static double getUpgradeRequireExp(int realm, int stage, int level) {
         int max = Define.Level.getMax();
         int total = (realm - 1) * max * 10 + (stage - 1) * max + level;
-        double difficulty = total / (2940d / realm) + realm + stage;
-        int result = (int) (total / Math.pow(difficulty / 4, -1));
+        double difficulty = total / (13820d / realm) + realm + stage;
+        int result = (int) (total / Math.pow(difficulty / 6, -1));
 
         return result + 20;
     }

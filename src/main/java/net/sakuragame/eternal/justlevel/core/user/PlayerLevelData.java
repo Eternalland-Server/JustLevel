@@ -28,12 +28,16 @@ public class PlayerLevelData extends LevelAccount {
         this.dailyExpLimit = 0;
     }
 
-    public void setDailyExpLimit(double dailyExpLimit) {
-        this.dailyExpLimit = dailyExpLimit;
+    public void addDailyExpLimit(double value) {
+        this.dailyExpLimit = Math.min(this.dailyExpLimit + value, Define.Daily.getMax());
     }
 
     public double getDailyExpLimit() {
         return dailyExpLimit;
+    }
+
+    public void setDailyExpLimit(double dailyExpLimit) {
+        this.dailyExpLimit = dailyExpLimit;
     }
 
     @Override
@@ -106,8 +110,21 @@ public class PlayerLevelData extends LevelAccount {
 
         int levelUP = 0;
         double addition = preEvent.getAddition();
-        double expPool = value + addition + this.getExp();
-        this.setExp(0);
+        double expPool = value + addition;
+        double limit = Define.Daily.getMax() - this.dailyExpLimit;
+
+        if (limit < expPool) {
+            expPool = limit;
+            this.dailyExpLimit = Define.Daily.getMax();
+        }
+        else {
+            this.addDailyExpLimit(expPool);
+        }
+
+        if (expPool != 0) {
+            expPool += this.getExp();
+            this.setExp(0);
+        }
 
         while (expPool > 0) {
             double upgradeExp = Utils.getUpgradeRequireExp(this.getRealm(), this.getStage(), this.getLevel() + levelUP);

@@ -18,6 +18,7 @@ public class MainCommand extends JustCommand {
         this.register(new MultiExpCommand());
         this.register(new PropCommand());
         this.register(new PropItemCommand());
+        this.register(new TestCommand());
         this.register(new ReloadCommand());
     }
 }

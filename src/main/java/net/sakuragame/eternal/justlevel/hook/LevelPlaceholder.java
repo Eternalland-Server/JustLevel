@@ -3,7 +3,6 @@ package net.sakuragame.eternal.justlevel.hook;
 import com.taylorswiftcn.justwei.util.UnitConvert;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
-import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.core.level.Define;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import org.bukkit.OfflinePlayer;
@@ -102,7 +101,7 @@ public class LevelPlaceholder extends PlaceholderExpansion {
                 if (i == 32) {
                     sb
                             .append("§b")
-                            .append(new DecimalFormat("##.#").format(rate * 100))
+                            .append(new DecimalFormat("##.0").format(rate * 100))
                             .append("%");
 
                     sb.append(i > index ? "§8" : "§e");

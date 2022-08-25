@@ -8,13 +8,17 @@ public class PlayerExpIncreaseEvent {
     @Getter
     public static class Pre extends JustEvent {
 
-        private final double amount;
+        private double amount;
         private double addition;
 
         public Pre(Player player, double amount) {
             super(player);
             this.amount = amount;
             this.addition = 0;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
         }
 
         public void addAddition(double value) {

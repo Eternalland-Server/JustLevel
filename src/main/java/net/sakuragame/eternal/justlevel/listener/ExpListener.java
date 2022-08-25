@@ -23,14 +23,14 @@ public class ExpListener implements Listener {
     private final DecimalFormat a = new DecimalFormat("#");
     private final DecimalFormat b = new DecimalFormat("#.#");
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onExpIncrease(PlayerExpIncreaseEvent.Pre e) {
         Player player = e.getPlayer();
+
         double amount = e.getAmount();
         double support = Utils.getExpAddition(player);
         double card = JustLevelAPI.getCardAddition(player);
         double system = JustLevel.getMultiExpManager().isValid() ? JustLevel.getMultiExpManager().getAddition() : 0;
-
         double value = amount * (support + card + system);
 
         e.addAddition(value);
