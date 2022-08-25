@@ -51,12 +51,6 @@
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
-
-        <repository>
-            <id>nexus</id>
-            <name>Lumine Releases</name>
-            <url>https://mvn.lumine.io/repository/maven-public/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -126,8 +120,9 @@
         <dependency>
             <groupId>io.lumine.xikage</groupId>
             <artifactId>MythicMobs</artifactId>
-            <version>4.12.0</version>
-            <scope>provided</scope>
+            <version>4.11.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/.lib/MythicMobs-4.11.0.jar</systemPath>
         </dependency>
 
         <dependency>
