@@ -14,15 +14,26 @@ import java.util.UUID;
 public class PlayerLevelData extends LevelAccount {
 
     private final int tid;
+    private double dailyExpLimit;
 
     public PlayerLevelData(UUID uuid) {
         super(uuid);
         this.tid = new AutoSave(uuid).runTaskTimerAsynchronously(JustLevel.getInstance(), 6000, 6000).getTaskId();
+        this.dailyExpLimit = 0;
     }
 
     public PlayerLevelData(UUID uuid, int realm, int stage, int level, double exp, int stagePoints, int realmPoints) {
         super(uuid, realm, stage, level, exp, stagePoints, realmPoints);
         this.tid = new AutoSave(uuid).runTaskTimerAsynchronously(JustLevel.getInstance(), 6000, 6000).getTaskId();
+        this.dailyExpLimit = 0;
+    }
+
+    public void setDailyExpLimit(double dailyExpLimit) {
+        this.dailyExpLimit = dailyExpLimit;
+    }
+
+    public double getDailyExpLimit() {
+        return dailyExpLimit;
     }
 
     @Override
@@ -138,6 +149,8 @@ public class PlayerLevelData extends LevelAccount {
                 this.getRealmPoints(),
                 this.getStagePoints()
         );
+
+        JustLevel.getStorageManager().setDailyExp(this.getUUID(), this.dailyExpLimit);
     }
 
     public void cancelAutoSave() {

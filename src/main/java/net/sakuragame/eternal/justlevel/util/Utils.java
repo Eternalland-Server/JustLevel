@@ -4,6 +4,8 @@ import net.sakuragame.eternal.justlevel.core.level.Define;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import org.bukkit.entity.Player;
 
+import java.util.Calendar;
+
 public class Utils {
 
     public static double getUpgradeRequireExp(int realm, int stage, int level) {
@@ -22,6 +24,16 @@ public class Utils {
         }
 
         return 0;
+    }
+
+    public static long getNextDayTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        return (calendar.getTimeInMillis() - System.currentTimeMillis()) / 1000;
     }
 
     public static void main(String[] args) {

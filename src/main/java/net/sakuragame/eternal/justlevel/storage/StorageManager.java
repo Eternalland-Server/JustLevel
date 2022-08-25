@@ -2,6 +2,7 @@ package net.sakuragame.eternal.justlevel.storage;
 
 import net.sakuragame.eternal.dragoncore.util.Pair;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
+import net.sakuragame.eternal.justlevel.util.Utils;
 import net.sakuragame.serversystems.manage.api.database.DataManager;
 import net.sakuragame.serversystems.manage.api.database.DatabaseQuery;
 import net.sakuragame.serversystems.manage.api.redis.RedisManager;
@@ -30,7 +31,7 @@ public class StorageManager {
         int uid = ClientManagerAPI.getUserID(uuid);
         if (uid == -1) return null;
 
-        try (DatabaseQuery query = dataManager.sqlQuery(
+        try (DatabaseQuery query = this.dataManager.sqlQuery(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
                 "uid",
                 uid
@@ -56,7 +57,7 @@ public class StorageManager {
     public Map<Integer, Integer> getAllPlayerLevel() {
         Map<Integer, Integer> map = new HashMap<>();
 
-        try (DatabaseQuery query = dataManager.createQuery("SELECT * FROM " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName())) {
+        try (DatabaseQuery query = this.dataManager.createQuery("SELECT * FROM " + AccountTable.JUST_LEVEL_ACCOUNT.getTableName())) {
             ResultSet result = query.getResultSet();
             while (result.next()) {
                 int uid = result.getInt("uid");
@@ -79,7 +80,7 @@ public class StorageManager {
         int uid = ClientManagerAPI.getUserID(uuid);
         if (uid == -1) return;
 
-        dataManager.executeReplace(
+        this.dataManager.executeReplace(
                 AccountTable.JUST_LEVEL_ACCOUNT.getTableName(),
                 new String[]{"uid", "realm", "stage", "level", "exp", "realm_point", "stage_point"},
                 new Object[]{uid, realm, stage, level, exp, realmPoint, stagePoint}
@@ -87,21 +88,39 @@ public class StorageManager {
     }
 
     public void setUseCard(UUID uuid, String card, int expire) {
-        String key = getUserKey(uuid);
-        redisManager.getStandaloneConn().async().set(key, card);
-        redisManager.getStandaloneConn().async().expire(key, expire);
+        String key = this.getCardUserKey(uuid);
+        this.redisManager.getStandaloneConn().async().set(key, card);
+        this.redisManager.getStandaloneConn().async().expire(key, expire);
     }
 
     public Pair<String, Long> getUseCard(UUID uuid) {
-        String key = getUserKey(uuid);
-        String card = redisManager.getStandaloneConn().sync().get(key);
+        String key = this.getCardUserKey(uuid);
+        String card = this.redisManager.getStandaloneConn().sync().get(key);
         if (card == null) return null;
-        long expire = redisManager.getStandaloneConn().sync().ttl(key);
+        long expire = this.redisManager.getStandaloneConn().sync().ttl(key);
 
         return new Pair<>(card, expire);
     }
 
-    public String getUserKey(UUID uuid) {
-        return "JustLevel:" + uuid.toString();
+    public void setDailyExp(UUID uuid, double v) {
+        String key = this.getDailyUserKey(uuid);
+        this.redisManager.getStandaloneConn().async().set(key, v + "");
+        this.redisManager.getStandaloneConn().async().expire(key, Utils.getNextDayTime());
+    }
+
+    public double getDailyExp(UUID uuid) {
+        String key = this.getDailyUserKey(uuid);
+        String s = this.redisManager.getStandaloneConn().sync().get(key);
+        if (s == null) return 0d;
+
+        return Double.parseDouble(s);
+    }
+
+    public String getCardUserKey(UUID uuid) {
+        return "JustLevel:Card:" + uuid.toString();
+    }
+
+    public String getDailyUserKey(UUID uuid) {
+        return "JustLevel:Daily:" + uuid.toString();
     }
 }

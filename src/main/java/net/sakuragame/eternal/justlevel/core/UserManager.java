@@ -29,8 +29,10 @@ public class UserManager {
     }
 
     public void loadAccount(UUID uuid) {
-        PlayerLevelData data = JustLevel.getStorageManager().loadData(uuid);
-        accounts.put(uuid, data);
+        PlayerLevelData account = JustLevel.getStorageManager().loadData(uuid);
+        double daily = JustLevel.getStorageManager().getDailyExp(uuid);
+        account.setDailyExpLimit(daily);
+        accounts.put(uuid, account);
     }
 
     public void removeAccount(UUID uuid) {
