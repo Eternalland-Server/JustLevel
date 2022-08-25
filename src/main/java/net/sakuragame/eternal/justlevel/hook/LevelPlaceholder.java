@@ -94,7 +94,7 @@ public class LevelPlaceholder extends PlaceholderExpansion {
             int index = (int) (rate * 64);
             for (int i = 0; i < 64; i++) {
                 if (i == (int) (rate * 64)) {
-                    sb.append("§f");
+                    sb.append("§8");
                 }
 
                 sb.append("|");
@@ -105,7 +105,7 @@ public class LevelPlaceholder extends PlaceholderExpansion {
                             .append(new DecimalFormat("##.#").format(rate * 100))
                             .append("%");
 
-                    sb.append(i > index ? "§f" : "§e");
+                    sb.append(i > index ? "§8" : "§e");
                 }
             }
 
