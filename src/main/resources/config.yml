@@ -13,148 +13,148 @@ setting:
     name: '炼体'
     prefix: '㊎'
     #阶段突破消耗点数
-    stage-consume: 3
+    stage-consume: 0
     #境界突破消耗点数
-    realm-consume: 1
+    realm-consume: 0
     stage-break-price: 1000
     realm-break-price: 9999
   2:
     name: '筑基'
     prefix: '㊍'
-    stage-consume: 5
-    realm-consume: 2
+    stage-consume: 2
+    realm-consume: 0
     stage-break-price: 2000
     realm-break-price: 19999
   3:
     name: '开光'
     prefix: '㊌'
-    stage-consume: 8
-    realm-consume: 3
+    stage-consume: 3
+    realm-consume: 0
     stage-break-price: 3000
     realm-break-price: 29999
   4:
     name: '融合'
     prefix: '㊋'
-    stage-consume: 11
-    realm-consume: 4
+    stage-consume: 4
+    realm-consume: 0
     stage-break-price: 4000
     realm-break-price: 39999
   5:
     name: '心动'
     prefix: '㊏'
-    stage-consume: 14
-    realm-consume: 5
+    stage-consume: 5
+    realm-consume: 0
     stage-break-price: 5000
     realm-break-price: 49999
   6:
     name: '金丹'
     prefix: '㊚'
-    stage-consume: 17
-    realm-consume: 6
+    stage-consume: 6
+    realm-consume: 16
     stage-break-price: 6000
     realm-break-price: 59999
   7:
     name: '元婴'
     prefix: '㊛'
-    stage-consume: 20
-    realm-consume: 7
+    stage-consume: 7
+    realm-consume: 20
     stage-break-price: 7000
     realm-break-price: 69999
   8:
     name: '出窍'
     prefix: '㊐'
-    stage-consume: 23
-    realm-consume: 8
+    stage-consume: 8
+    realm-consume: 24
     stage-break-price: 8000
     realm-break-price: 79999
   9:
     name: '分神'
     prefix: '㊊'
-    stage-consume: 26
-    realm-consume: 9
+    stage-consume: 9
+    realm-consume: 28
     stage-break-price: 9000
     realm-break-price: 89999
   10:
     name: '合体'
     prefix: '㊣'
-    stage-consume: 29
-    realm-consume: 10
+    stage-consume: 10
+    realm-consume: 32
     stage-break-price: 10000
     realm-break-price: 99999
   11:
     name: '洞虚'
     prefix: '㊤'
-    stage-consume: 32
-    realm-consume: 11
+    stage-consume: 12
+    realm-consume: 36
     stage-break-price: 11000
     realm-break-price: 109999
   12:
     name: '大乘'
     prefix: '㊥'
-    stage-consume: 35
-    realm-consume: 12
+    stage-consume: 14
+    realm-consume: 42
     stage-break-price: 12000
     realm-break-price: 119999
   13:
     name: '渡劫'
     prefix: '㊦'
-    stage-consume: 38
-    realm-consume: 13
+    stage-consume: 16
+    realm-consume: 48
     stage-break-price: 13000
     realm-break-price: 129999
   14:
     name: '飞升'
     prefix: '㊧'
-    stage-consume: 41
-    realm-consume: 14
+    stage-consume: 18
+    realm-consume: 54
     stage-break-price: 14000
     realm-break-price: 139999
   15:
     name: '地仙'
     prefix: '㊨'
-    stage-consume: 44
-    realm-consume: 15
+    stage-consume: 20
+    realm-consume: 60
     stage-break-price: 15000
     realm-break-price: 149999
   16:
     name: '天仙'
     prefix: '㊒'
-    stage-consume: 47
-    realm-consume: 16
+    stage-consume: 22
+    realm-consume: 66
     stage-break-price: 16000
     realm-break-price: 159999
   17:
     name: '金仙'
     prefix: '㊫'
-    stage-consume: 50
-    realm-consume: 17
+    stage-consume: 24
+    realm-consume: 72
     stage-break-price: 17000
     realm-break-price: 169999
   18:
     name: '仙王'
     prefix: '㊑'
-    stage-consume: 53
-    realm-consume: 18
+    stage-consume: 26
+    realm-consume: 78
     stage-break-price: 18000
     realm-break-price: 179999
   19:
     name: '仙尊'
     prefix: '㊓'
-    stage-consume: 56
-    realm-consume: 19
+    stage-consume: 28
+    realm-consume: 84
     stage-break-price: 19000
     realm-break-price: 189999
   20:
     name: '仙帝'
     prefix: '㊔'
-    stage-consume: 59
-    realm-consume: 20
+    stage-consume: 30
+    realm-consume: 90
     stage-break-price: 20000
     realm-break-price: 199999
   21:
     name: '圣者'
     prefix: '㊕'
-    stage-consume: 62
-    realm-consume: 21
+    stage-consume: 32
+    realm-consume: 96
     stage-break-price: 21000
     realm-break-price: 209999
