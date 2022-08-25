@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum Define {
 
-    Level("level", 200),
+    Level("level", 100),
     Stage("stage", 10),
     Realm("realm", 21);
 

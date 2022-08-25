@@ -1,12 +1,14 @@
 package net.sakuragame.eternal.justlevel.util;
 
+import net.sakuragame.eternal.justlevel.core.level.Define;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import org.bukkit.entity.Player;
 
 public class Utils {
 
     public static double getUpgradeRequireExp(int realm, int stage, int level) {
-        int total = (realm - 1) * 2000 + (stage - 1) * 200 + level;
+        int max = Define.Level.getMax();
+        int total = (realm - 1) * max * 10 + (stage - 1) * max + level;
         double difficulty = total / (2940d / realm) + realm + stage;
         int result = (int) (total / Math.pow(difficulty / 4, -1));
 
@@ -20,5 +22,30 @@ public class Utils {
         }
 
         return 0;
+    }
+
+    public static void main(String[] args) {
+        long v0 = 0;
+
+        for (int realm = 1; realm <= 21; realm++) {
+
+            long v1 = 0;
+            for (int stage = 1; stage <= 10; stage++) {
+
+                long v2 = 0;
+                for (int level = 1; level <= 100; level++) {
+                    double exp = Utils.getUpgradeRequireExp(realm, stage, level);
+                    v1 += exp;
+                    v2 += exp;
+                }
+
+                System.out.println(realm + " | " + stage + " : " + v2);
+            }
+
+            System.out.printf("%s # %s%n", realm, v1);
+            v0 += v1;
+        }
+
+        System.out.println("total: " + v0);
     }
 }
