@@ -4,6 +4,7 @@ import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
 import net.sakuragame.eternal.justlevel.api.event.PlayerExpIncreaseEvent;
 import net.sakuragame.eternal.justlevel.api.event.PlayerLevelChangeEvent;
+import net.sakuragame.eternal.justlevel.core.level.Define;
 import net.sakuragame.eternal.justlevel.core.user.PlayerLevelData;
 import net.sakuragame.eternal.justlevel.file.sub.ConfigFile;
 import net.sakuragame.eternal.justlevel.file.sub.MessageFile;
@@ -56,11 +57,12 @@ public class ExpListener implements Listener {
         int change = post - pre;
 
         String s = (change > 0 ? "§e+" : "§c") + change;
-        if (post != 200) {
+        int max = Define.Level.getMax();
+        if (post != max) {
             player.sendTitle("", "§a§l等级提升(" + s + "§a§l) §8§l[§eLv." + pre + "§8§l] §3§l➜ §8§l[§eLv." + post + "§8§l]", 0, 60, 0);
         }
         else {
-            player.sendTitle("", "§3§l200级已达成 §b§l| §3§l境界突破已开启", 10, 60, 10);
+            player.sendTitle("", "§3§l" + max + "级已达成 §b§l| §3§l境界突破已开启", 10, 60, 10);
             player.sendMessage(ConfigFile.Prefix + "§7境界突破已开启,按§aE§7进入角色界面进行突破");
         }
     }
