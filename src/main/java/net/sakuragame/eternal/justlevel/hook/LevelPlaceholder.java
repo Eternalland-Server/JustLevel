@@ -101,7 +101,7 @@ public class LevelPlaceholder extends PlaceholderExpansion {
                 if (i == 32) {
                     sb
                             .append("§b")
-                            .append(new DecimalFormat("##.0").format(rate * 100))
+                            .append(new DecimalFormat("#0.0").format(rate * 100))
                             .append("%");
 
                     sb.append(i > index ? "§8" : "§e");
