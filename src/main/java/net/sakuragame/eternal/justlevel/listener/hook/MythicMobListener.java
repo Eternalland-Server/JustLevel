@@ -2,8 +2,8 @@ package net.sakuragame.eternal.justlevel.listener.hook;
 
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicDropLoadEvent;
 import io.lumine.xikage.mythicmobs.drops.Drop;
-import net.sakuragame.eternal.justlevel.hook.JustExperienceDrop;
 import net.sakuragame.eternal.justlevel.JustLevel;
+import net.sakuragame.eternal.justlevel.hook.JustExperienceDrop;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 

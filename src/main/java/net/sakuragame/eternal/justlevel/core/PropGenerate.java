@@ -89,6 +89,11 @@ public class PropGenerate {
         return itemStack;
     }
 
+    public void itemSpray(Location location, int type, int value, int amount, double radius) {
+        ItemStack item = this.generate(type, value, 1);
+        this.itemSpray(location, item, amount, radius);
+    }
+
     public void itemSpray(Location location, ItemStack item, int amount, double radius) {
         item.setAmount(1);
         for (int i = 0; i < amount; i++) {

@@ -9,6 +9,7 @@ import net.sakuragame.eternal.gemseconomy.api.GemsEconomyAPI;
 import net.sakuragame.eternal.gemseconomy.currency.EternalCurrency;
 import net.sakuragame.eternal.justlevel.JustLevel;
 import net.sakuragame.eternal.justlevel.api.JustLevelAPI;
+import net.sakuragame.eternal.justlevel.api.event.PropPickupEvent;
 import net.sakuragame.eternal.justlevel.core.PropGenerate;
 import net.sakuragame.eternal.justmessage.api.MessageAPI;
 import org.bukkit.Location;
@@ -54,21 +55,25 @@ public class PropListener implements Listener {
         PropGenerate.ItemEnum propItemEnum = PropGenerate.ItemEnum.match(type);
         if (propItemEnum == null) return;
 
+        PropPickupEvent event = new PropPickupEvent(player, type, value);
+        event.call();
+
         switch (propItemEnum) {
             case EXP:
+                if (event.isCancelled()) break;
                 value = (int) (value * (1 + (JustLevelAPI.getTotalStage(player) / 10d)));
                 JustLevelAPI.addExp(player, value);
                 break;
             case LEVEL:
-                JustLevelAPI.addLevel(player, value);
+                if (!event.isCancelled()) JustLevelAPI.addLevel(player, value);
                 MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItemEnum.getColor() + value + "级");
                 break;
             case MONEY:
-                GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Money);
+                if (!event.isCancelled()) GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Money);
                 MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItemEnum.getColor() + value + "金币");
                 break;
             case COINS:
-                GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Coins);
+                if (!event.isCancelled()) GemsEconomyAPI.deposit(player.getUniqueId(), value, EternalCurrency.Coins);
                 MessageAPI.sendInformMessage(player, "§8[§e+§8] " + propItemEnum.getColor() + value + "点劵");
                 break;
         }
