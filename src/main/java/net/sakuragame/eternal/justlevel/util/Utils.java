@@ -35,29 +35,4 @@ public class Utils {
 
         return (calendar.getTimeInMillis() - System.currentTimeMillis()) / 1000;
     }
-
-    public static void main(String[] args) {
-        long v0 = 0;
-
-        for (int realm = 1; realm <= 21; realm++) {
-
-            long v1 = 0;
-            for (int stage = 1; stage <= 10; stage++) {
-
-                long v2 = 0;
-                for (int level = 1; level <= 100; level++) {
-                    double exp = Utils.getUpgradeRequireExp(realm, stage, level);
-                    v1 += exp;
-                    v2 += exp;
-                }
-
-                System.out.println(realm + " | " + stage + " : " + v2);
-            }
-
-            System.out.printf("%s # %s%n", realm, v1);
-            v0 += v1;
-        }
-
-        System.out.println("total: " + v0);
-    }
 }
